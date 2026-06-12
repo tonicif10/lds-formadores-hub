@@ -12024,5 +12024,365 @@ const trainers = [
       "Escola"
     ],
     "ativo": false
+  },
+  {
+    "id": 229,
+    "nome": "Ana Ameixa",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Ana-Ameixa.png",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 230,
+    "nome": "Catarina Silva",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2024/05/Catarina-Silva.jpg",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 231,
+    "nome": "Erika Barra",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Erika-Barra.jpg",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 232,
+    "nome": "Inês Potier",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-1.png",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 233,
+    "nome": "Joana Costa",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Joana-Costa-2.jpg",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 234,
+    "nome": "João Rosado",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Joao-Rosado.jpg",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 235,
+    "nome": "Jorge Borges",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Jorge-Borges.png",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 236,
+    "nome": "Pedro Lanceiro",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/02/imagem-thumbnail.png",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 237,
+    "nome": "Liliana Azevedo",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Liliana-Azevedo.jpg",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 238,
+    "nome": "Marco Saias",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/02/imagem-thumbnail-3.png",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 239,
+    "nome": "Maria Mineiro",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/05/Maria-Mineiro.jpg.jpeg",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 240,
+    "nome": "Maria Rita Rodrigues",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2024/02/Maria-Rita-1.jpg",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 241,
+    "nome": "Maria Sampaio Soares",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Maria-Soares-2.jpg",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 242,
+    "nome": "Mónica Araújo",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-4.png",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 243,
+    "nome": "Renato Simões",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Renato-SImoes.png",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 244,
+    "nome": "Ruben Duarte",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2024/03/Ruben-Duarte.png",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 245,
+    "nome": "Tommaso Veronesi",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Tommaso-Veronesi.png",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
+  },
+  {
+    "id": 246,
+    "nome": "Vera Lúcia Silva",
+    "cargo": "Formador LDS",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Vera-Silva-2.jpg",
+    "bio_curta": "",
+    "bio_completa": "",
+    "categorias": [],
+    "badges": [],
+    "flags": {
+      "inovacao_lab": false,
+      "novos_talentos": false,
+      "ingles": false,
+      "corporate": false
+    },
+    "timeline": {
+      "carreira": []
+    },
+    "ativo": true
   }
 ];
