@@ -3,7 +3,7 @@ const trainers = [
     "id": 1,
     "nome": "Afonso Malheiro Lopes da Silva",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/afonso-malheiro.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/12/Afonso-Malheiro-Thumbnail.jpg",
     "bio_curta": "Lecionei este tema em diversos cursos ministrados na EDIT e na Lisbon Digital School.\n\nAdicionalmente, trabalho diariamente com o GA4 e conto com cerca de sete anos de experiência profissional na área da análise de dados aplicada ao marketing digital.",
     "bio_completa": "Lecionei este tema em diversos cursos ministrados na EDIT e na Lisbon Digital School.\n\nAdicionalmente, trabalho diariamente com o GA4 e conto com cerca de sete anos de experiência profissional na área da análise de dados aplicada ao marketing digital.",
     "categorias": [
@@ -117,7 +117,7 @@ const trainers = [
     "id": 2,
     "nome": "Alexandre Couto",
     "cargo": "Storyteller",
-    "foto": "assets/trainers/alexandre-couto.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/05/Alexandre-Couto_Thumbnail.jpg",
     "bio_curta": "Nascido e criado em Setúbal, Alexandre Couto é licenciado em Estudos Artísticos pela Universidade Aberta (com média de 16) e pós-graduado em Artes da Escrita pela FCSH (com média de 18). \n\nTrabalhou em agências como Wunderman Thompson, BBDO Portugal e Solid Dogma, escrevou para publicações como Shif",
     "bio_completa": "Nascido e criado em Setúbal, Alexandre Couto é licenciado em Estudos Artísticos pela Universidade Aberta (com média de 16) e pós-graduado em Artes da Escrita pela FCSH (com média de 18). \n\nTrabalhou em agências como Wunderman Thompson, BBDO Portugal e Solid Dogma, escrevou para publicações como Shifter, Observador, Mensagem de Lisboa e Trippin World. Foi premiado nos prémios Meios e Publicidade, Eficácia, Clube de Criativos de Portugal e Art Director's Club of Europe (ADCE). A lista de clientes de prestígio para a qual escrevi inclui Câmara Municipal de Lisboa, Netflix, Ikea, Galp e Delta Cafés.\n\nCom mais de doze anos de carreira em comunicação, iniciou o seu percurso editorial com a publicação de Nova Lisboa (2019). Publicou dois romances na chancela Suma de Letras da Penguin Random House Portugal: Sinais de Fumo (2024) e Os Periquitos Somos Nós (2025). O Observador considerou que \"talvez seja o escritor mais pop da contemporaneidade em Portugal.\"",
     "categorias": [
@@ -197,7 +197,7 @@ const trainers = [
     "id": 3,
     "nome": "André Bello",
     "cargo": "Design Lead",
-    "foto": "assets/trainers/andre-bello.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/08/Andre-Bello-2.jpg",
     "bio_curta": "André é Managing Partner na Audosys, e também formador nas áreas de desenvolvimento web e marketing digital.\n\nLicenciado em Ciência Política e Relações Internacionais pela Faculdade de Ciências Sociais e Humanas da Universidade Nova de Lisboa, realizou também o curso profissional de Web e Mobile Dev",
     "bio_completa": "André é Managing Partner na Audosys, e também formador nas áreas de desenvolvimento web e marketing digital.\n\nLicenciado em Ciência Política e Relações Internacionais pela Faculdade de Ciências Sociais e Humanas da Universidade Nova de Lisboa, realizou também o curso profissional de Web e Mobile Developer na FLAG e fez a Certificação ScrumMaster pela Scrum Alliance.\n\nA sua experiência laboral passou pela gestão de projeto em várias marcas ligadas ao comércio online, em contexto de agência. Especializou-se em produção e gestão de lojas e-Commerce e na plataforma WordPress.\n\nAlgumas marcas trabalhadas: Make-A-Wish, Visit Montemor-o-Novo, Volkswagen, SEAT, Montellano, Hotéis Real: Maxime Hotel e Restaurante, Anjewels, BF Grupo, José de Mello Saúde, Galp, Locarent, BBVA, moey!, SONAE, m.Doc, Plural+udifar, Leroy Merlin, Turismo de Portugal e IAPMEI.",
     "categorias": [
@@ -277,7 +277,7 @@ const trainers = [
     "id": 4,
     "nome": "André Calvário",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/andre-calvario.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-André-Calvário-1.png",
     "bio_curta": "André é Managing Partner na Audosys, e também formador nas áreas de desenvolvimento web e marketing digital.\n\nLicenciado em Ciência Política e Relações Internacionais pela Faculdade de Ciências Sociais e Humanas da Universidade Nova de Lisboa, realizou também o curso profissional de Web e Mobile Dev",
     "bio_completa": "André é Managing Partner na Audosys, e também formador nas áreas de desenvolvimento web e marketing digital.\n\nLicenciado em Ciência Política e Relações Internacionais pela Faculdade de Ciências Sociais e Humanas da Universidade Nova de Lisboa, realizou também o curso profissional de Web e Mobile Developer na FLAG e fez a Certificação ScrumMaster pela Scrum Alliance.\n\nA sua experiência laboral passou pela gestão de projeto em várias marcas ligadas ao comércio online, em contexto de agência. Especializou-se em produção e gestão de lojas e-Commerce e na plataforma WordPress.\n\nAlgumas marcas trabalhadas: Make-A-Wish, Visit Montemor-o-Novo, Volkswagen, SEAT, Montellano, Hotéis Real: Maxime Hotel e Restaurante, Anjewels, BF Grupo, José de Mello Saúde, Galp, Locarent, BBVA, moey!, SONAE, m.Doc, Plural+udifar, Leroy Merlin, Turismo de Portugal e IAPMEI.",
     "categorias": [
@@ -406,7 +406,7 @@ const trainers = [
     "id": 5,
     "nome": "André Novais de Paula",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/andre-novais-de-paula.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2022/12/Andre-Novais-de-Paula.png",
     "bio_curta": "André é Managing Partner na Audosys, e também formador nas áreas de desenvolvimento web e marketing digital.\n\nLicenciado em Ciência Política e Relações Internacionais pela Faculdade de Ciências Sociais e Humanas da Universidade Nova de Lisboa, realizou também o curso profissional de Web e Mobile Dev",
     "bio_completa": "André é Managing Partner na Audosys, e também formador nas áreas de desenvolvimento web e marketing digital.\n\nLicenciado em Ciência Política e Relações Internacionais pela Faculdade de Ciências Sociais e Humanas da Universidade Nova de Lisboa, realizou também o curso profissional de Web e Mobile Developer na FLAG e fez a Certificação ScrumMaster pela Scrum Alliance.\n\nA sua experiência laboral passou pela gestão de projeto em várias marcas ligadas ao comércio online, em contexto de agência. Especializou-se em produção e gestão de lojas e-Commerce e na plataforma WordPress.\n\nAlgumas marcas trabalhadas: Make-A-Wish, Visit Montemor-o-Novo, Volkswagen, SEAT, Montellano, Hotéis Real: Maxime Hotel e Restaurante, Anjewels, BF Grupo, José de Mello Saúde, Galp, Locarent, BBVA, moey!, SONAE, m.Doc, Plural+udifar, Leroy Merlin, Turismo de Portugal e IAPMEI.",
     "categorias": [
@@ -488,7 +488,7 @@ const trainers = [
     "id": 6,
     "nome": "Ângelo Marques",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/angelo-marques.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-Ângelo-Marques.png",
     "bio_curta": "Ângelo Marques - Copywriter & Creative Head na East Atlantic Engineering.\n\nO Ângelo gosta de tornar as coisas interessantes e investigar o que é isto de sermos humanos.\n\nComeçou no ano 2000 por criar anúncios interessantes e acabou por fazer o percurso completo do copy estagiário ao copy sénior - e ",
     "bio_completa": "Ângelo Marques - Copywriter & Creative Head na East Atlantic Engineering.\n\nO Ângelo gosta de tornar as coisas interessantes e investigar o que é isto de sermos humanos.\n\nComeçou no ano 2000 por criar anúncios interessantes e acabou por fazer o percurso completo do copy estagiário ao copy sénior - e do copy sénior ao director-criativo-que-lidera-pessoas.\n\nPassou da publicidade tradicional para a comunicação digital, trabalhando para tornar a internet mais interessante com arquitecturas de informação criativas, conceitos e conteúdos para interfaces interactivos.\n\nPelo caminho foi fazendo formação em psicologia da criatividade, escrita criativa, UX writing, brand voice e até instrutor de yoga.\n\nTrabalhou marcas como Red Bull, Mercedes Benz, Expresso, Samsung, Frize, Cutty Sark, Mateus Rosé, Boutique dos Relógios, Vinagres Cristal e bastantes outras mais ou menos conhecidas.\n\nDesde 2013 que dá formação em Copywriting e conteúdos.\n\nO Ângelo não costuma escrever sobre si próprio na terceira pessoa, mas achou que assim este texto ganhava um ar mais pomposo e até ficava bem numa biografia.",
     "categorias": [
@@ -587,7 +587,7 @@ const trainers = [
     "id": 7,
     "nome": "António Almeida",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/antonio-almeida.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-António-Almeida-2.png",
     "bio_curta": "Licenciado em Gestão e Planeamento em Turismo em 2004\nRealizou várias formações e certificações em HTML, CSS, Javascript, Google Analytics, …\nTrabalho...",
     "bio_completa": "Licenciado em Gestão e Planeamento em Turismo em 2004\nRealizou várias formações e certificações em HTML, CSS, Javascript, Google Analytics, …\nTrabalhou como “one person show” desde 2005\nTrabalha com WordPress desde 2009\nAbriu empresa no início de 2024\nFaz a gestão / manutenção de +- 30 websites WordPress\nFoi voluntário no WordCamp Europe no Porto em 2022, WordCamp Lisboa 2023 e fiz parte da equipa organizadora do WordCamp Porto 2024\nProlancer em 2023 e Plus em 2024\n---\nFocado na gestão e desenvolvimento com WordPress, atualmente está a implementar um sistema de marketing e vendas para uma associação conhecida, um sistema de vendas para uma escola de música e o redesign de um site relacionado com tours / turismo.. Para o futuro tem a visão de se tornar uma referência \"one person show\", livre financeiramente, e continuar focado em construir soluções com WordPress, A11y (acessibilidade), AI generativa e automação.\n---\nAPPM.pt\nProdj.pt\nUBBO.pt\nllride.com",
     "categorias": [
@@ -651,7 +651,7 @@ const trainers = [
     "id": 8,
     "nome": "António Cancela Abreu",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/antonio-cancela-abreu.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/05/Antonio-Cancela-AbreuThumbnail.jpg",
     "bio_curta": "Masterclass para 22 de Março - faltam video e blogpost - pedido a 03.03.2023 - enviou docs a 01.03",
     "bio_completa": "Masterclass para 22 de Março - faltam video e blogpost - pedido a 03.03.2023 - enviou docs a 01.03",
     "categorias": [
@@ -729,7 +729,7 @@ const trainers = [
     "id": 9,
     "nome": "Bárbara Oliveira",
     "cargo": "Head of Digital Marketing no ActivoBank",
-    "foto": "assets/trainers/barbara-oliveira.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2024/07/Barbara-Oliveira-site.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -796,7 +796,7 @@ const trainers = [
     "id": 10,
     "nome": "Beatriz Mazzilli Kafejian",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/beatriz-mazzilli.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Beatriz-Mazzilli.jpg",
     "bio_curta": "alocada à ESP Ecommerce 2023 ",
     "bio_completa": "alocada à ESP Ecommerce 2023 ",
     "categorias": [
@@ -881,7 +881,7 @@ const trainers = [
     "id": 12,
     "nome": "Bruno Oliveira",
     "cargo": "Innovation Lead",
-    "foto": "assets/trainers/bruno-oliveira.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/04/Bruno-Oliveira-1.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -1010,7 +1010,7 @@ const trainers = [
     "id": 13,
     "nome": "Bruno Valinhas",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/bruno-valinhas.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Bruno-Valinhas.jpg",
     "bio_curta": "Curso já agendado para janeiro 2024",
     "bio_completa": "Curso já agendado para janeiro 2024",
     "categorias": [
@@ -1087,7 +1087,7 @@ const trainers = [
     "id": 14,
     "nome": "Carla Rodrigues",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/carla-rodrigues.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Carla-Rodrigues-1.png",
     "bio_curta": "8 anos a gerir o departamento de Digital, Branded content e ativação Wavemaker. 8 anos como Partner de uma agência de influenciadores ",
     "bio_completa": "8 anos a gerir o departamento de Digital, Branded content e ativação Wavemaker. 8 anos como Partner de uma agência de influenciadores ",
     "categorias": [
@@ -1185,7 +1185,7 @@ const trainers = [
     "id": 15,
     "nome": "Carlos Martins",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/carlos-martins.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-Carlos-Martins.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -1359,7 +1359,7 @@ const trainers = [
     "id": 19,
     "nome": "Caroline Cardoso Souza",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/patricia-coelho.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-7-1.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -1419,7 +1419,7 @@ const trainers = [
     "id": 20,
     "nome": "Catarina Aquino Pedrosa",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/catarina-aquino-pedrosa.jpg",
+    "foto": "",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -1512,7 +1512,7 @@ const trainers = [
     "id": 22,
     "nome": "Catarina Ferreira da Silva",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/catarina-silva.jpg",
+    "foto": "",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -1577,7 +1577,7 @@ const trainers = [
     "id": 24,
     "nome": "Catarina Ribeiro",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/catarina-ribeiro.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/06/Catarina-Ribeiro-1.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -1645,7 +1645,7 @@ const trainers = [
     "id": 25,
     "nome": "Catarina Sanches",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/catarina-sanches.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-Catarina-Sanches.png",
     "bio_curta": "Sou consultora digital especializada no ecossistema das redes sociais, com mais de 10 anos de experiência na ativação de estratégias digitais. Tenho f...",
     "bio_completa": "Sou consultora digital especializada no ecossistema das redes sociais, com mais de 10 anos de experiência na ativação de estratégias digitais. Tenho foco em Storytelling, Engagement e Branding nas redes. Procuro unir criatividade e resultados concretos para criar narrativas que humanizam marcas e estabelecem ligação com o público.\n\nTrabalhei tanto do lado das agências como do lado do cliente, o que me deu uma visão completa dos desafios e dinâmicas do mercado. Desde 2024 trabalho como freelancer, colaboro em pitches e participo em projetos contínuos com equipas multidisciplinares, o que reforça a minha autonomia, adaptabilidade e capacidade de envolver diferentes stakeholders.",
     "categorias": [
@@ -1765,7 +1765,7 @@ const trainers = [
     "id": 27,
     "nome": "Cristina Veríssimo",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/cristina-verissimo.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Cristina-Verissimo.jpg",
     "bio_curta": "Diretora de Marketing e Comunicação e membro da Direção Executiva da Amorim Cork Solutions (Corticeira Amorim). Com mais de 20 anos de experiência na Direção de Marketing e Comunicação de empresas ligadas aos setores do Retalho, FMCG e Indústria, tem dedicado a sua carreira à implementação de estrat",
     "bio_completa": "Diretora de Marketing e Comunicação e membro da Direção Executiva da Amorim Cork Solutions (Corticeira Amorim). Com mais de 20 anos de experiência na Direção de Marketing e Comunicação de empresas ligadas aos setores do Retalho, FMCG e Indústria, tem dedicado a sua carreira à implementação de estratégias destinadas a impulsionar o crescimento do negócio e a notoriedade de marcas B2B e B2C, tanto a nível nacional como internacional. Gestão das marcas Barbot, Tiffosi e Amorim. Mais informações no perfil de linkedin: https://www.linkedin.com/in/cristinaverissimo/ \nFormada em Ciências da Comunicação, é pós-graduada em Assessoria Mediática e RP, e possui diversas formações nas áreas de Marketing Digital, Gestão e Administração de Empresas, Gestão de Produto, E-commerce e, mais recentemente, em Inteligência Artificial.",
     "categorias": [
@@ -1863,7 +1863,7 @@ const trainers = [
     "id": 28,
     "nome": "Daniel Caeiro",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/daniel-caeiro.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-Daniel-Caeiro.png",
     "bio_curta": "Licenciada em Comunicação Social pelo ISCSP, com a especialização em Marketing e Publicidade. Todo o seu percurso profissional tem sido ligado à área do planeamento e marketing digital, tendo iniciado a sua experiência na Creative Partner, agência de meios focada no planeamento de campanhas online e",
     "bio_completa": "Licenciada em Comunicação Social pelo ISCSP, com a especialização em Marketing e Publicidade. Todo o seu percurso profissional tem sido ligado à área do planeamento e marketing digital, tendo iniciado a sua experiência na Creative Partner, agência de meios focada no planeamento de campanhas online e onde permaneceu durante 10 anos.\n\nParalelamente a este trabalho de Digital Media Planner, abraçou também em 2014 um projeto inovador ligado a cadernetas de cromos digitais, a plataforma Colara, onde desempenhou as funções de Diretora Comercial, trabalhando em projetos com a Sociedade Central de Cervejas, IPDJ, S.L.Benfica, TAP, S.C.Portugal, Fundação do Gil, ICNF, Centro Ciência Viva do Algarve, Nicola, entre outros.\n\nAtualmente, ocupa o cargo de Digital Account Manager na Arena Media Portugal, agência do grupo Havas, onde se encontra desde 2017 a trabalhar essencialmente contas pertencentes ao Grupo Sonae (Continente, Zippy, Modalfa, Sonae SGPS, entre outros).",
     "categorias": [
@@ -1954,7 +1954,7 @@ const trainers = [
     "id": 29,
     "nome": "Daniela Campino",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/daniela-campino.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-Daniela-Campino.png",
     "bio_curta": "Licenciada em Comunicação Social pelo ISCSP, com a especialização em Marketing e Publicidade. Todo o seu percurso profissional tem sido ligado à área ...",
     "bio_completa": "Licenciada em Comunicação Social pelo ISCSP, com a especialização em Marketing e Publicidade. Todo o seu percurso profissional tem sido ligado à área do planeamento e marketing digital, tendo iniciado a sua experiência na Creative Partner, agência de meios focada no planeamento de campanhas online e onde permaneceu durante 10 anos.\n\nParalelamente a este trabalho de Digital Media Planner, abraçou também em 2014 um projeto inovador ligado a cadernetas de cromos digitais, a plataforma Colara, onde desempenhou as funções de Diretora Comercial, trabalhando em projetos com a Sociedade Central de Cervejas, IPDJ, S.L.Benfica, TAP, S.C.Portugal, Fundação do Gil, ICNF, Centro Ciência Viva do Algarve, Nicola, entre outros.\n\nAtualmente, ocupa o cargo de Digital Account Manager na Arena Media Portugal, agência do grupo Havas, onde se encontra desde 2017 a trabalhar essencialmente contas pertencentes ao Grupo Sonae (Continente, Zippy, Modalfa, Sonae SGPS, entre outros).",
     "categorias": [
@@ -2034,7 +2034,7 @@ const trainers = [
     "id": 30,
     "nome": "David Coelho",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/david-coelho.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/06/David-Coelho-2.jpg",
     "bio_curta": "Licenciado em Gestão de Marketing pelo IPAM, Pós-Graduado em Marketing Digital e também em e-Commerce, está no Marketing Digital e Estratégia desde 2011 quando se tornou apaixonado pelo Empreendedorismo ao colaborar na criação e lançamento de uma Startup (Adfamilies). Em 2014, participou num spin-of",
     "bio_completa": "Licenciado em Gestão de Marketing pelo IPAM, Pós-Graduado em Marketing Digital e também em e-Commerce, está no Marketing Digital e Estratégia desde 2011 quando se tornou apaixonado pelo Empreendedorismo ao colaborar na criação e lançamento de uma Startup (Adfamilies). Em 2014, participou num spin-off da Adfamilies e ajudou a lançar uma nova empresa de tecnologia digital (boomApp). Nestas experiências profissionais teve a oportunidade de trabalhar com marcas de todos os setores de atividade como, por exemplo, FMCG, Energia, Serviços, Auto, Pharma, Banca ou Seguros.\n\nO seu percurso profissional tem sido junto das agências de meios, nomeadamente na EssenceMediacom. Abraçou em 2017 a função de Digital Manager da EssenceMediacom (GroupM), tendo sido responsável digital por clientes como Peugeot, Citroën, IKEA, Galp, Auchan, Bayer, Banco CTT, CTT, Coca-Cola, Danone, Allianz, PlayStation, entre outros. Em 2022 assumiu ainda a função de Digital Integration Manager do GroupM.\n\nAtualmente, acumula a posição de Digital Consulting das equipas internas EssenceMediacom e ainda Senior Client Associate tornando-se assim responsável por toda a atividade de meios, também pelo contacto direto e diário de clientes como a Coca-Cola, CTT, Xiaomi, BWIN, Optivisão e Jaguar Land Rover.\n\nTem ainda a função de Formador e Docente Convidado em várias instituições de ensino, sendo formador na área do Marketing Digital, Estratégia, Social Media e Inteligência Artificial desde 2019.",
     "categorias": [
@@ -2214,7 +2214,7 @@ const trainers = [
     "id": 32,
     "nome": "Deolinda Sousa",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/deolinda-sousa.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/06/Deolinda-Thumbnail.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -2292,7 +2292,7 @@ const trainers = [
     "id": 33,
     "nome": "Diana Lopes",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/diana-lopes.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-Diana-Lopes-1-1.png",
     "bio_curta": "Diana Lopes\nDiana Lopes, mais conhecida no mundo da comunicação como Didas, é licenciada em Marketing e Publicidade no IADE e ingressou na pós-graduaç...",
     "bio_completa": "Diana Lopes\nDiana Lopes, mais conhecida no mundo da comunicação como Didas, é licenciada em Marketing e Publicidade no IADE e ingressou na pós-graduação Oficina do Portfólio, o que lhe permitiu trabalhar com profissionais das principais agências do mercado, como também com marcas como : AXE, Montepio, Hyundai, Monster, Compal, Licor Beirão, CUF, NOBRE e Transtejo.\n\nEm 2013, foi convidada para realizar o seu estágio profissional na J. Walter Thompson (atual WLM) como Estratega Digital, sendo um pivot importante entre a estratégia, o cliente e a equipa criativa e de produção para clientes como Yoggi, KitKat, Nestlé Chocolates, Nestlé Cereais, Beiersdorf (NIVEA e Labello) e Sumol Compal.\n\nCom o tempo acabou por acompanhar e gerir projetos digitais, e em 2019 abraçou o desafio de gerir contas e tornar-se Account. Em 2022, passou a ser Diretora de Contas na comOn, tendo como conta um dos principais clientes da agência, a Fidelidade/Multicare.\n\nEm 2024, abraçou um novo desafio, tornando-se Marketing Strategist no Ocubo, uma empresa especializada em vídeo mapping e experiências imersivas.\n\nAtualmente, faz parte da Fullsix Portugal como Senior Project Manage, responsável pela conta McDonald's Portugal",
     "categorias": [
@@ -2378,7 +2378,7 @@ const trainers = [
     "id": 34,
     "nome": "Diogo Abrantes da Silva",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/diogo-abrantes.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Diogo-Abrantes-Silva.jpg",
     "bio_curta": "Embaixador pelo Pacto Climático Europeu, especialista em marketing digital com 15 anos de experiência. Licenciado em Gestão de Marketing (IPAM) e pós-graduado em ESG e Gestão Sustentável (ISCTE), trabalha exclusivamente com ONGs, como a Greenpeace, Amnistia Internacional, UNICEF e FFMS.\n\nFundador do",
     "bio_completa": "Embaixador pelo Pacto Climático Europeu, especialista em marketing digital com 15 anos de experiência. Licenciado em Gestão de Marketing (IPAM) e pós-graduado em ESG e Gestão Sustentável (ISCTE), trabalha exclusivamente com ONGs, como a Greenpeace, Amnistia Internacional, UNICEF e FFMS.\n\nFundador do projeto #Pub que promove transparência e sustentabilidade na publicidade para PMEs e ONGs.\n\nDocente em várias instituições de ensino e autor do podcast \"Marketing por Idiotas\".\n\nComprometido com a sustentabilidade, voluntaria-se regularmente em iniciativas ambientais, defendendo um marketing de decrescimento.\n\nMarcas trabalhadas: IKEA, Continente, Amazon, Vodafone, VW, Nowo, Novo Banco, etc.",
     "categorias": [
@@ -2430,7 +2430,7 @@ const trainers = [
     "id": 35,
     "nome": "Diogo Cruz",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/diogo-cruz.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-Diogo-Cruz.png",
     "bio_curta": "Embaixador pelo Pacto Climático Europeu, especialista em marketing digital com 15 anos de experiência. Licenciado em Gestão de Marketing (IPAM) e pós-graduado em ESG e Gestão Sustentável (ISCTE), trabalha exclusivamente com ONGs, como a Greenpeace, Amnistia Internacional, UNICEF e FFMS.\n\nFundador do",
     "bio_completa": "Embaixador pelo Pacto Climático Europeu, especialista em marketing digital com 15 anos de experiência. Licenciado em Gestão de Marketing (IPAM) e pós-graduado em ESG e Gestão Sustentável (ISCTE), trabalha exclusivamente com ONGs, como a Greenpeace, Amnistia Internacional, UNICEF e FFMS.\n\nFundador do projeto #Pub que promove transparência e sustentabilidade na publicidade para PMEs e ONGs.\n\nDocente em várias instituições de ensino e autor do podcast \"Marketing por Idiotas\".\n\nComprometido com a sustentabilidade, voluntaria-se regularmente em iniciativas ambientais, defendendo um marketing de decrescimento.\n\nMarcas trabalhadas: IKEA, Continente, Amazon, Vodafone, VW, Nowo, Novo Banco, etc.",
     "categorias": [
@@ -2518,7 +2518,7 @@ const trainers = [
     "id": 36,
     "nome": "Duarte Abecasis",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/rafael-coelho.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/02/imagem-thumbnail-3.png",
     "bio_curta": "Gestor especialista em Compliance na SUMOL+COMPAL. Formado em Direito pela Universidade de Lisboa em 2009 (licenciatura pré-Bolonha), membro da Ordem dos Advogados desde 2013, Executive LL.M pela AESE Business School e formador certificado pelo IEPF.Tem experiência de cerca de 15 anos na implementaç",
     "bio_completa": "Gestor especialista em Compliance na SUMOL+COMPAL. Formado em Direito pela Universidade de Lisboa em 2009 (licenciatura pré-Bolonha), membro da Ordem dos Advogados desde 2013, Executive LL.M pela AESE Business School e formador certificado pelo IEPF.Tem experiência de cerca de 15 anos na implementação de sistemas, procedimentos e ferramentas de cumprimento da legislação nacional e internacional em empresas multinacionais dos setores farmacêutico, automóvel e alimentar.Atualmente, trabalha na implementação e gestão de sistemas de conformidade e é o pivô da área Jurídica e de Compliance da SUMOL+COMPAL para a transformação digital.",
     "categorias": [
@@ -2630,7 +2630,7 @@ const trainers = [
     "id": 38,
     "nome": "Eduardo Marques Lopes",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/eduardo-marques-lopes.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2025/03/Eduardo-Marques-Lopes.png",
     "bio_curta": "2ª edição Employer Branding & Recruitment Marketing - Dias 27 e 29 de Novembro, 5 e 6 de Dezembro, das 18h30 às 20h30",
     "bio_completa": "2ª edição Employer Branding & Recruitment Marketing - Dias 27 e 29 de Novembro, 5 e 6 de Dezembro, das 18h30 às 20h30",
     "categorias": [
@@ -2715,7 +2715,7 @@ const trainers = [
     "id": 39,
     "nome": "Elsa Tavares",
     "cargo": "Influence Marketing Specialist at The Goat Agency",
-    "foto": "assets/trainers/elsa-tavares.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Elsa-Tavares.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -2775,7 +2775,7 @@ const trainers = [
     "id": 40,
     "nome": "Erika Godinho Simões Barra",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/erika-barra.jpg",
+    "foto": "",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -2807,7 +2807,7 @@ const trainers = [
     "id": 41,
     "nome": "Estevão Paiva",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/tiago-espirito-santo.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-6.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -2842,7 +2842,7 @@ const trainers = [
     "id": 42,
     "nome": "Filipa Abrantes",
     "cargo": "Head of Marketing na Marketing em Si",
-    "foto": "assets/trainers/judit-takacs.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-7.png",
     "bio_curta": "Licenciada em Publicidade e Marketing pela ESCS, apaixonada por dados e analytics, conta com mais de 10 anos de experiência em Marketing Digital, mais de 5 dos quais 100% dedicados a B2B. É Pós-Graduada em Marketing Intelligence, na Nova IMS.\nEm 2017, inicia a sua jornada na PHC Software onde assumi",
     "bio_completa": "Licenciada em Publicidade e Marketing pela ESCS, apaixonada por dados e analytics, conta com mais de 10 anos de experiência em Marketing Digital, mais de 5 dos quais 100% dedicados a B2B. É Pós-Graduada em Marketing Intelligence, na Nova IMS.\nEm 2017, inicia a sua jornada na PHC Software onde assumiu o Marketing Digital do Produto na Cloud da PHC, sendo responsável pela estratégia, execução e controlo das campanhas de performance (SEA), social media, site e newsletters deste produto B2B, em Portugal e Espanha.\nFundou a equipa de Demand Generation da PHC, e foi Coordenadora da Equipa de Customer Marketing da PHC, responsável pela componente digital da PHC Software, em todas as geografias – sites, SEO, SEA, social media, e-mail marketing e lead nurturing.\nEm 2023, assume um novo desafio, sendo atualmente Performance Marketing Manager no Pingo Doce. No Pingo Doce dedica-se diariamente à gestão da equipa responsável pelas campanhas de performance em Google e Meta, bem como pelo email marketing da marca.\nSente que a experiência em ambos os mercados - B2B e B2C - tem sido uma enorme vantagem na sua atividade profissional e que o conhecimento agregado é sempre enriquecedor.",
     "categorias": [
@@ -2916,7 +2916,7 @@ const trainers = [
     "id": 43,
     "nome": "Filipa Garcia",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/filipa-garcia.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-Filipa-Garcia.png",
     "bio_curta": "Licenciada em Publicidade e Marketing pela ESCS, apaixonada por dados e analytics, conta com mais de 10 anos de experiência em Marketing Digital, mais de 5 dos quais 100% dedicados a B2B. É Pós-Graduada em Marketing Intelligence, na Nova IMS.\nEm 2017, inicia a sua jornada na PHC Software onde assumi",
     "bio_completa": "Licenciada em Publicidade e Marketing pela ESCS, apaixonada por dados e analytics, conta com mais de 10 anos de experiência em Marketing Digital, mais de 5 dos quais 100% dedicados a B2B. É Pós-Graduada em Marketing Intelligence, na Nova IMS.\nEm 2017, inicia a sua jornada na PHC Software onde assumiu o Marketing Digital do Produto na Cloud da PHC, sendo responsável pela estratégia, execução e controlo das campanhas de performance (SEA), social media, site e newsletters deste produto B2B, em Portugal e Espanha.\nFundou a equipa de Demand Generation da PHC, e foi Coordenadora da Equipa de Customer Marketing da PHC, responsável pela componente digital da PHC Software, em todas as geografias – sites, SEO, SEA, social media, e-mail marketing e lead nurturing.\nEm 2023, assume um novo desafio, sendo atualmente Performance Marketing Manager no Pingo Doce. No Pingo Doce dedica-se diariamente à gestão da equipa responsável pelas campanhas de performance em Google e Meta, bem como pelo email marketing da marca.\nSente que a experiência em ambos os mercados - B2B e B2C - tem sido uma enorme vantagem na sua atividade profissional e que o conhecimento agregado é sempre enriquecedor.",
     "categorias": [
@@ -2960,7 +2960,7 @@ const trainers = [
     "id": 44,
     "nome": "Filipe Simões Jorge",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/filipe-simoes.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Filipe-Simoes.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -3007,7 +3007,7 @@ const trainers = [
     "id": 45,
     "nome": "Francisco Grijó",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/francisco-grijo.jpeg",
+    "foto": "",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -3082,7 +3082,7 @@ const trainers = [
     "id": 47,
     "nome": "Glauco Madeira",
     "cargo": "Partner @ 401 Business Design",
-    "foto": "assets/trainers/glauco-madeira.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2024/02/Glauco-Madeira-thumbnail.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -3140,7 +3140,7 @@ const trainers = [
     "id": 48,
     "nome": "Gonçalo Alexandre Rodrigues Ramos",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/goncalo-ramos.png",
+    "foto": "",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -3172,7 +3172,7 @@ const trainers = [
     "id": 49,
     "nome": "Gonçalo Hall",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/rui-miranda.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-3.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -3204,7 +3204,7 @@ const trainers = [
     "id": 50,
     "nome": "Guilherme Coelho",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/guilherme-coelho.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-Guilherme-Coelho.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -3292,7 +3292,7 @@ const trainers = [
     "id": 51,
     "nome": "Helena Dias",
     "cargo": "Fundador do Cappra Institute for Data Science",
-    "foto": "assets/trainers/helena-dias.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Helena-Dias.jpg",
     "bio_curta": "alocada à ESP Ecommerce 2023 ",
     "bio_completa": "alocada à ESP Ecommerce 2023 ",
     "categorias": [
@@ -3353,7 +3353,7 @@ const trainers = [
     "id": 52,
     "nome": "Henrique Cavalhieri",
     "cargo": "Head of Digital Marketing no ActivoBank",
-    "foto": "assets/trainers/rafael-coelho.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/02/imagem-thumbnail-3.png",
     "bio_curta": "alocado à ESP Ecommerce 2023 (Está no Brasil)",
     "bio_completa": "alocado à ESP Ecommerce 2023 (Está no Brasil)",
     "categorias": [
@@ -3461,7 +3461,7 @@ const trainers = [
     "id": 54,
     "nome": "Hugo de Sousa",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/hugo-de-sousa.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Design-sem-nome-1.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -3528,7 +3528,7 @@ const trainers = [
     "id": 55,
     "nome": "Hugo Macedo",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/hugo-macedo.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Computador-1.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -3607,7 +3607,7 @@ const trainers = [
     "id": 56,
     "nome": "Inês Carvalho",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/ines-carvalho.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2024/03/Ines-Carvalho-thumbnail.jpg",
     "bio_curta": "Inês Simas e Tiago Lemos são os fundadores do Departamento de Marketing, uma empresa de outsourcing, consultoria, formação e mentoria de Marketing que atua em Espanha e Portugal desde 2015.\nJunto com uma equipa de 12 pessoas trabalham todos os dias para elevar o papel do marketing e afirmar a sua im",
     "bio_completa": "Inês Simas e Tiago Lemos são os fundadores do Departamento de Marketing, uma empresa de outsourcing, consultoria, formação e mentoria de Marketing que atua em Espanha e Portugal desde 2015.\nJunto com uma equipa de 12 pessoas trabalham todos os dias para elevar o papel do marketing e afirmar a sua importância para o sucesso das marcas e dos negócios.\nInês Simas: 25 anos de experiência em Marketing. Trabalhou em empresas como a Hewlett-Packard, Pescanova, Nutrexpa, The Coca-Cola Company em Portugal e em Espanha e na Navigator.\nDesde 2017 cofundou e é CEO no Departamento de Marketing em Portugal. É cofundadora do Departamento de Vendas. Criador e host do podcast Walking Meeting e do CMO Club.\nTiago Lemos: 21 anos de experiência em Marketing. Trabalhou na L’Oreal, Unilever, Coca-Cola, LG e Cafento em Portugal e Espanha.\nCriou várias empresas: Los 3 Sentidos, a Hoopoe Running Apparel e em 2015 fundou o Departamento de Marketing em Espanha.",
     "categorias": [
@@ -3693,7 +3693,7 @@ const trainers = [
     "id": 57,
     "nome": "Inês Coelho",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/ines-coelho.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-Inês-Coelho.png",
     "bio_curta": "Inês Simas e Tiago Lemos são os fundadores do Departamento de Marketing, uma empresa de outsourcing, consultoria, formação e mentoria de Marketing que atua em Espanha e Portugal desde 2015.\nJunto com uma equipa de 12 pessoas trabalham todos os dias para elevar o papel do marketing e afirmar a sua im",
     "bio_completa": "Inês Simas e Tiago Lemos são os fundadores do Departamento de Marketing, uma empresa de outsourcing, consultoria, formação e mentoria de Marketing que atua em Espanha e Portugal desde 2015.\nJunto com uma equipa de 12 pessoas trabalham todos os dias para elevar o papel do marketing e afirmar a sua importância para o sucesso das marcas e dos negócios.\nInês Simas: 25 anos de experiência em Marketing. Trabalhou em empresas como a Hewlett-Packard, Pescanova, Nutrexpa, The Coca-Cola Company em Portugal e em Espanha e na Navigator.\nDesde 2017 cofundou e é CEO no Departamento de Marketing em Portugal. É cofundadora do Departamento de Vendas. Criador e host do podcast Walking Meeting e do CMO Club.\nTiago Lemos: 21 anos de experiência em Marketing. Trabalhou na L’Oreal, Unilever, Coca-Cola, LG e Cafento em Portugal e Espanha.\nCriou várias empresas: Los 3 Sentidos, a Hoopoe Running Apparel e em 2015 fundou o Departamento de Marketing em Espanha.",
     "categorias": [
@@ -3773,7 +3773,7 @@ const trainers = [
     "id": 58,
     "nome": "Ines Drummond Borges",
     "cargo": "Chief Digital Officer no Gato Preto",
-    "foto": "assets/trainers/ines-drummond-borges.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Ines-Borges.jpg",
     "bio_curta": "alocada à ESP Ecommerce 2023 - faltam docs",
     "bio_completa": "alocada à ESP Ecommerce 2023 - faltam docs",
     "categorias": [
@@ -3834,7 +3834,7 @@ const trainers = [
     "id": 59,
     "nome": "Inês Simas",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/ines-simas.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Ines-Simas.jpg",
     "bio_curta": "Inês Simas e Tiago Lemos são os fundadores do Departamento de Marketing, uma empresa de outsourcing, consultoria, formação e mentoria de Marketing que atua em Espanha e Portugal desde 2015.\nJunto com uma equipa de 12 pessoas trabalham todos os dias para elevar o papel do marketing e afirmar a sua im",
     "bio_completa": "Inês Simas e Tiago Lemos são os fundadores do Departamento de Marketing, uma empresa de outsourcing, consultoria, formação e mentoria de Marketing que atua em Espanha e Portugal desde 2015.\nJunto com uma equipa de 12 pessoas trabalham todos os dias para elevar o papel do marketing e afirmar a sua importância para o sucesso das marcas e dos negócios.\nInês Simas: 25 anos de experiência em Marketing. Trabalhou em empresas como a Hewlett-Packard, Pescanova, Nutrexpa, The Coca-Cola Company em Portugal e em Espanha e na Navigator.\nDesde 2017 cofundou e é CEO no Departamento de Marketing em Portugal. É cofundadora do Departamento de Vendas. Criador e host do podcast Walking Meeting e do CMO Club.\nTiago Lemos: 21 anos de experiência em Marketing. Trabalhou na L’Oreal, Unilever, Coca-Cola, LG e Cafento em Portugal e Espanha.\nCriou várias empresas: Los 3 Sentidos, a Hoopoe Running Apparel e em 2015 fundou o Departamento de Marketing em Espanha.",
     "categorias": [
@@ -3938,7 +3938,7 @@ const trainers = [
     "id": 60,
     "nome": "Isabel Novais Machado",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/isabel-novais-machado.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Design-sem-nome-2.png",
     "bio_curta": "Isabel Novais Machado is a design leader known for her expertise in strategy, design resource management, and design thinking. With over 15 years of experience across sectors like telecommunications, big data, finance and data privacy, she has played a crucial role in positioning Design as a strateg",
     "bio_completa": "Isabel Novais Machado is a design leader known for her expertise in strategy, design resource management, and design thinking. With over 15 years of experience across sectors like telecommunications, big data, finance and data privacy, she has played a crucial role in positioning Design as a strategic partner for business and tech.\nGraduated in Design, Isabel has further specialized in areas like AI, product management, service design and innovation.\nShe is also active in social initiatives and is driven by positive change.\nPassionate about collaboration, Isabel believes understanding people’s needs is key to impactful solutions.",
     "categorias": [
@@ -3985,7 +3985,7 @@ const trainers = [
     "id": 61,
     "nome": "Joana Ramos Dias da Costa",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/joana-costa.jpg",
+    "foto": "",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -4083,7 +4083,7 @@ const trainers = [
     "id": 64,
     "nome": "Joana Roquette",
     "cargo": "UX Strategist Lead na Mediaweb Global",
-    "foto": "assets/trainers/judit-takacs.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-7.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -4151,7 +4151,7 @@ const trainers = [
     "id": 65,
     "nome": "João Gouveia",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/rui-miranda.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-3.png",
     "bio_curta": "BigQuery SQL para Google Analytics 4 ",
     "bio_completa": "BigQuery SQL para Google Analytics 4 ",
     "categorias": [
@@ -4283,7 +4283,7 @@ const trainers = [
     "id": 68,
     "nome": "João Francisco Nunes Rosado",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/joao-rosado.jpg",
+    "foto": "",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -4315,7 +4315,7 @@ const trainers = [
     "id": 69,
     "nome": "João Maria Machado",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/joao-maria-machado.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Joao-Maria-Machado.png",
     "bio_curta": "Viciado na magia de criar impacto.\n\nCom mais de 20 anos de experiência em Marketing e Vendas, João Machado tem uma trajetória marcada pela paixão por criar impacto positivo através de estratégias eficazes, histórias cativantes, execução precisa e gestão eficaz de equipas. Licenciado em Gestão pela N",
     "bio_completa": "Viciado na magia de criar impacto.\n\nCom mais de 20 anos de experiência em Marketing e Vendas, João Machado tem uma trajetória marcada pela paixão por criar impacto positivo através de estratégias eficazes, histórias cativantes, execução precisa e gestão eficaz de equipas. Licenciado em Gestão pela NOVA, com um Mestrado Executivo em Administração de Empresas pelo ISCTE e uma Pós-Graduação em Marketing Digital também pelo ISCTE, João continua a investir no seu desenvolvimento pessoal e profissional, tendo ainda formação em Storytelling (AKIMBO), Communication Skills (STAGE) e Programação Neurolinguística (PNL).\n\nAtualmente, ajuda empresas a contar histórias e criar impacto onde tem um histórico comprovado com marcas globais como Breitling, Tommy Hilfiger e Pedigree, liderando projetos em diversas indústrias.\n\nRecentemente no sector b2b, liderou o marketing na PHC Business Software e um dos atuais projectos passa por montar estratégia de comunicação e new business da Premium Minds. Antes disso, na Tempus International, foi responsável pela gestão de marcas icónicas como Breitling, Hugo Boss e Ferrari, alcançando um crescimento notável e integrando novas marcas no sector retalho de luxo.\n\nEntusiasta nas aventuras em que se atira de cabeça, adora experimentar novas tecnologias e tendências, produzindo um podcast com os seus 2 filhos “Baú das Mascaradas”, facilitador em workshops de desenvolvimento pessoal via técnicas de clown, foi na magia que encontrou o caminho ideal para colocar em prática e aperfeiçoar técnicas de comunicação e storytelling.\n\nJoão acredita que a chave para o sucesso reside na união de estratégias de marketing robustas com storytelling autêntico e envolvente, transformando cada projeto numa jornada memorável.",
     "categorias": [
@@ -4394,7 +4394,7 @@ const trainers = [
     "id": 70,
     "nome": "João Miguel Silva",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/joao-miguel-silva.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Design-sem-nome-1-1.png",
     "bio_curta": "Product Owner na Mercedes-Benz.io. Certificações em Agile, Scrum e SAFe.",
     "bio_completa": "Product Owner na Mercedes-Benz.io. Certificações em Agile, Scrum e SAFe.",
     "categorias": [
@@ -4462,7 +4462,7 @@ const trainers = [
     "id": 71,
     "nome": "João Nunes",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/joao-nunes.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-default-2.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -4522,7 +4522,7 @@ const trainers = [
     "id": 72,
     "nome": "João Nunes Rosado",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/joao-rosado.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-default-2.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -4582,7 +4582,7 @@ const trainers = [
     "id": 73,
     "nome": "João Pico",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/joao-pico.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Joao-Pico.png",
     "bio_curta": "a tratar de datas para nova edição ( 1ª aconteceu em setembro)",
     "bio_completa": "a tratar de datas para nova edição ( 1ª aconteceu em setembro)",
     "categorias": [
@@ -4644,7 +4644,7 @@ const trainers = [
     "id": 74,
     "nome": "Jorge Manuel Brás Borges",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/jorge-borges.jpg",
+    "foto": "",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -4676,7 +4676,7 @@ const trainers = [
     "id": 75,
     "nome": "Jorge Durões",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/jorge-duroes.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2024/06/Jorge-duroes-thumbnail.jpg",
     "bio_curta": "alocado à ESP Ecommerce 2023 ",
     "bio_completa": "alocado à ESP Ecommerce 2023 ",
     "categorias": [
@@ -4759,7 +4759,7 @@ const trainers = [
     "id": 76,
     "nome": "José Manuel Fernandes",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/jose-manuel-fernandes.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Jose-Manuel-Fernandes-2.jpg",
     "bio_curta": "José Manuel Fernandes (JMF) é licenciado em Gestão de Marketing, com pós-graduação em Sales Management (IPAM) e Executive Master em International Business (Porto Business School)\n\nÉ Market Manager Export na Sumol Compal, responsável pelos mercados da América Central e do Sul, Médio Oriente e Ásia, o",
     "bio_completa": "José Manuel Fernandes (JMF) é licenciado em Gestão de Marketing, com pós-graduação em Sales Management (IPAM) e Executive Master em International Business (Porto Business School)\n\nÉ Market Manager Export na Sumol Compal, responsável pelos mercados da América Central e do Sul, Médio Oriente e Ásia, onde lidera estratégias de entrada, desenvolvimento de distribuidores, negociação internacional e crescimento sustentável de marcas FMCG.\n\nConta com mais de 20 anos de experiência em vendas, tendo passado por funções de Key Account Manager, Business Development Manager e New Business & CRM Manager export markets, trabalhando marcas como Sumol, Compal e Um Bongo em contextos nacionais e internacionais.\n\nParalelamente, é docente convidado no IPAM, formador na Lisbon Digital School e orador em workshops e palestras, onde aborda marketing, vendas, negociação, personal branding e mercados internacionais, com uma abordagem prática e orientada a resultados, focada em desmistificar frameworks complexos e traduzi-los em aplicação real, integrando a Inteligência Artificial no negócio.\n\nFoi convidado a integrar a comunidade LinkedIn for Creators, onde partilha conteúdos sobre marketing, vendas, liderança, personal branding e mercados internacionais.",
     "categorias": [
@@ -4808,7 +4808,7 @@ const trainers = [
     "id": 77,
     "nome": "José Pedro Forte",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/rui-miranda.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-3.png",
     "bio_curta": "In the age defined as BHST (Before Having S*** Together), José spent 1.5 years passing through most of the foundations of this area as email marketing, design and even doing sales development to help early-stage startups.\n\nThe journey went on and he specialized in paid media and data analysis and ha",
     "bio_completa": "In the age defined as BHST (Before Having S*** Together), José spent 1.5 years passing through most of the foundations of this area as email marketing, design and even doing sales development to help early-stage startups.\n\nThe journey went on and he specialized in paid media and data analysis and have managed over 500K€ on Facebook, Google and Linkedin Ads mostly on B2B SaaS Lead Generation. 🎯\n\nAs of today, something that started as a side affair with Hubspot is now his current focus as Revenue Operations Manager!\n\n🏆 Hubspot Champion User - 2019\n🏆 Hubspot Community Champion - 2023 (131 earned out of +500K members)\n🏆 Key Speaker at Inspire UK from 6sense - 2025\n🏆 Customer Advisory Board - 2026\n\nIf you want to talk about PPC, Marketing Ops, discuss challenges or just connect with a like-minded peer feel free to add me 👨‍🚀👨‍🚀",
     "categorias": [
@@ -4889,7 +4889,7 @@ const trainers = [
     "id": 78,
     "nome": "Judit Takács",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/judit-takacs.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-7.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -4925,7 +4925,7 @@ const trainers = [
     "id": 79,
     "nome": "Liliana Sá Azevedo",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/liliana-azevedo.jpg",
+    "foto": "",
     "bio_curta": "Sou UX Lead com experiência em estratégia, research e gestão de projectos digitais. Ao longo do meu percurso profissional tenho trabalhado na intersecção entre utilizadores, negócio e tecnologia, ajudando equipas a tomar decisões mais informadas e a criar experiências com impacto real.\n\nA minha carr",
     "bio_completa": "Sou UX Lead com experiência em estratégia, research e gestão de projectos digitais. Ao longo do meu percurso profissional tenho trabalhado na intersecção entre utilizadores, negócio e tecnologia, ajudando equipas a tomar decisões mais informadas e a criar experiências com impacto real.\n\nA minha carreira começou em gestão de projectos, o que me deu uma base sólida em planeamento, coordenação de equipas e entrega em contextos complexos. Essa experiência evoluiu naturalmente para UX, onde tenho liderado iniciativas de research, definição estratégica e melhoria contínua de produtos digitais, colaborando com equipas multidisciplinares de design, produto e desenvolvimento.\n\nTenho trabalhado em diferentes contextos organizacionais com marcas como Carlsberg, HPinc, novobanco, Continente, Fidelidade e em mercados diversos, do norte da Europa ao Sudeste Asiático. Sempre com foco em transformar insights de investigação em soluções práticas, alinhadas com objetivos de negócio e necessidades reais de utilizadores.\n\nParalelamente à prática profissional, tenho interesse ativo em partilha de conhecimento, formação e desenvolvimento de maturidade em UX, com especial atenção a temas como estratégia, pesquisa, gestão, projectos e acessibilidade.",
     "categorias": [
@@ -5084,7 +5084,7 @@ const trainers = [
     "id": 82,
     "nome": "Luís Almeida",
     "cargo": "CEO SprintAI.dev e Professor ISCTE/PBS/Católica",
-    "foto": "assets/trainers/luis-almeida.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/02/imagem-thumbnail-4.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -5170,7 +5170,7 @@ const trainers = [
     "id": 84,
     "nome": "Luís Chaby",
     "cargo": "Copywriter, Cronista e Argumentista",
-    "foto": "assets/trainers/luis-chaby.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Luis-Chaby.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -5225,7 +5225,7 @@ const trainers = [
     "id": 85,
     "nome": "Luís Serra",
     "cargo": "Chief Data Officer no Grupo Brisa",
-    "foto": "assets/trainers/luis-serra.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2024/01/Luis-Serra-thumbnail.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -5278,7 +5278,7 @@ const trainers = [
     "id": 86,
     "nome": "Luís Dinis",
     "cargo": "Executive SEO na SIXT",
-    "foto": "assets/trainers/luis-dinis.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Luis-Dinis-1.jpg",
     "bio_curta": "CRM: Da gestão de Oportunidades às Vendas - 16, 18, 23, 25 e 30 de Novembro das 15h às 19h",
     "bio_completa": "CRM: Da gestão de Oportunidades às Vendas - 16, 18, 23, 25 e 30 de Novembro das 15h às 19h",
     "categorias": [
@@ -5312,7 +5312,7 @@ const trainers = [
     "id": 87,
     "nome": "Luís Madureira",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/luis-madureira.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2024/04/Luis-Madureira-Thumbnail.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -5345,7 +5345,7 @@ const trainers = [
     "id": 88,
     "nome": "Luís Matias",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/luis-matias.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Luis-Matias-1.jpg",
     "bio_curta": "Camara municipal de Alpiarça, Escola de Cozinha e pastelria de angola. Missionto escape, Poupadores.pt, Camara Municipal Loures,Mundiflex",
     "bio_completa": "Camara municipal de Alpiarça, Escola de Cozinha e pastelria de angola. Missionto escape, Poupadores.pt, Camara Municipal Loures,Mundiflex",
     "categorias": [
@@ -5470,7 +5470,7 @@ const trainers = [
     "id": 89,
     "nome": "Luisa Amorim",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/luisa-amorim.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-8.png",
     "bio_curta": "Luísa Amorim é licenciada em Ciências da Comunicação, com especialização em Jornalismo, e mestre em Multimédia. Convicta de que a sua vida passaria pelo Jornalismo, a verdade é que nunca o exerceu.\n\nA Luísa é do Porto e leva as mãos à anca sempre que fala mais alto (algo que acontece mais do que dev",
     "bio_completa": "Luísa Amorim é licenciada em Ciências da Comunicação, com especialização em Jornalismo, e mestre em Multimédia. Convicta de que a sua vida passaria pelo Jornalismo, a verdade é que nunca o exerceu.\n\nA Luísa é do Porto e leva as mãos à anca sempre que fala mais alto (algo que acontece mais do que deveria). É mulher do João, mãe da Alba e adora escrever tanto como comer. \n\nTrabalha como freelancer, em Copywriting e Content Writing. É a viajar que encontra inspiração para as palavras seguintes. Com quase 10 anos de experiência, já passou por duas agências de marketing, um gabinete de comunicação universitário e ainda serviu às mesas antes de começar a trabalhar na Bliss Applications — onde esteve quase 3 anos a escrever sobre a área financeira. Depois, ainda passou 2 anos pela BRIDGE IN, onde trabalhou como Content Manager e Copywriter.\n\nHoje, dá cursos de escrita digital e escreve remotamente para negócios portugueses e internacionais. Já escreveu para marcas como a adidas, KAYAK, trivago magazine, bodum, Barkyn, Reebok e Pestana Golf & Resorts.",
     "categorias": [
@@ -5562,7 +5562,7 @@ const trainers = [
     "id": 90,
     "nome": "Luzia Lampreia",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/luzia-lampreia.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Luzia-Lampreia.png",
     "bio_curta": "UX Research: Como trazer a voz do cliente para a tomada de decisão - 27 e 28 de Novembro das 18h30 às 21h30. 29 de Novembro das 18h30 às 20h30",
     "bio_completa": "UX Research: Como trazer a voz do cliente para a tomada de decisão - 27 e 28 de Novembro das 18h30 às 21h30. 29 de Novembro das 18h30 às 20h30",
     "categorias": [
@@ -5670,7 +5670,7 @@ const trainers = [
     "id": 92,
     "nome": "Marcelo Penteado",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/marcelo-penteado.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Marcelo-Penteado.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -5731,7 +5731,7 @@ const trainers = [
     "id": 93,
     "nome": "Márcio Miranda",
     "cargo": "Producer, Sound Designer & Multimedia Specialist",
-    "foto": "assets/trainers/marcio-miranda.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Marcio-Miranda.jpg",
     "bio_curta": "alocado à ESP Ecommerce 2023 ",
     "bio_completa": "alocado à ESP Ecommerce 2023 ",
     "categorias": [
@@ -5872,7 +5872,7 @@ const trainers = [
     "id": 96,
     "nome": "Mário Alcântara",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/mario-alcantara.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-Mário-Alcântara.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -5920,7 +5920,7 @@ const trainers = [
     "id": 97,
     "nome": "Margarida Barreto",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/margarida-barreto.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Design-sem-nome-6.png",
     "bio_curta": "Diretora Criativa, AI Artist e Partner na ELETRICO28, agência de design e comunicação com mais de 20 anos de experiência no setor. Trabalhou com marca...",
     "bio_completa": "Diretora Criativa, AI Artist e Partner na ELETRICO28, agência de design e comunicação com mais de 20 anos de experiência no setor. Trabalhou com marcas como Apple, HP, Dell e Mitsubishi Electric, tendo desenvolvido projetos de branding, design gráfico, web design, campanhas digitais e estratégias visuais. \nEspecializou-se na integração de Inteligência Artificial no processo criativo e é autora de um dos primeiros livros técnicos sobre o Midjourney “The MidJourney Expedition”, um guia prático sobre design generativo com IA, disponível na Amazon. Tem sido convidada como oradora e formadora em diversos eventos internacionais e é embaixadora da plataforma Pimento, da revista SHE IS AI e do Reinvent DAO, onde explora a junção da tecnologia, ética e criatividade.",
     "categorias": [
@@ -6001,7 +6001,7 @@ const trainers = [
     "id": 98,
     "nome": "Margarida Silva",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/margarida-silva.jpg",
+    "foto": "",
     "bio_curta": "Diretora Criativa, AI Artist e Partner na ELETRICO28, agência de design e comunicação com mais de 20 anos de experiência no setor. Trabalhou com marcas como Apple, HP, Dell e Mitsubishi Electric, tendo desenvolvido projetos de branding, design gráfico, web design, campanhas digitais e estratégias vi",
     "bio_completa": "Diretora Criativa, AI Artist e Partner na ELETRICO28, agência de design e comunicação com mais de 20 anos de experiência no setor. Trabalhou com marcas como Apple, HP, Dell e Mitsubishi Electric, tendo desenvolvido projetos de branding, design gráfico, web design, campanhas digitais e estratégias visuais. \nEspecializou-se na integração de Inteligência Artificial no processo criativo e é autora de um dos primeiros livros técnicos sobre o Midjourney “The MidJourney Expedition”, um guia prático sobre design generativo com IA, disponível na Amazon. Tem sido convidada como oradora e formadora em diversos eventos internacionais e é embaixadora da plataforma Pimento, da revista SHE IS AI e do Reinvent DAO, onde explora a junção da tecnologia, ética e criatividade.",
     "categorias": [
@@ -6075,7 +6075,7 @@ const trainers = [
     "id": 99,
     "nome": "Maxwel Quintão",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/maxwel-quintao.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Maxwell.png",
     "bio_curta": "12 anos de experiência.\n6 em agência e 6 em cliente.\nEm agência trabalhei marcas como Hard Rock Cafe Lisboa, Ocenário de Lisboa, Adidas, Stone By Ston...",
     "bio_completa": "12 anos de experiência.\n6 em agência e 6 em cliente.\nEm agência trabalhei marcas como Hard Rock Cafe Lisboa, Ocenário de Lisboa, Adidas, Stone By Stone, Super Bock, 24Kitchen, Porto Ferreira, DAZN e entre outras.\nEm cliente, estive na Emma - The Sleep Company e Fidelidade Seguros. ",
     "categorias": [
@@ -6115,7 +6115,7 @@ const trainers = [
     "id": 100,
     "nome": "Miguel Maio",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/miguel-maio.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Miguel-Maio.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -6232,7 +6232,7 @@ const trainers = [
     "id": 101,
     "nome": "Mónica Isabel da Silva Araújo",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/monica-araujo.png",
+    "foto": "",
     "bio_curta": "Mónica Araújo is a multilingual Senior Scrum Master and Product Owner with over 27 years of experience driving digital transformation and AI-enabled initiatives across global teams. She specialises in leading the design and delivery of digital solutions that enhance service management and reduce ope",
     "bio_completa": "Mónica Araújo is a multilingual Senior Scrum Master and Product Owner with over 27 years of experience driving digital transformation and AI-enabled initiatives across global teams. She specialises in leading the design and delivery of digital solutions that enhance service management and reduce operational costs while aligning technology with strategic business goals.",
     "categorias": [
@@ -6444,7 +6444,7 @@ const trainers = [
     "id": 106,
     "nome": "Patrícia Weiss",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/patricia-weiss.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail.png",
     "bio_curta": "\nfaltam docs + programa Masterclass | a aguardar feedback em relação a data para masterclass em nov. | Feito FU a 02.10.23 ",
     "bio_completa": "\nfaltam docs + programa Masterclass | a aguardar feedback em relação a data para masterclass em nov. | Feito FU a 02.10.23 ",
     "categorias": [
@@ -6486,7 +6486,7 @@ const trainers = [
     "id": 107,
     "nome": "Paula Silva",
     "cargo": "Unicorn Factory Lisboa",
-    "foto": "assets/trainers/paula-silva.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Paula-Silva.jpg",
     "bio_curta": "alocada à ESP Ecommerce 2023 ",
     "bio_completa": "alocada à ESP Ecommerce 2023 ",
     "categorias": [
@@ -6557,7 +6557,7 @@ const trainers = [
     "id": 108,
     "nome": "Paulo Rossas",
     "cargo": "Creative Innovation",
-    "foto": "assets/trainers/paulo-rossas.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-Paulo-Rossas.png",
     "bio_curta": "Líder de produto e transformação digital com mais de 12 anos de experiência nos setores de fintech, e-commerce e tecnologia. É CEO e fundador da SprintAI.dev (agência AI-First) e co-fundou duas startups de e-commerce. No plano académico, é Professor Convidado em instituições de prestígio como a Cató",
     "bio_completa": "Líder de produto e transformação digital com mais de 12 anos de experiência nos setores de fintech, e-commerce e tecnologia. É CEO e fundador da SprintAI.dev (agência AI-First) e co-fundou duas startups de e-commerce. No plano académico, é Professor Convidado em instituições de prestígio como a Católica Lisbon, Porto Business School e ISCTE, onde leciona Gestão de Produto, Metodologias Ágeis e Inovação. Tem vasta experiência a trabalhar diretamente com executivos e equipas de alta performance na adoção de tecnologias emergentes.",
     "categorias": [
@@ -6683,7 +6683,7 @@ const trainers = [
     "id": 110,
     "nome": "Pedro Bessa Mendes",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/pedro-bessa-mendes.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Pedro-Bessa-Mendes.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -6788,7 +6788,7 @@ const trainers = [
     "id": 112,
     "nome": "Pedro Caramez",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/pedro-caramez.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Pedro-Caramez.jpg",
     "bio_curta": "Pedro Caramez é atualmente reconhecido como o maior especialista de LinkedIn em Portugal. Com mais de 15 anos de experiência prática, dedica-se a estu...",
     "bio_completa": "Pedro Caramez é atualmente reconhecido como o maior especialista de LinkedIn em Portugal. Com mais de 15 anos de experiência prática, dedica-se a estudar, testar e aplicar estratégias de otimização para profissionais e empresas na maior rede social profissional do mundo.\n\nÉ autor de vários livros sobre LinkedIn, mentor e formador, e tem acompanhado centenas de profissionais na construção de marcas pessoais fortes e estratégias de comunicação eficazes. Colabora com diversas empresas em programas de capacitação digital focados em recrutamento, vendas, comunicação e programas de embaixadores digitais.\n\nTem vindo a explorar o cruzamento entre LinkedIn e Inteligência Artificial, aplicando esta sinergia não só ao desenvolvimento de carreira, mas também à geração de leads, criação de conteúdos estratégicos, apoio ao recrutamento e otimização de processos de comunicação e decisão em contexto académico e empresarial.",
     "categorias": [
@@ -6840,7 +6840,7 @@ const trainers = [
     "id": 113,
     "nome": "Pedro Janela",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/pedro-janela.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/04/Pedro-Janela-1.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -6874,7 +6874,7 @@ const trainers = [
     "id": 114,
     "nome": "Pedro Mota",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/pedro-mota.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Pedro-Mota.png",
     "bio_curta": "Agendada 1ª edição para OUT 23, já confirmada",
     "bio_completa": "Agendada 1ª edição para OUT 23, já confirmada",
     "categorias": [
@@ -6928,7 +6928,7 @@ const trainers = [
     "id": 115,
     "nome": "Pedro Pinto",
     "cargo": "Director E-commerce @ MC",
-    "foto": "assets/trainers/pedro-pinto.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/02/imagem-thumbnail-1.png",
     "bio_curta": "alocado à ESP Ecommerce 2023 ",
     "bio_completa": "alocado à ESP Ecommerce 2023 ",
     "categorias": [
@@ -6996,7 +6996,7 @@ const trainers = [
     "id": 116,
     "nome": "Pedro Quintino",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/pedro-quintino.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Pedro-Quintino-1.png",
     "bio_curta": "Content Designer na Anchorage Digital, onde assume a responsabilidade de garantir que os produtos da empresa transmitem, de forma, clara conceitos fin...",
     "bio_completa": "Content Designer na Anchorage Digital, onde assume a responsabilidade de garantir que os produtos da empresa transmitem, de forma, clara conceitos financeiros complexos, permitindo aos seus utilizadores tomar decisões informadas e navegar com confiança nas suas interfaces.\n\nAo longo do seu percurso profissional de mais de uma década, escreveu para marcas como a Nike, Chivas Regal, Nescafé, Corona Extra, ActivoBank, Santander, e Uphold.\n\nMudar o seu foco da criatividade publicitária para a complexidade do mundo da User Experience foi uma progressão natural, alinhada com os seus valores pessoais. Isto permitiu que canalizasse a sua paixão pela escrita, design e tecnologia, bem como a a curiosidade pelo comportamento humano, num propósito singular.\n\nÉ co-fundador da comunidade UX Writing Portugal, um espaço colaborativo que promove a troca de conhecimento entre os entusiastas de UX writing.",
     "categorias": [
@@ -7070,7 +7070,7 @@ const trainers = [
     "id": 117,
     "nome": "Pedro Reis",
     "cargo": "Data Lead @ Natixis",
-    "foto": "assets/trainers/pedro-reis.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/02/imagem-thumbnail.png",
     "bio_curta": " Introdução ao Power Bi - 23, 26, 27 de Outubro + 2 de Novembro",
     "bio_completa": " Introdução ao Power Bi - 23, 26, 27 de Outubro + 2 de Novembro",
     "categorias": [
@@ -7125,7 +7125,7 @@ const trainers = [
     "id": 118,
     "nome": "Pedro Santos",
     "cargo": "Head Branding & Culture na With Company",
-    "foto": "assets/trainers/pedro-santos.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Pedro-Santos-2.jpg",
     "bio_curta": "Diretor de Inovação (MC Sonae, 2024-hoje). Diretor Desenvolvimento Operações (MC Sonae, 2024-hoje), Vice-presidente ACEPI (2016-hoje), Diretor e-comme...",
     "bio_completa": "Diretor de Inovação (MC Sonae, 2024-hoje). Diretor Desenvolvimento Operações (MC Sonae, 2024-hoje), Vice-presidente ACEPI (2016-hoje), Diretor e-commerce (MC Sonae 2016-2024),  Administrador (Ulabox, 2016-2020), Diversas funções Grupo Sonae, incluindo lançamento e gestão da Worten Online (2001-2004). Mestrado Ciência Empresariais. Programa Doutormanento em Gestão (atualmente a preparar tese). Advisor (Portugal Ventures, EGI Booster).",
     "categorias": [
@@ -7221,7 +7221,7 @@ const trainers = [
     "id": 120,
     "nome": "Rafael Coelho",
     "cargo": "Dev & Accessibility",
-    "foto": "assets/trainers/rafael-coelho.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/02/imagem-thumbnail-3.png",
     "bio_curta": "Acessibilidade Digital na prática para Developers - 13, 15 e 17 de Novembro das 18h30 às 21h30",
     "bio_completa": "Acessibilidade Digital na prática para Developers - 13, 15 e 17 de Novembro das 18h30 às 21h30",
     "categorias": [
@@ -7371,7 +7371,7 @@ const trainers = [
     "id": 124,
     "nome": "Ricardo Cappra",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/ricardo-cappra.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/02/imagem-thumbnail-2.png",
     "bio_curta": "falta programa, Masterclass Data Driven agendada para 20 de Junho | falta vídeo + blogpost ",
     "bio_completa": "falta programa, Masterclass Data Driven agendada para 20 de Junho | falta vídeo + blogpost ",
     "categorias": [
@@ -7437,7 +7437,7 @@ const trainers = [
     "id": 125,
     "nome": "Ricardo Dória",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/ricardo-doria.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2024/07/Ricardo-Doria-site.jpg",
     "bio_curta": "Profissional com mais de 10 anos de experiência em marketing digital, e-commerce e gestão de produto, com forte enfoque em estratégia, optimização de performance e desenvolvimento de soluções digitais orientadas a negócio.\n\nAo longo do seu percurso, tem vindo a desempenhar funções como Product Manag",
     "bio_completa": "Profissional com mais de 10 anos de experiência em marketing digital, e-commerce e gestão de produto, com forte enfoque em estratégia, optimização de performance e desenvolvimento de soluções digitais orientadas a negócio.\n\nAo longo do seu percurso, tem vindo a desempenhar funções como Product Manager e especialista em SEA, trabalhando em contextos complexos de e-commerce e transformação digital. Actualmente integra o Grupo Boticário, onde colabora na gestão e evolução de plataformas digitais, articulando equipas multidisciplinares nas áreas de tecnologia, CRM, media e brand, com foco na melhoria contínua da experiência do utilizador e no crescimento de vendas online.\n\nTem experiência prática na liderança de iniciativas de produto, definição de roadmaps, priorização de backlog e alinhamento entre stakeholders técnicos e de negócio. Trabalha regularmente com plataformas como Shopify e com ecossistemas digitais integrados, garantindo a execução de estratégias omnicanal e a optimização de funis de conversão.\n\nDesenvolveu competências sólidas em gestão de campanhas de aquisição (SEA), análise de dados e performance marketing, contribuindo para a optimização de investimentos e melhoria de KPIs em diferentes mercados e segmentos.\n\nDestaca-se pela capacidade de estruturar problemas complexos, traduzir necessidades de negócio em soluções concretas e colaborar de forma eficaz com equipas diversas. Tem particular interesse em google ads, automação, inteligência artificial aplicada a produtos digitais e construção de soluções escaláveis que gerem impacto real no negócio.\n\nAo longo da sua carreira, tem estado envolvido em projectos relevantes em marcas de grande dimensão, combinando visão estratégica com execução prática, sempre com foco em resultados e na criação de valor sustentável.",
     "categorias": [
@@ -7531,7 +7531,7 @@ const trainers = [
     "id": 126,
     "nome": "Ricardo Lopes",
     "cargo": "Senior Project Manager na Fullsix Portugal",
-    "foto": "assets/trainers/ricardo-lopes.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Ricardo-Lopes.png",
     "bio_curta": "Profissional com mais de 10 anos de experiência em marketing digital, e-commerce e gestão de produto, com forte enfoque em estratégia, optimização de performance e desenvolvimento de soluções digitais orientadas a negócio.\n\nAo longo do seu percurso, tem vindo a desempenhar funções como Product Manag",
     "bio_completa": "Profissional com mais de 10 anos de experiência em marketing digital, e-commerce e gestão de produto, com forte enfoque em estratégia, optimização de performance e desenvolvimento de soluções digitais orientadas a negócio.\n\nAo longo do seu percurso, tem vindo a desempenhar funções como Product Manager e especialista em SEA, trabalhando em contextos complexos de e-commerce e transformação digital. Actualmente integra o Grupo Boticário, onde colabora na gestão e evolução de plataformas digitais, articulando equipas multidisciplinares nas áreas de tecnologia, CRM, media e brand, com foco na melhoria contínua da experiência do utilizador e no crescimento de vendas online.\n\nTem experiência prática na liderança de iniciativas de produto, definição de roadmaps, priorização de backlog e alinhamento entre stakeholders técnicos e de negócio. Trabalha regularmente com plataformas como Shopify e com ecossistemas digitais integrados, garantindo a execução de estratégias omnicanal e a optimização de funis de conversão.\n\nDesenvolveu competências sólidas em gestão de campanhas de aquisição (SEA), análise de dados e performance marketing, contribuindo para a optimização de investimentos e melhoria de KPIs em diferentes mercados e segmentos.\n\nDestaca-se pela capacidade de estruturar problemas complexos, traduzir necessidades de negócio em soluções concretas e colaborar de forma eficaz com equipas diversas. Tem particular interesse em google ads, automação, inteligência artificial aplicada a produtos digitais e construção de soluções escaláveis que gerem impacto real no negócio.\n\nAo longo da sua carreira, tem estado envolvido em projectos relevantes em marcas de grande dimensão, combinando visão estratégica com execução prática, sempre com foco em resultados e na criação de valor sustentável.",
     "categorias": [
@@ -7570,7 +7570,7 @@ const trainers = [
     "id": 127,
     "nome": "Ricardo Luiz",
     "cargo": "AI & Product Director",
-    "foto": "assets/trainers/ricardo-luiz.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/02/imagem-thumbnail-2.png",
     "bio_curta": "Profissional com mais de 10 anos de experiência em marketing digital, e-commerce e gestão de produto, com forte enfoque em estratégia, optimização de performance e desenvolvimento de soluções digitais orientadas a negócio.\n\nAo longo do seu percurso, tem vindo a desempenhar funções como Product Manag",
     "bio_completa": "Profissional com mais de 10 anos de experiência em marketing digital, e-commerce e gestão de produto, com forte enfoque em estratégia, optimização de performance e desenvolvimento de soluções digitais orientadas a negócio.\n\nAo longo do seu percurso, tem vindo a desempenhar funções como Product Manager e especialista em SEA, trabalhando em contextos complexos de e-commerce e transformação digital. Actualmente integra o Grupo Boticário, onde colabora na gestão e evolução de plataformas digitais, articulando equipas multidisciplinares nas áreas de tecnologia, CRM, media e brand, com foco na melhoria contínua da experiência do utilizador e no crescimento de vendas online.\n\nTem experiência prática na liderança de iniciativas de produto, definição de roadmaps, priorização de backlog e alinhamento entre stakeholders técnicos e de negócio. Trabalha regularmente com plataformas como Shopify e com ecossistemas digitais integrados, garantindo a execução de estratégias omnicanal e a optimização de funis de conversão.\n\nDesenvolveu competências sólidas em gestão de campanhas de aquisição (SEA), análise de dados e performance marketing, contribuindo para a optimização de investimentos e melhoria de KPIs em diferentes mercados e segmentos.\n\nDestaca-se pela capacidade de estruturar problemas complexos, traduzir necessidades de negócio em soluções concretas e colaborar de forma eficaz com equipas diversas. Tem particular interesse em google ads, automação, inteligência artificial aplicada a produtos digitais e construção de soluções escaláveis que gerem impacto real no negócio.\n\nAo longo da sua carreira, tem estado envolvido em projectos relevantes em marcas de grande dimensão, combinando visão estratégica com execução prática, sempre com foco em resultados e na criação de valor sustentável.",
     "categorias": [
@@ -7639,7 +7639,7 @@ const trainers = [
     "id": 128,
     "nome": "Ricardo Nobre",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/ricardo-nobre.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-Ricardo-Nobre.png",
     "bio_curta": "Implementação do Ga4 no Millennium BCP. Trabalhar com Analytics de APP no MBCP. ",
     "bio_completa": "Implementação do Ga4 no Millennium BCP. Trabalhar com Analytics de APP no MBCP. ",
     "categorias": [
@@ -7750,7 +7750,7 @@ const trainers = [
     "id": 130,
     "nome": "Rita Pureza",
     "cargo": "Producer, Sound Designer & Multimedia Specialist",
-    "foto": "assets/trainers/rita-pureza.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Rita-Pureza.png",
     "bio_curta": "Innovation strategy projects at With Company",
     "bio_completa": "Innovation strategy projects at With Company",
     "categorias": [
@@ -7818,7 +7818,7 @@ const trainers = [
     "id": 131,
     "nome": "Rita Sobral",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/rita-sobral.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-7-1.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -7922,7 +7922,7 @@ const trainers = [
     "id": 133,
     "nome": "Ruben Ferreira Duarte",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/ruben-duarte.jpg",
+    "foto": "",
     "bio_curta": "Digital LAB Análises de Guerrilha de Acessibilidade Digital - 23 de Novembro das 10h às 13h e das 14h às 17h\nFundamentos de Acessibilidade Digital - 2...",
     "bio_completa": "Digital LAB Análises de Guerrilha de Acessibilidade Digital - 23 de Novembro das 10h às 13h e das 14h às 17h\nFundamentos de Acessibilidade Digital - 20 e 22 de Novembro das 18h30 às 21h30",
     "categorias": [
@@ -7980,7 +7980,7 @@ const trainers = [
     "id": 134,
     "nome": "Ruben Pardal",
     "cargo": "Head of Digital Brand Content @ NOS",
-    "foto": "assets/trainers/ruben-pardal.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2024/01/Ruben-Pardal-3.jpg",
     "bio_curta": "Ruben Ferreira Duarte é um designer português, natural de Setúbal e atualmente a viver em Lisboa (Portugal).\n\nOs seus dias são divididos entre o trabalho como designer, enquanto líder de equipas de design, especialista de acessibilidade digital e design systems e a sua atividade como Professor Adjun",
     "bio_completa": "Ruben Ferreira Duarte é um designer português, natural de Setúbal e atualmente a viver em Lisboa (Portugal).\n\nOs seus dias são divididos entre o trabalho como designer, enquanto líder de equipas de design, especialista de acessibilidade digital e design systems e a sua atividade como Professor Adjunto Convidado na Escola Superior de Comunicação Social do Instituto Politécnico de Lisboa.\n\nO Ruben é amante confesso de fazer muitas perguntas e convive bastante mal com qualquer tipo de coisas desalinhadas, especialmente se for em cima da secretária.\n\nAcredita que o design pode ser um instrumento fundamental  para o desenho de produtos, serviços e experiências, sejam elas digitais ou não. Na mesma medida, acredita igualmente que a estratégia e o processo de design se podem afirmar enquanto ferramentas indispensáveis para os negócios das empresas do futuro, contribuindo para a construção de uma economia de valor acrescentado.\n\nNas horas vagas (as que sobram quando não está a viajar), é também formador nas áreas de UX, UI e Product Design e editor do DXD, um blog que tem por missão ajudar as equipas de transformação digital em geral e as equipas de design em particular, a imaginar a próxima geração de produtos, serviços e experiências digitais.",
     "categorias": [
@@ -8067,7 +8067,7 @@ const trainers = [
     "id": 135,
     "nome": "Rui Cordeiro",
     "cargo": "GenAI & Innovation Expert",
-    "foto": "02-ruicordeiro_foto.png",
+    "foto": "",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -8142,7 +8142,7 @@ const trainers = [
     "id": 136,
     "nome": "Rui Malvarez",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/rui-malvarez.jpeg",
+    "foto": "",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -8208,7 +8208,7 @@ const trainers = [
     "id": 137,
     "nome": "Rui Miranda",
     "cargo": "Content Manager na BRIDGE IN",
-    "foto": "assets/trainers/rui-miranda.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-3.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -8244,7 +8244,7 @@ const trainers = [
     "id": 138,
     "nome": "Rui Nunes",
     "cargo": "Fundadora da Bárbara Oliveira Nutrição",
-    "foto": "assets/trainers/rui-nunes.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Rui-Nunes.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -8282,7 +8282,7 @@ const trainers = [
     "id": 139,
     "nome": "Samir Valimamade",
     "cargo": "Product Owner",
-    "foto": "assets/trainers/samir-valimamade.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Samir-Valimamade-1.jpg",
     "bio_curta": "A aguardar datas para próxima edição de Product Owner Nov.",
     "bio_completa": "A aguardar datas para próxima edição de Product Owner Nov.",
     "categorias": [
@@ -8345,7 +8345,7 @@ const trainers = [
     "id": 140,
     "nome": "Sara Felício",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/sara-felicio.jpeg",
+    "foto": "",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -8405,7 +8405,7 @@ const trainers = [
     "id": 141,
     "nome": "Sara Godinho",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/sara-godinho.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/07/Sara-Godinho.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -8457,7 +8457,7 @@ const trainers = [
     "id": 142,
     "nome": "Teresa Geraldo",
     "cargo": "Managing Partner na Audosys",
-    "foto": "assets/trainers/teresa-geraldo.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-1.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -8517,7 +8517,7 @@ const trainers = [
     "id": 143,
     "nome": "Tiago Almeida Nogueira",
     "cargo": "Digital Director @ Odisseias",
-    "foto": "assets/trainers/tiago-almeida-nogueira.jpg",
+    "foto": "",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -8561,7 +8561,7 @@ const trainers = [
     "id": 144,
     "nome": "Tiago Belotte",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/tiago-belotte.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2024/06/Tiago-bellote-thumbnail.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -8665,7 +8665,7 @@ const trainers = [
     "id": 146,
     "nome": "Tiago Espírito Santo",
     "cargo": "Consultora na área da gestão de operações e desenvolvimento de pessoas",
-    "foto": "assets/trainers/tiago-espirito-santo.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-6.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -8698,7 +8698,7 @@ const trainers = [
     "id": 147,
     "nome": "Tiago Janela",
     "cargo": "Chief Innovation Officer na Lisbon Digital School",
-    "foto": "assets/trainers/tiago-janela.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Tiago-Janela.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -8746,7 +8746,7 @@ const trainers = [
     "id": 148,
     "nome": "Tiago Lemos",
     "cargo": "CEO @ Dep. Marketing Espanha",
-    "foto": "assets/trainers/tiago-lemos.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Tiago-Lemos.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -8821,7 +8821,7 @@ const trainers = [
     "id": 149,
     "nome": "Tiago Vilarinho",
     "cargo": "Formador LDS",
-    "foto": "",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Tiago-Vilarinho.jpg",
     "bio_curta": "Com mais de 10 anos de experiência em liderança de equipas e gestão de clientes, o meu percurso começou na hospitalidade e evoluiu para áreas como bel...",
     "bio_completa": "Com mais de 10 anos de experiência em liderança de equipas e gestão de clientes, o meu percurso começou na hospitalidade e evoluiu para áreas como beleza, luxo, tecnologia e marketing digital. Trabalhei com marcas globais como Farfetch, L’Oréal e Primetag, sempre em funções onde a relação com parceiros, o crescimento do negócio e a motivação de equipas estiveram no centro.\n\nAlém do lado corporativo, tenho investido energia em projetos pessoais ligados a comunidade, eventos e cultura, desde a criação de espaços alternativos de clubbing até iniciativas criativas como podcasts e escrita. Este cruzamento entre negócio, pessoas e cultura tem sido o fio condutor da minha carreira e dos projetos que abraço.",
     "categorias": [
@@ -8897,7 +8897,7 @@ const trainers = [
     "id": 150,
     "nome": "Tommaso Matteo di Veronesi",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/tommaso-veronesi.jpg",
+    "foto": "",
     "bio_curta": "Tommaso Matteo di Veronesi é gestor, empreendedor e fotógrafo Fine-Art de retrato premiado internacionalmente. Venceu múltiplos prémios de prestígio, incluindo duas vezes o 'Gold' nos London Photography Awards e seis vezes nos New York Photography Awards, tendo ainda recebido do museu \"La Pinacothèq",
     "bio_completa": "Tommaso Matteo di Veronesi é gestor, empreendedor e fotógrafo Fine-Art de retrato premiado internacionalmente. Venceu múltiplos prémios de prestígio, incluindo duas vezes o 'Gold' nos London Photography Awards e seis vezes nos New York Photography Awards, tendo ainda recebido do museu \"La Pinacothèque\", no Luxemburgo, o Certificado de Mérito Artístico pela excelência do seu trabalho. O seu percurso inclui publicações na Vogue UK e colaborações com marcas como L’Oréal, Microsoft, New Balance e Huawei. Licenciado em Gestão de Marketing e Mestre em Gestão pelo ISCTE, com experiência em multinacionais como a Xerox e a Pioneer Electronics, alia a experiência artística à visão estratégica de negócio. Atualmente, gere o seu estúdio de fotografia, desenvolve projetos de inovação em Inteligência Artificial e atua como mentor e formador, cruzando arte, tecnologia e marketing para capacitar profissionais e marcas a comunicarem de forma mais impactante e diferenciada.",
     "categorias": [
@@ -9086,7 +9086,7 @@ const trainers = [
     "id": 152,
     "nome": "Vanessa Arlandis",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/vanessa-arlandis.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Vanessa-Arlandis.jpg",
     "bio_curta": "Já dou formação nesta área há 8 anos tanto como formadora como docente. Há mais de 15 anos que trabalho em ecommerce (mais 50 lojas online). MBA em ec...",
     "bio_completa": "Já dou formação nesta área há 8 anos tanto como formadora como docente. Há mais de 15 anos que trabalho em ecommerce (mais 50 lojas online). MBA em ecommerce.",
     "categorias": [
@@ -9799,7 +9799,7 @@ const trainers = [
     "id": 171,
     "nome": "João Andrade Gouveia",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/joao-gouveia.png",
+    "foto": "",
     "bio_curta": "SQL",
     "bio_completa": "SQL",
     "categorias": [
@@ -10842,7 +10842,7 @@ const trainers = [
     "id": 199,
     "nome": "Ricardo Gil",
     "cargo": "Ex-Formador LDS",
-    "foto": "assets/trainers/ricardo-gil.png",
+    "foto": "",
     "bio_curta": "Google Ads | Paid Media | Facebook e Instagram Ads | SEO | Estratégia de MKT Digital | Digital Project Management | Data- Driven Marketing | Tiktok Ads | Conversion Rate Optimization | ChatGPT",
     "bio_completa": "Google Ads | Paid Media | Facebook e Instagram Ads | SEO | Estratégia de MKT Digital | Digital Project Management | Data- Driven Marketing | Tiktok Ads | Conversion Rate Optimization | ChatGPT",
     "categorias": [
@@ -10880,7 +10880,7 @@ const trainers = [
     "id": 200,
     "nome": "Bruno Pereira",
     "cargo": "Ex-Formador LDS",
-    "foto": "assets/trainers/bruno-pereira.jpeg",
+    "foto": "",
     "bio_curta": "Google Ads | SEO",
     "bio_completa": "Google Ads | SEO",
     "categorias": [
@@ -10954,7 +10954,7 @@ const trainers = [
     "id": 201,
     "nome": "Carlota Brogueira",
     "cargo": "Ex-Formador LDS",
-    "foto": "assets/trainers/carlota-brogueira.jpg",
+    "foto": "",
     "bio_curta": "Redes Sociais | Estratégia de Social Media",
     "bio_completa": "Redes Sociais | Estratégia de Social Media",
     "categorias": [
@@ -10985,7 +10985,7 @@ const trainers = [
     "id": 202,
     "nome": "Cláudio Soares",
     "cargo": "Ex-Formador LDS",
-    "foto": "assets/trainers/claudio-soares.jpg",
+    "foto": "",
     "bio_curta": "Estratégia vs Criatividade | Workshop",
     "bio_completa": "Estratégia vs Criatividade | Workshop",
     "categorias": [
@@ -11045,7 +11045,7 @@ const trainers = [
     "id": 204,
     "nome": "Gonçalo Ramos",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/goncalo-ramos.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/02/imagem-thumbnail-2.png",
     "bio_curta": "Vendas & Plano de Operações",
     "bio_completa": "Vendas & Plano de Operações",
     "categorias": [
@@ -11106,7 +11106,7 @@ const trainers = [
     "id": 206,
     "nome": "Ana Filipa Gaspar",
     "cargo": "Especialista SEO & Analytics",
-    "foto": "assets/trainers/ana-filipa-gaspar.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Ana-Filipa-Gaspar.png",
     "bio_curta": "Executive SEO na SIXT, rent-a-car alemã presente em mais de 100 países, onde lidera a estratégia e otimização de performance orgânica para mais de 30 domínios internacionais de franchises. Com mais de 15 anos de experiência em marketing digital, liderou equipas e desenvolveu estratégias de SEO para ",
     "bio_completa": "Executive SEO na SIXT, rent-a-car alemã presente em mais de 100 países, onde lidera a estratégia e otimização de performance orgânica para mais de 30 domínios internacionais de franchises. Com mais de 15 anos de experiência em marketing digital, liderou equipas e desenvolveu estratégias de SEO para B2B, B2C e enterprise em setores como tecnologia, e-commerce, banca e seguros.\n\nMentora e formadora no programa VOICE Leadership da Nova SBE, alia a experiência prática em SEO com uma visão estratégica do marketing digital. Aposta na formação contínua em Inteligência Artificial aplicada ao marketing e aplica estas competências na criação de soluções de SEO baseadas em dados e automação de processos, tanto na sua função atual como anteriormente, enquanto Head of SEO na agência WYperformance.\n\nÉ licenciada em Ciências da Comunicação pela FCSH – Universidade Nova de Lisboa, mestre em Comunicação, Cultura e Tecnologias de Informação pelo ISCTE e concluiu em 2024 o programa MBA Essentials na London School of Economics and Political Science (LSE).",
     "categorias": [
@@ -11148,7 +11148,7 @@ const trainers = [
     "id": 207,
     "nome": "Bilal Machraa",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/bilal-machraa.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/02/imagem-thumbnail-3.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -11182,7 +11182,7 @@ const trainers = [
     "id": 208,
     "nome": "Catarina Antunes",
     "cargo": "Formadora LDS",
-    "foto": "assets/trainers/catarina-antunes.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Catarina-Antunes.jpg",
     "bio_curta": "Diretora Criativa, Marketing e Comunicação (6 equipas, 20 pessoas)\n- Board Member\n- Diretora Criativa\n- Diretora de Arte\n- Gestão de Equipas (comunicação, vídeo, redes sociais, gestão de tráfego, design, webinars, redação)\n- Gestora de Marcas (Supercasa, Casasapo, eGo Real Estate, Infocasa & Virtual",
     "bio_completa": "Diretora Criativa, Marketing e Comunicação (6 equipas, 20 pessoas)\n- Board Member\n- Diretora Criativa\n- Diretora de Arte\n- Gestão de Equipas (comunicação, vídeo, redes sociais, gestão de tráfego, design, webinars, redação)\n- Gestora de Marcas (Supercasa, Casasapo, eGo Real Estate, Infocasa & Virtual Tour)\n- Estratega Omnicanal\n- B2B\n- B2C\n- Responder, perfilar e nutrir leads de marca\n- Especialista de Produto\n- Desenvolvimento de Projetos de Websites\n- Desenvolvimento de Estratégias para Crescimento\n- Estratégias para Gestão de Tráfego Pago & Orgânico\n- Estratégias Cruzadas de Comunicação Online e Offline\n- Gestão de Redes Sociais (Instagram, Facebook, YouTube)\n- Estratégia SEM\n- SEO (SEO Técnico, On Page, Off Page, SEO para Redes Sociais)\n- SEM Strategy\n- ORM Strategy\n- CRO Marketing\n- Email Marketing\n- Campanhas de Press Release & Outreach\n- Neuromarketing\n- Criação de Conteúdo (comunicação interna e externa; conteúdo digital; copywriting, vídeo)\n- Acompanhamento e Relatórios (Meta, Google Tools, Clarity)\n- Copywriting: websites, email marketing, ebooks, artigos, redes sociais, blog\n\nBunker Agency - CEO\nEDP, Sogrape, Grupo Fastio,  Companhia de Seguros Zurich, Volkswagen Finance, Grupo Amorim\n- Fundadora da Bunker Agency (7 pessoas)\n- Gestão de Empresa\n- Diretora Criativa\n- Gestão de Equipas\n- Desenvolvimento de Projetos de Websites\n- Desenvolvimento de Projetos de Marca\n- Criação de Conteúdos (comunicação interna e externa; conteúdos digitais; copywriting, vídeo)\n- Design Offline\n- Diretora de Arte\n- Desenvolvimento e Gestão de Projetos de Marca\n- Criação de Conteúdos (comunicação interna e externa; conteúdos digitais; copywriting, vídeo)\n- Estratega Omnicanal\n- Websites\n- Design Offline\n- Design de Marca\n- Design Editorial\n- Design de Embalagens\n- Design Tipográfico\n- Diretora de Arte\n- Ilustradora\n- Design de Infografias\n- Storyboarding\n- Gestão de Redes Sociais (Instagram, Facebook, YouTube)\n- Responder, perfilar e nutrir leads de marca\n- Email Marketing\nEstudo de Mercado\nEstratega Omnicanal\nB2B\nProspecção, acordos e gestão de relações\n\nAdsoul - Diretora Criativa\n- Diretora Criativa\n- Diretora de Arte\n- Gestão de Equipas\n- Desenvolvimento e Gestão de Projetos de Marca\n- Criação de Conteúdos (comunicação interna e externa; conteúdos digitais; copywriting, vídeo)\n- Estratega Omnicanal\n- Design Offline\n- Design de Marca\n- Design Editorial\n- Design de Embalagens\n- Design Tipográfico\n- Diretora de Arte\n- Ilustradora\n- Design de Infografias\n- Storyboarding\n\nBy Com - Designer\nNavigator, Grupo Pestana e Pousadas de Portugal, Fox, Vista Alegre, Aldeias Históricas, Minipreço, Teixeira Duarte, BES, TMN, Sanofi, Universidade Católica\n- Estrategista Omnicanal\n- Design Offline\n- Design de Marca\n- Design Editorial\n- Design de Embalagens\n- Design Tipográfico\n- Diretor de Arte\n- Ilustrador\n- Design de Infografia\n\nIDF - Designer\n- Gestão de Equipas\n- Design Offline\n- Design de Marca\n- Design Editorial\n- Design Tipográfico\n- Diretor de Arte\n- Ilustrador\n- Design de Infografia\n- Design de Sinalização",
     "categorias": [
@@ -11223,7 +11223,7 @@ const trainers = [
     "id": 209,
     "nome": "Gisela Morgadinho",
     "cargo": "Formadora LDS",
-    "foto": "assets/trainers/gisela-morgadinho.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Gisela-Morgadinho.jpg",
     "bio_curta": "Há 10 anos que está envolvida nos meandros do Social Media e Influencer Marketing, construiu um percurso no universo da comunicação digital depois de dar um pezinho no mundo da cultura e do espetáculo. Começou a sua carreira na IPG Mediabrands, onde integrou equipas dedicadas a estratégia e à execuç",
     "bio_completa": "Há 10 anos que está envolvida nos meandros do Social Media e Influencer Marketing, construiu um percurso no universo da comunicação digital depois de dar um pezinho no mundo da cultura e do espetáculo. Começou a sua carreira na IPG Mediabrands, onde integrou equipas dedicadas a estratégia e à execução de campanhas quer em redes sociais quer com influenciadores, trabalhando com todo o grupo Unilever, SONAE, Daikin e Robbialac.​ Mais tarde, juntou-se ao grupo WPP, onde integrou a equipa de Social Media e Influence Marketing. Em 2024, fez parte da equipa de lançamento da The Goat Agency em Portugal - a maior agência global de marketing de influência, agora parte do grupo WPP, onde trabalha com o grupo Coca-Cola, Lactogal e Auchan.​ Atualmente, desempenha a função de Influence Marketing Specialist na The Goat Agency, liderando projetos com foco na criação de estratégias com impacto e alinhadas com os objetivos de cada marca.​ Para não parecer pouco, é docente de Social Media na Escola Superior de Comunicação Social, onde partilha a sua experiência e visão prática sobre o setor com as próximas gerações de profissionais da comunicação digital.",
     "categorias": [
@@ -11271,7 +11271,7 @@ const trainers = [
     "id": 210,
     "nome": "Hugo Gonçalves",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/hugo-goncalves.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Hugo-Goncalves-1.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -11305,7 +11305,7 @@ const trainers = [
     "id": 211,
     "nome": "Jaqueline Silva",
     "cargo": "Formadora LDS",
-    "foto": "assets/trainers/jaqueline-silva.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Jaqueline-Silva.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -11339,7 +11339,7 @@ const trainers = [
     "id": 212,
     "nome": "João Santos",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/joao-santos.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Joao-Santos.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -11373,7 +11373,7 @@ const trainers = [
     "id": 213,
     "nome": "José Miguel Espregueira",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/jose-miguel-espregueira.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/02/imagem-thumbnail-3.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -11416,7 +11416,7 @@ const trainers = [
     "id": 214,
     "nome": "Liliana Farelo",
     "cargo": "Formadora LDS",
-    "foto": "",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Liliana-Farelo-1.jpg",
     "bio_curta": "Sou UX Lead com experiência em estratégia, research e gestão de projectos digitais. Ao longo do meu percurso profissional tenho trabalhado na intersecção entre utilizadores, negócio e tecnologia, ajudando equipas a tomar decisões mais informadas e a criar experiências com impacto real.\n\nA minha carr",
     "bio_completa": "Sou UX Lead com experiência em estratégia, research e gestão de projectos digitais. Ao longo do meu percurso profissional tenho trabalhado na intersecção entre utilizadores, negócio e tecnologia, ajudando equipas a tomar decisões mais informadas e a criar experiências com impacto real.\n\nA minha carreira começou em gestão de projectos, o que me deu uma base sólida em planeamento, coordenação de equipas e entrega em contextos complexos. Essa experiência evoluiu naturalmente para UX, onde tenho liderado iniciativas de research, definição estratégica e melhoria contínua de produtos digitais, colaborando com equipas multidisciplinares de design, produto e desenvolvimento.\n\nTenho trabalhado em diferentes contextos organizacionais com marcas como Carlsberg, HPinc, novobanco, Continente, Fidelidade e em mercados diversos, do norte da Europa ao Sudeste Asiático. Sempre com foco em transformar insights de investigação em soluções práticas, alinhadas com objetivos de negócio e necessidades reais de utilizadores.\n\nParalelamente à prática profissional, tenho interesse ativo em partilha de conhecimento, formação e desenvolvimento de maturidade em UX, com especial atenção a temas como estratégia, pesquisa, gestão, projectos e acessibilidade.",
     "categorias": [
@@ -11470,7 +11470,7 @@ const trainers = [
     "id": 215,
     "nome": "Mafalda Vila Nova",
     "cargo": "Formadora LDS",
-    "foto": "",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-7.png",
     "bio_curta": "Profissional de Marketing Digital e Social Media Manager com formação académica em Direito e\nespecialização em Marketing Digital. Experiência sólida em gestão de redes sociais, estratégia digital,\ncriação de conteúdos, branding e marketing de influência, com um portfólio diversificado em áreas\ncomo ",
     "bio_completa": "Profissional de Marketing Digital e Social Media Manager com formação académica em Direito e\nespecialização em Marketing Digital. Experiência sólida em gestão de redes sociais, estratégia digital,\ncriação de conteúdos, branding e marketing de influência, com um portfólio diversificado em áreas\ncomo restauração, hotelaria, fitness, arte, retalho e serviços. Forte orientação para resultados,\ncriatividade e pensamento estratégico.",
     "categorias": [
@@ -11511,7 +11511,7 @@ const trainers = [
     "id": 216,
     "nome": "Miguel Rão Vieira",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/miguel-rao-vieira.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Miguel-Rao-Vieira.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -11556,7 +11556,7 @@ const trainers = [
     "id": 217,
     "nome": "Patrícia Coelho",
     "cargo": "Formadora LDS",
-    "foto": "assets/trainers/patricia-coelho.png",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/01/Imagem-thumbnail-7-1.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -11591,7 +11591,7 @@ const trainers = [
     "id": 218,
     "nome": "Paulo Gaudencio",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/paulo-gaudencio.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Paulo-Gaudencio.jpg",
     "bio_curta": "Líder de produto e transformação digital com mais de 12 anos de experiência nos setores de fintech, e-commerce e tecnologia. É CEO e fundador da SprintAI.dev (agência AI-First) e co-fundou duas startups de e-commerce. No plano académico, é Professor Convidado em instituições de prestígio como a Cató",
     "bio_completa": "Líder de produto e transformação digital com mais de 12 anos de experiência nos setores de fintech, e-commerce e tecnologia. É CEO e fundador da SprintAI.dev (agência AI-First) e co-fundou duas startups de e-commerce. No plano académico, é Professor Convidado em instituições de prestígio como a Católica Lisbon, Porto Business School e ISCTE, onde leciona Gestão de Produto, Metodologias Ágeis e Inovação. Tem vasta experiência a trabalhar diretamente com executivos e equipas de alta performance na adoção de tecnologias emergentes.",
     "categorias": [
@@ -11634,7 +11634,7 @@ const trainers = [
     "id": 219,
     "nome": "Pedro Esteves",
     "cargo": "Formador LDS",
-    "foto": "",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2023/02/imagem-thumbnail-3.png",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -11668,7 +11668,7 @@ const trainers = [
     "id": 220,
     "nome": "Ricardo Carneiro",
     "cargo": "Formador LDS",
-    "foto": "",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/02/Ricardo-Carneiro-2.jpg",
     "bio_curta": "Profissional com mais de 10 anos de experiência em marketing digital, e-commerce e gestão de produto, com forte enfoque em estratégia, optimização de performance e desenvolvimento de soluções digitais orientadas a negócio.\n\nAo longo do seu percurso, tem vindo a desempenhar funções como Product Manag",
     "bio_completa": "Profissional com mais de 10 anos de experiência em marketing digital, e-commerce e gestão de produto, com forte enfoque em estratégia, optimização de performance e desenvolvimento de soluções digitais orientadas a negócio.\n\nAo longo do seu percurso, tem vindo a desempenhar funções como Product Manager e especialista em SEA, trabalhando em contextos complexos de e-commerce e transformação digital. Actualmente integra o Grupo Boticário, onde colabora na gestão e evolução de plataformas digitais, articulando equipas multidisciplinares nas áreas de tecnologia, CRM, media e brand, com foco na melhoria contínua da experiência do utilizador e no crescimento de vendas online.\n\nTem experiência prática na liderança de iniciativas de produto, definição de roadmaps, priorização de backlog e alinhamento entre stakeholders técnicos e de negócio. Trabalha regularmente com plataformas como Shopify e com ecossistemas digitais integrados, garantindo a execução de estratégias omnicanal e a optimização de funis de conversão.\n\nDesenvolveu competências sólidas em gestão de campanhas de aquisição (SEA), análise de dados e performance marketing, contribuindo para a optimização de investimentos e melhoria de KPIs em diferentes mercados e segmentos.\n\nDestaca-se pela capacidade de estruturar problemas complexos, traduzir necessidades de negócio em soluções concretas e colaborar de forma eficaz com equipas diversas. Tem particular interesse em google ads, automação, inteligência artificial aplicada a produtos digitais e construção de soluções escaláveis que gerem impacto real no negócio.\n\nAo longo da sua carreira, tem estado envolvido em projectos relevantes em marcas de grande dimensão, combinando visão estratégica com execução prática, sempre com foco em resultados e na criação de valor sustentável.",
     "categorias": [
@@ -11709,7 +11709,7 @@ const trainers = [
     "id": 221,
     "nome": "Ricardo Fonseca",
     "cargo": "Formador LDS",
-    "foto": "",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Ricardo-Fonseca.png",
     "bio_curta": "Profissional com mais de 10 anos de experiência em marketing digital, e-commerce e gestão de produto, com forte enfoque em estratégia, optimização de performance e desenvolvimento de soluções digitais orientadas a negócio.\n\nAo longo do seu percurso, tem vindo a desempenhar funções como Product Manag",
     "bio_completa": "Profissional com mais de 10 anos de experiência em marketing digital, e-commerce e gestão de produto, com forte enfoque em estratégia, optimização de performance e desenvolvimento de soluções digitais orientadas a negócio.\n\nAo longo do seu percurso, tem vindo a desempenhar funções como Product Manager e especialista em SEA, trabalhando em contextos complexos de e-commerce e transformação digital. Actualmente integra o Grupo Boticário, onde colabora na gestão e evolução de plataformas digitais, articulando equipas multidisciplinares nas áreas de tecnologia, CRM, media e brand, com foco na melhoria contínua da experiência do utilizador e no crescimento de vendas online.\n\nTem experiência prática na liderança de iniciativas de produto, definição de roadmaps, priorização de backlog e alinhamento entre stakeholders técnicos e de negócio. Trabalha regularmente com plataformas como Shopify e com ecossistemas digitais integrados, garantindo a execução de estratégias omnicanal e a optimização de funis de conversão.\n\nDesenvolveu competências sólidas em gestão de campanhas de aquisição (SEA), análise de dados e performance marketing, contribuindo para a optimização de investimentos e melhoria de KPIs em diferentes mercados e segmentos.\n\nDestaca-se pela capacidade de estruturar problemas complexos, traduzir necessidades de negócio em soluções concretas e colaborar de forma eficaz com equipas diversas. Tem particular interesse em google ads, automação, inteligência artificial aplicada a produtos digitais e construção de soluções escaláveis que gerem impacto real no negócio.\n\nAo longo da sua carreira, tem estado envolvido em projectos relevantes em marcas de grande dimensão, combinando visão estratégica com execução prática, sempre com foco em resultados e na criação de valor sustentável.",
     "categorias": [
@@ -11751,7 +11751,7 @@ const trainers = [
     "id": 222,
     "nome": "Sofia Martins",
     "cargo": "Formadora LDS",
-    "foto": "assets/trainers/sofia-martins.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2026/04/Sofia-Martins.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -11786,7 +11786,7 @@ const trainers = [
     "id": 223,
     "nome": "Tiago Azevedo",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/tiago-azevedo.jpg",
+    "foto": "",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
@@ -11820,7 +11820,7 @@ const trainers = [
     "id": 224,
     "nome": "Tiago Reis",
     "cargo": "Formador LDS",
-    "foto": "assets/trainers/tiago-reis.jpg",
+    "foto": "RAW:https://lisbondigitalschool.com/wp-content/uploads/2024/01/Tiago-Reis-Thumbnail.jpg",
     "bio_curta": "Especialista LDS.",
     "bio_completa": "Especialista LDS.",
     "categorias": [
