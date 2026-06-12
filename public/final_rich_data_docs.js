@@ -1539,7 +1539,7 @@ const trainers = [
       "AI",
       "Cursos Inovação"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 23,
@@ -1571,7 +1571,7 @@ const trainers = [
     "tab_categories": [
       "AI"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 24,
@@ -2801,7 +2801,7 @@ const trainers = [
     "tab_categories": [
       "AI"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 41,
@@ -3166,7 +3166,7 @@ const trainers = [
     "tab_categories": [
       "AI"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 49,
@@ -4011,7 +4011,7 @@ const trainers = [
     "tab_categories": [
       "AI"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 62,
@@ -4309,7 +4309,7 @@ const trainers = [
     "tab_categories": [
       "AI"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 69,
@@ -4670,7 +4670,7 @@ const trainers = [
     "tab_categories": [
       "AI"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 75,
@@ -4973,7 +4973,7 @@ const trainers = [
       "Performance",
       "UX & Design"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 80,
@@ -5078,7 +5078,7 @@ const trainers = [
       "AI",
       "UX & Design"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 82,
@@ -5827,7 +5827,7 @@ const trainers = [
       "AI",
       "Performance"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 95,
@@ -5866,7 +5866,7 @@ const trainers = [
     "tab_categories": [
       "AI"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 96,
@@ -6297,7 +6297,7 @@ const trainers = [
       "Cursos Inovação",
       "Escola"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 102,
@@ -7215,7 +7215,7 @@ const trainers = [
       "AI",
       "Performance"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 120,
@@ -7365,7 +7365,7 @@ const trainers = [
       "AI",
       "UX & Design"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 124,
@@ -7974,7 +7974,7 @@ const trainers = [
       "Produto",
       "UX & Design"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 134,
@@ -8890,7 +8890,7 @@ const trainers = [
       "Performance",
       "Produto"
     ],
-    "ativo": false,
+    "ativo": true,
     "alumni_note": "Não listado no site oficial"
   },
   {
@@ -9002,7 +9002,7 @@ const trainers = [
       "Social Media",
       "Vídeo & Imagem"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 151,
@@ -9251,7 +9251,7 @@ const trainers = [
       "Cursos Inovação",
       "Ecommerce"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 155,
@@ -9700,7 +9700,7 @@ const trainers = [
     "main_category": "Geral",
     "cursos": [],
     "tab_categories": [],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 168,
@@ -9823,7 +9823,7 @@ const trainers = [
     "main_category": "Geral",
     "cursos": [],
     "tab_categories": [],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 172,
@@ -11814,7 +11814,7 @@ const trainers = [
     "tab_categories": [
       "Escola"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 224,
@@ -11883,7 +11883,7 @@ const trainers = [
     "tab_categories": [
       "Escola"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 226,
@@ -11955,7 +11955,7 @@ const trainers = [
     "tab_categories": [
       "Escola"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 227,
@@ -11989,7 +11989,7 @@ const trainers = [
     "tab_categories": [
       "Escola"
     ],
-    "ativo": true
+    "ativo": false
   },
   {
     "id": 228,
@@ -12023,6 +12023,6 @@ const trainers = [
     "tab_categories": [
       "Escola"
     ],
-    "ativo": true
+    "ativo": false
   }
 ];
