@@ -1972,6 +1972,7 @@
     function getPhotoSrc(foto) {
       if (!foto) return '';
       if (foto.startsWith('RAW:')) return foto.substring(4);
+      if (foto.startsWith('assets/')) return foto;
       return `assets/${foto}`;
     }
 
