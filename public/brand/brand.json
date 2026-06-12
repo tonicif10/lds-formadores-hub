@@ -1,0 +1,136 @@
+{
+  "colorScheme": "light",
+  "fonts": [
+    {
+      "family": "Tomato",
+      "role": "body"
+    },
+    {
+      "family": "Roboto",
+      "role": "body"
+    },
+    {
+      "family": "Segoe UI",
+      "role": "body"
+    },
+    {
+      "family": "Helvetica Neue",
+      "role": "body"
+    },
+    {
+      "family": "Noto Sans",
+      "role": "body"
+    }
+  ],
+  "colors": {
+    "primary": "#FFC100",
+    "accent": "#006CFF",
+    "background": "#F4F4F4",
+    "textPrimary": "#006CFF",
+    "link": "#006CFF"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "Tomato",
+      "heading": "Tomato"
+    },
+    "fontStacks": {
+      "heading": [
+        "system-ui",
+        "-apple-system",
+        "Segoe UI",
+        "Roboto",
+        "Helvetica Neue",
+        "Noto Sans",
+        "Liberation Sans",
+        "Arial",
+        "sans-serif",
+        "Apple Color Emoji",
+        "Noto Color Emoji"
+      ],
+      "body": [
+        "system-ui",
+        "-apple-system",
+        "Segoe UI",
+        "Roboto",
+        "Helvetica Neue",
+        "Noto Sans",
+        "Liberation Sans",
+        "Arial",
+        "sans-serif",
+        "Apple Color Emoji",
+        "Noto Color Emoji"
+      ],
+      "paragraph": [
+        "Tomato"
+      ]
+    },
+    "fontSizes": {
+      "h1": "16px",
+      "h2": "46px",
+      "body": "14px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 4,
+    "borderRadius": "6px"
+  },
+  "components": {
+    "input": {
+      "borderColor": "#CCCCCC",
+      "borderRadius": "6px"
+    },
+    "buttonPrimary": {
+      "background": "#FFC100",
+      "textColor": "#2F2F2F",
+      "borderRadius": "50px",
+      "shadow": "none"
+    },
+    "buttonSecondary": {
+      "background": "transparent",
+      "textColor": "#000000",
+      "borderColor": "#000000",
+      "borderRadius": "50px",
+      "shadow": "none"
+    }
+  },
+  "images": {
+    "logo": "https://lisbondigitalschool.com/wp-content/themes/lds-2.0/dist/img/logo-blue.svg",
+    "favicon": "https://lisbondigitalschool.com/wp-content/uploads/2023/02/cropped-android-chrome-256x256-1-32x32.png",
+    "ogImage": null
+  },
+  "__framework_hints": [
+    "WordPress 6.9"
+  ],
+  "__llm_logo_reasoning": {
+    "selectedIndex": 0,
+    "reasoning": "Logo #0 visually represents the brand name 'Lisbon Digital School' and is located in the header, linking to the homepage, making it the most suitable choice for the brand logo.",
+    "confidence": 0.9
+  },
+  "__llm_button_reasoning": {
+    "primary": {
+      "index": 1,
+      "text": "SABER MAIS",
+      "reasoning": "Button #1 has a vibrant background color (#FFC100) and action-oriented text ('SABER MAIS'), making it the primary call-to-action. It stands out as the most visually prominent button on the page."
+    },
+    "secondary": {
+      "index": 0,
+      "text": "ENTRA EM CONTACTO",
+      "reasoning": "Button #0 has a transparent background, making it less prominent compared to the primary button. It serves a different purpose ('ENTRA EM CONTACTO') and is visually distinct from the primary button, fulfilling the requirement for a secondary action."
+    },
+    "confidence": 0.95
+  },
+  "personality": {
+    "tone": "modern",
+    "energy": "medium",
+    "targetAudience": "young professionals and students seeking digital education"
+  },
+  "designSystem": {
+    "framework": "unknown",
+    "componentLibrary": null
+  },
+  "confidence": {
+    "buttons": 0.95,
+    "colors": 0.9,
+    "overall": 0.925
+  }

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — LDS Talent Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+    * { font-family: 'Inter', sans-serif; }
+    body { background: #09090b; color: #e5e7eb; }
+    .gold { color: #C9A84C; }
+    .bg-gold { background: #C9A84C; }
+    .border-gold { border-color: #C9A84C; }
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: #18181b; } ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 3px; }
+    .card { background: #18181b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; }
+    .input { background: #27272a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 8px 12px; color: #e5e7eb; width: 100%; font-size: 14px; transition: border-color 0.2s; }
+    .input:focus { outline: none; border-color: #C9A84C; }
+    .btn-gold { background: #C9A84C; color: #09090b; font-weight: 700; padding: 8px 18px; border-radius: 8px; font-size: 13px; cursor: pointer; transition: opacity 0.2s; border: none; }
+    .btn-gold:hover { opacity: 0.85; }
+    .btn-outline { border: 1px solid rgba(255,255,255,0.15); background: transparent; color: #9ca3af; font-size: 13px; padding: 7px 14px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.35); color: #e5e7eb; }
+    .badge { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 8px; border-radius: 20px; }
+    .badge-green { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.25); }
+    .badge-amber { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.25); }
+    .badge-red { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+    .badge-blue { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.25); }
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 50; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .modal { background: #18181b; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; width: 100%; max-width: 740px; max-height: 90vh; overflow-y: auto; }
+    .stat-card { background: #18181b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 20px 24px; }
+    .photo-thumb { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; object-position: top; background: #27272a; }
+    .row-hover:hover { background: rgba(255,255,255,0.03); }
+    textarea.input { resize: vertical; min-height: 90px; }
+    .tag { display: inline-flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 3px 8px; font-size: 11px; color: #9ca3af; }
+    .toast { position: fixed; bottom: 24px; right: 24px; z-index: 9999; padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 30px rgba(0,0,0,0.5); transition: all 0.3s; }
+    .toast-success { background: #166534; color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+    .toast-error   { background: #7f1d1d; color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
+  </style>
+</head>
+<body class="min-h-screen">
+
+<!-- TOP NAV -->
+<header style="background:#0f0f11;border-bottom:1px solid rgba(255,255,255,0.06);" class="sticky top-0 z-40 px-6 py-4 flex items-center justify-between">
+  <div class="flex items-center gap-4">
+    <a href="index.html" class="flex items-center gap-2 text-gray-500 hover:text-white transition text-sm">
+      <i class="fa-solid fa-arrow-left text-xs"></i> Voltar ao Hub
+    </a>
+    <div class="w-px h-4 bg-white/10"></div>
+    <span class="font-bold text-white text-sm">LDS <span class="gold">Admin</span></span>
+  </div>
+  <div class="flex items-center gap-3">
+    <span id="admin-email" class="text-xs text-gray-500"></span>
+    <button onclick="exportJSON()" class="btn-outline text-xs flex items-center gap-1.5">
+      <i class="fa-solid fa-download text-[10px]"></i> Exportar JSON
+    </button>
+    <button onclick="signOut()" class="btn-outline text-xs flex items-center gap-1.5">
+      <i class="fa-solid fa-right-from-bracket text-[10px]"></i> Sair
+    </button>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main class="max-w-7xl mx-auto px-6 py-8">
+
+  <!-- STATS ROW -->
+  <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8" id="stats-row">
+    <div class="stat-card"><div class="text-2xl font-bold text-white" id="stat-total">—</div><div class="text-xs text-gray-500 mt-1">Total Formadores</div></div>
+    <div class="stat-card"><div class="text-2xl font-bold text-green-400" id="stat-ativos">—</div><div class="text-xs text-gray-500 mt-1">Ativos</div></div>
+    <div class="stat-card"><div class="text-2xl font-bold text-amber-400" id="stat-inativos">—</div><div class="text-xs text-gray-500 mt-1">Inativos</div></div>
+    <div class="stat-card"><div class="text-2xl font-bold gold" id="stat-com-foto">—</div><div class="text-xs text-gray-500 mt-1">Com Foto</div></div>
+    <div class="stat-card"><div class="text-2xl font-bold text-blue-400" id="stat-com-cursos">—</div><div class="text-xs text-gray-500 mt-1">Com Cursos</div></div>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="flex flex-wrap items-center gap-3 mb-6">
+    <div class="relative flex-1 min-w-[200px]">
+      <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs"></i>
+      <input id="admin-search" type="text" placeholder="Pesquisar formador..." class="input pl-8 pr-4 py-2.5" oninput="renderTable()" />
+    </div>
+    <select id="filter-status" class="input w-auto py-2.5" onchange="renderTable()">
+      <option value="all">Todos</option>
+      <option value="active">Ativos</option>
+      <option value="inactive">Inativos</option>
+      <option value="no-photo">Sem Foto</option>
+      <option value="no-bio">Sem Bio</option>
+    </select>
+    <select id="filter-cat" class="input w-auto py-2.5" onchange="renderTable()">
+      <option value="">Todas as categorias</option>
+    </select>
+    <button onclick="openAddModal()" class="btn-gold flex items-center gap-2">
+      <i class="fa-solid fa-plus text-xs"></i> Novo Formador
+    </button>
+  </div>
+
+  <!-- TABLE -->
+  <div class="card overflow-hidden">
+    <table class="w-full text-sm">
+      <thead>
+        <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
+          <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-12">#</th>
+          <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Formador</th>
+          <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider hidden md:table-cell">Categorias</th>
+          <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider hidden lg:table-cell">Cursos</th>
+          <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Estado</th>
+          <th class="px-4 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Ações</th>
+        </tr>
+      </thead>
+      <tbody id="admin-tbody"></tbody>
+    </table>
+    <div id="table-empty" class="hidden py-16 text-center text-gray-600 text-sm">Nenhum formador encontrado.</div>
+    <div id="table-count" class="px-4 py-3 text-xs text-gray-600 border-t border-white/5"></div>
+  </div>
+</main>
+
+<!-- ═══════════════════════════════════════
+     EDIT / ADD MODAL
+════════════════════════════════════════ -->
+<div id="modal" class="modal-backdrop hidden" onclick="handleBackdropClick(event)">
+  <div class="modal p-6 md:p-8" onclick="event.stopPropagation()">
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-lg font-bold text-white" id="modal-title">Editar Formador</h2>
+      <button onclick="closeModal()" class="text-gray-500 hover:text-white transition text-xl">&times;</button>
+    </div>
+
+    <form id="trainer-form" onsubmit="saveTrainer(event)" class="space-y-5">
+      <input type="hidden" id="f-id" />
+
+      <!-- Row 1: Nome + Cargo -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs text-gray-400 mb-1.5 font-medium">Nome Completo *</label>
+          <input id="f-nome" type="text" class="input" required placeholder="Ex: João Silva" />
+        </div>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1.5 font-medium">Cargo / Título</label>
+          <input id="f-cargo" type="text" class="input" placeholder="Ex: Especialista em Marketing Digital" />
+        </div>
+      </div>
+
+      <!-- Row 2: Foto -->
+      <div>
+        <label class="block text-xs text-gray-400 mb-1.5 font-medium">URL da Foto</label>
+        <div class="flex gap-3 items-start">
+          <div class="flex-1">
+            <input id="f-foto" type="text" class="input" placeholder="assets/trainers/nome-apelido.jpg" oninput="previewPhoto()" />
+            <p class="text-[10px] text-gray-600 mt-1">Coloca o caminho relativo da foto (deve estar na pasta assets/trainers/)</p>
+          </div>
+          <div id="foto-preview" class="w-14 h-14 rounded-lg bg-zinc-800 border border-white/10 overflow-hidden flex items-center justify-center flex-shrink-0">
+            <i class="fa-solid fa-user text-gray-600"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: Bio -->
+      <div>
+        <label class="block text-xs text-gray-400 mb-1.5 font-medium">Bio Curta <span class="text-gray-600">(máx. 300 caracteres)</span></label>
+        <textarea id="f-bio-curta" class="input" maxlength="300" rows="3" placeholder="Resumo profissional breve..."></textarea>
+      </div>
+      <div>
+        <label class="block text-xs text-gray-400 mb-1.5 font-medium">Bio Completa</label>
+        <textarea id="f-bio-completa" class="input" rows="5" placeholder="Descrição detalhada do percurso profissional..."></textarea>
+      </div>
+
+      <!-- Row 4: Categorias + Status -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs text-gray-400 mb-1.5 font-medium">Categorias da Tab</label>
+          <div class="flex flex-wrap gap-1.5 p-2.5 bg-zinc-800 rounded-lg border border-white/10 min-h-[40px] mb-1.5" id="tab-cats-display"></div>
+          <select id="tab-cat-select" class="input text-xs" onchange="addTabCat()">
+            <option value="">+ Adicionar categoria</option>
+            <option>Escola</option><option>AI</option><option>Social Media</option>
+            <option>Performance</option><option>Estratégia</option><option>Produto</option>
+            <option>Ecommerce</option><option>Gaming</option><option>Cursos Inovação</option>
+            <option>Completo Influencers</option><option>UX & Design</option><option>Vídeo & Imagem</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1.5 font-medium">Estado</label>
+          <select id="f-ativo" class="input">
+            <option value="true">✅ Ativo</option>
+            <option value="false">📦 Inativo</option>
+          </select>
+
+          <label class="block text-xs text-gray-400 mb-1.5 font-medium mt-4">Flags</label>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center gap-2 text-xs text-gray-300 cursor-pointer">
+              <input type="checkbox" id="f-corporate" class="accent-yellow-500" /> Corporate Ready
+            </label>
+            <label class="flex items-center gap-2 text-xs text-gray-300 cursor-pointer">
+              <input type="checkbox" id="f-ingles" class="accent-yellow-500" /> English Fluent
+            </label>
+            <label class="flex items-center gap-2 text-xs text-gray-300 cursor-pointer">
+              <input type="checkbox" id="f-inovacao" class="accent-yellow-500" /> Inovação Lab
+            </label>
+            <label class="flex items-center gap-2 text-xs text-gray-300 cursor-pointer">
+              <input type="checkbox" id="f-novos" class="accent-yellow-500" /> Novo Talento
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 5: Marcas + Formação -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs text-gray-400 mb-1.5 font-medium">Marcas / Clientes <span class="text-gray-600">(uma por linha)</span></label>
+          <textarea id="f-carreira" class="input" rows="4" placeholder="Google&#10;Meta&#10;NOS"></textarea>
+        </div>
+        <div>
+          <label class="block text-xs text-gray-400 mb-1.5 font-medium">Cursos / Temas que Leciona <span class="text-gray-600">(um por linha)</span></label>
+          <textarea id="f-cursos" class="input" rows="4" placeholder="Marketing Digital&#10;Google Ads&#10;SEO"></textarea>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex items-center justify-between pt-2 border-t border-white/5">
+        <button type="button" id="delete-btn" onclick="confirmDelete()" class="text-red-500 hover:text-red-400 text-xs font-medium transition hidden">
+          <i class="fa-solid fa-trash mr-1"></i> Eliminar formador
+        </button>
+        <div class="flex gap-3 ml-auto">
+          <button type="button" onclick="closeModal()" class="btn-outline">Cancelar</button>
+          <button type="submit" class="btn-gold flex items-center gap-2">
+            <i class="fa-solid fa-floppy-disk text-xs"></i> Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast" class="toast hidden"></div>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script>
+// ─── DATA ────────────────────────────────────────────────────────────────────
+let trainers = [];
+let currentTabCats = [];
+let editingId = null;
+
+// Load from final_rich_data_docs.js
+async function loadTrainers() {
+  if (sb) {
+    try {
+      const { data, error } = await sb.from('lds_trainers').select('*').order('id', { ascending: true });
+      if (!error && data && data.length > 0) {
+        trainers = data;
+        return;
+      }
+    } catch(e) { console.error(e); }
+  }
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = 'final_rich_data_docs.js?v=' + Date.now();
+    script.onload = () => {
+      if (typeof window.trainers !== 'undefined') {
+        trainers = window.trainers;
+      }
+      resolve();
+    };
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+// ─── SUPABASE AUTH ───────────────────────────────────────────────────────────
+let sb = null;
+
+async function initAuth() {
+  try {
+    const res = await fetch('/api/config');
+    const cfg = await res.json();
+    if (cfg.supabaseUrl && cfg.supabaseKey) {
+      sb = supabase.createClient(cfg.supabaseUrl, cfg.supabaseKey);
+      const { data: { session } } = await sb.auth.getSession();
+      if (!session) {
+        window.location.href = '/login.html?redirect=/admin.html';
+        return false;
+      }
+      document.getElementById('admin-email').textContent = session.user.email;
+    }
+  } catch {
+    // Running locally without backend — allow access
+    console.log('Running in local mode — skipping auth check');
+  }
+  return true;
+}
+
+async function signOut() {
+  if (sb) await sb.auth.signOut();
+  window.location.href = '/login.html';
+}
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+(async () => {
+  const ok = await initAuth();
+  if (!ok) return;
+  await loadTrainers();
+  renderStats();
+  populateCatFilter();
+  renderTable();
+})();
+
+// ─── STATS ───────────────────────────────────────────────────────────────────
+function renderStats() {
+  const total = trainers.length;
+  const ativos = trainers.filter(t => t.ativo !== false).length;
+  const inativos = total - ativos;
+  const comFoto = trainers.filter(t => t.foto && t.foto.trim()).length;
+  const comCursos = trainers.filter(t => t.cursos && t.cursos.length > 0).length;
+  document.getElementById('stat-total').textContent = total;
+  document.getElementById('stat-ativos').textContent = ativos;
+  document.getElementById('stat-inativos').textContent = inativos;
+  document.getElementById('stat-com-foto').textContent = comFoto;
+  document.getElementById('stat-com-cursos').textContent = comCursos;
+}
+
+function populateCatFilter() {
+  const cats = new Set();
+  trainers.forEach(t => (t.tab_categories || []).forEach(c => cats.add(c)));
+  const sel = document.getElementById('filter-cat');
+  [...cats].sort().forEach(c => {
+    const o = document.createElement('option');
+    o.value = c; o.textContent = c;
+    sel.appendChild(o);
+  });
+}
+
+// ─── TABLE ───────────────────────────────────────────────────────────────────
+function getFiltered() {
+  const q = document.getElementById('admin-search').value.toLowerCase().trim();
+  const status = document.getElementById('filter-status').value;
+  const cat = document.getElementById('filter-cat').value;
+
+  return trainers.filter(t => {
+    if (q && !t.nome.toLowerCase().includes(q) && !(t.cargo||'').toLowerCase().includes(q)) return false;
+    if (status === 'active' && t.ativo === false) return false;
+    if (status === 'inactive' && t.ativo !== false) return false;
+    if (status === 'no-photo' && t.foto && t.foto.trim()) return false;
+    if (status === 'no-bio') {
+      const generic = ['Especialista LDS.', 'Formador especialista em Marketing Digital.', ''];
+      if (!generic.includes(t.bio_curta || '')) return false;
+    }
+    if (cat && !(t.tab_categories || []).includes(cat)) return false;
+    return true;
+  });
+}
+
+function renderTable() {
+  const filtered = getFiltered();
+  const tbody = document.getElementById('admin-tbody');
+  const empty = document.getElementById('table-empty');
+  const count = document.getElementById('table-count');
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = '';
+    empty.classList.remove('hidden');
+  } else {
+    empty.classList.add('hidden');
+    tbody.innerHTML = filtered.map(t => {
+      const isAtivo = t.ativo !== false;
+      const hasPhoto = t.foto && t.foto.trim();
+      const cursosCount = (t.cursos || []).length;
+      const cats = (t.tab_categories || []).slice(0, 2).join(', ');
+      const photoEl = hasPhoto
+        ? `<img src="${t.foto}" class="photo-thumb" onerror="this.outerHTML='<div class=\\'photo-thumb flex items-center justify-center bg-zinc-800 text-gray-600 text-xs font-bold\\'>${getInitials(t.nome)}</div>'" />`
+        : `<div class="photo-thumb flex items-center justify-center bg-zinc-800 text-gray-600 text-xs font-bold">${getInitials(t.nome)}</div>`;
+
+      return `<tr class="row-hover border-b border-white/4 cursor-pointer" onclick="openEditModal(${t.id})">
+        <td class="px-4 py-3 text-gray-600 text-xs">${t.id}</td>
+        <td class="px-4 py-3">
+          <div class="flex items-center gap-3">
+            ${photoEl}
+            <div>
+              <div class="font-medium text-white text-sm">${t.nome}</div>
+              <div class="text-xs text-gray-500">${t.cargo || '—'}</div>
+            </div>
+          </div>
+        </td>
+        <td class="px-4 py-3 hidden md:table-cell text-xs text-gray-400">${cats || '—'}</td>
+        <td class="px-4 py-3 hidden lg:table-cell">
+          ${cursosCount > 0 ? `<span class="badge badge-blue">${cursosCount} temas</span>` : '<span class="text-gray-600 text-xs">—</span>'}
+        </td>
+        <td class="px-4 py-3">
+          ${isAtivo
+            ? '<span class="badge badge-green">Ativo</span>'
+            : '<span class="badge badge-amber">Inativo</span>'}
+        </td>
+        <td class="px-4 py-3 text-right">
+          <button onclick="event.stopPropagation(); openEditModal(${t.id})" class="text-gray-500 hover:text-white transition text-xs px-2 py-1">
+            <i class="fa-solid fa-pen"></i>
+          </button>
+        </td>
+      </tr>`;
+    }).join('');
+  }
+
+  count.textContent = `${filtered.length} de ${trainers.length} formadores`;
+}
+
+function getInitials(name) {
+  return name.split(' ').filter(w => w.length > 2).slice(0, 2).map(w => w[0]).join('').toUpperCase() || '?';
+}
+
+// ─── MODAL ───────────────────────────────────────────────────────────────────
+function openAddModal() {
+  editingId = null;
+  currentTabCats = [];
+  document.getElementById('modal-title').textContent = '+ Novo Formador';
+  document.getElementById('trainer-form').reset();
+  document.getElementById('f-id').value = '';
+  document.getElementById('f-ativo').value = 'true';
+  document.getElementById('delete-btn').classList.add('hidden');
+  updateTabCatsDisplay();
+  updateFotoPreview('');
+  document.getElementById('modal').classList.remove('hidden');
+}
+
+function openEditModal(id) {
+  const t = trainers.find(x => x.id === id);
+  if (!t) return;
+  editingId = id;
+  currentTabCats = [...(t.tab_categories || [])];
+
+  document.getElementById('modal-title').textContent = 'Editar — ' + t.nome;
+  document.getElementById('f-id').value = t.id;
+  document.getElementById('f-nome').value = t.nome || '';
+  document.getElementById('f-cargo').value = t.cargo || '';
+  document.getElementById('f-foto').value = t.foto || '';
+  document.getElementById('f-bio-curta').value = t.bio_curta || '';
+  document.getElementById('f-bio-completa').value = t.bio_completa || '';
+  document.getElementById('f-ativo').value = t.ativo === false ? 'false' : 'true';
+
+  const flags = t.flags || {};
+  document.getElementById('f-corporate').checked = !!flags.corporate;
+  document.getElementById('f-ingles').checked = !!flags.ingles;
+  document.getElementById('f-inovacao').checked = !!flags.inovacao_lab;
+  document.getElementById('f-novos').checked = !!flags.novos_talentos;
+
+  document.getElementById('f-carreira').value = ((t.timeline || {}).carreira || []).join('\n');
+
+  // Cursos → text (just tema titles)
+  const cursosText = (t.cursos || []).map(c => (typeof c === 'object' ? c.tema : c)).join('\n');
+  document.getElementById('f-cursos').value = cursosText;
+
+  document.getElementById('delete-btn').classList.remove('hidden');
+  updateTabCatsDisplay();
+  updateFotoPreview(t.foto || '');
+  document.getElementById('modal').classList.remove('hidden');
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.add('hidden');
+  editingId = null;
+}
+
+function handleBackdropClick(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+// ─── FOTO PREVIEW ────────────────────────────────────────────────────────────
+function previewPhoto() {
+  const val = document.getElementById('f-foto').value.trim();
+  updateFotoPreview(val);
+}
+
+function updateFotoPreview(src) {
+  const el = document.getElementById('foto-preview');
+  if (src) {
+    el.innerHTML = `<img src="${src}" class="w-full h-full object-cover object-top" onerror="this.parentElement.innerHTML='<i class=\\'fa-solid fa-image-slash text-gray-600\\'></i>'" />`;
+  } else {
+    el.innerHTML = `<i class="fa-solid fa-user text-gray-600"></i>`;
+  }
+}
+
+// ─── TAB CATS ────────────────────────────────────────────────────────────────
+function addTabCat() {
+  const sel = document.getElementById('tab-cat-select');
+  const val = sel.value;
+  if (!val || currentTabCats.includes(val)) { sel.value = ''; return; }
+  currentTabCats.push(val);
+  sel.value = '';
+  updateTabCatsDisplay();
+}
+
+function removeTabCat(cat) {
+  currentTabCats = currentTabCats.filter(c => c !== cat);
+  updateTabCatsDisplay();
+}
+
+function updateTabCatsDisplay() {
+  document.getElementById('tab-cats-display').innerHTML = currentTabCats.map(c =>
+    `<span class="tag">${c} <button type="button" onclick="removeTabCat('${c}')" class="hover:text-red-400 ml-1">&times;</button></span>`
+  ).join('') || '<span class="text-xs text-gray-600 p-1">Nenhuma categoria</span>';
+}
+
+// ─── SAVE ────────────────────────────────────────────────────────────────────
+async function saveTrainer(e) {
+  e.preventDefault();
+
+  const nome = document.getElementById('f-nome').value.trim();
+  if (!nome) { showToast('Nome é obrigatório.', 'error'); return; }
+
+  const cursosRaw = document.getElementById('f-cursos').value.trim();
+  const cursos = cursosRaw ? cursosRaw.split('\n').filter(l => l.trim()).map(tema => ({ tema: tema.trim(), objetivos: '', publico: '', duracao: '' })) : [];
+
+  const carreiraRaw = document.getElementById('f-carreira').value.trim();
+  const carreira = carreiraRaw ? carreiraRaw.split('\n').filter(l => l.trim()) : [];
+
+  let tData = {
+      nome,
+      cargo: document.getElementById('f-cargo').value.trim(),
+      foto: document.getElementById('f-foto').value.trim(),
+      bio_curta: document.getElementById('f-bio-curta').value.trim() || 'Formador LDS.',
+      bio_completa: document.getElementById('f-bio-completa').value.trim() || 'Formador LDS.',
+      ativo: document.getElementById('f-ativo').value === 'true',
+      flags: {
+        corporate: document.getElementById('f-corporate').checked,
+        ingles: document.getElementById('f-ingles').checked,
+        inovacao_lab: document.getElementById('f-inovacao').checked,
+        novos_talentos: document.getElementById('f-novos').checked,
+      },
+      tab_categories: currentTabCats,
+      timeline: { carreira },
+      cursos
+  };
+
+  try {
+      if (editingId !== null) {
+        tData.id = editingId;
+        const idx = trainers.findIndex(t => t.id === editingId);
+        if (idx !== -1 && trainers[idx].timeline) {
+            tData.timeline = { ...trainers[idx].timeline, carreira };
+        }
+        
+        if (sb) {
+            const { error } = await sb.from('lds_trainers').update(tData).eq('id', editingId);
+            if (error) throw error;
+        }
+        if (idx !== -1) trainers[idx] = { ...trainers[idx], ...tData };
+        showToast('✅ Formador atualizado na Base de Dados!', 'success');
+      } else {
+        const maxId = trainers.length > 0 ? Math.max(...trainers.map(t => t.id)) : 0;
+        tData.id = maxId + 1;
+        if (sb) {
+            const { error } = await sb.from('lds_trainers').insert(tData);
+            if (error) throw error;
+        }
+        trainers.push(tData);
+        showToast('✅ Formador adicionado à Base de Dados!', 'success');
+      }
+  } catch (err) {
+      console.error(err);
+      showToast('❌ Erro ao gravar. Tente de novo.', 'error');
+      return;
+  }
+
+  closeModal();
+  renderStats();
+  renderTable();
+}
+
+// ─── DELETE ──────────────────────────────────────────────────────────────────
+async function confirmDelete() {
+  if (!editingId) return;
+  const t = trainers.find(x => x.id === editingId);
+  if (!t) return;
+  if (!confirm(`Tens a certeza que queres eliminar "${t.nome}"?\n\nEsta ação é irreversível.`)) return;
+  
+  try {
+      if (sb) {
+          const { error } = await sb.from('lds_trainers').delete().eq('id', editingId);
+          if (error) throw error;
+      }
+      trainers = trainers.filter(x => x.id !== editingId);
+      showToast('🗑️ Formador eliminado da Base de Dados.', 'success');
+      closeModal();
+      renderStats();
+      renderTable();
+  } catch (err) {
+      console.error(err);
+      showToast('❌ Erro a eliminar.', 'error');
+  }
+}
+
+// ─── EXPORT JSON ─────────────────────────────────────────────────────────────
+function exportJSON() {
+  const js = `const trainers = ${JSON.stringify(trainers, null, 2)};\n`;
+  const blob = new Blob([js], { type: 'application/javascript' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'final_rich_data_docs.js';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('📥 JSON exportado! Substitui o ficheiro em public/', 'success');
+}
+
+// ─── SAVE REMINDER ───────────────────────────────────────────────────────────
+let reminderShown = false;
+function showSaveReminder() {
+  if (reminderShown) return;
+  reminderShown = true;
+  const banner = document.createElement('div');
+  banner.id = 'save-banner';
+  banner.className = 'fixed top-16 left-0 right-0 z-50 flex items-center justify-between px-6 py-3 text-sm font-medium';
+  banner.style.background = 'rgba(201,168,76,0.15)';
+  banner.style.borderBottom = '1px solid rgba(201,168,76,0.3)';
+  banner.innerHTML = `
+    <span class="text-yellow-200"><i class="fa-solid fa-triangle-exclamation mr-2 text-yellow-400"></i>Tens alterações não guardadas no servidor.</span>
+    <button onclick="exportJSON()" class="btn-gold text-xs">
+      <i class="fa-solid fa-download mr-1"></i> Exportar final_rich_data_docs.js
+    </button>`;
+  document.body.appendChild(banner);
+}
+
+// ─── TOAST ───────────────────────────────────────────────────────────────────
+function showToast(msg, type = 'success') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `toast ${type === 'success' ? 'toast-success' : 'toast-error'}`;
+  el.classList.remove('hidden');
+  setTimeout(() => el.classList.add('hidden'), 3200);
+}
+</script>
+
+</body>
+</html>

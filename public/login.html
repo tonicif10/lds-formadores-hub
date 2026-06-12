@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LDS Talent Hub | Acesso Exclusivo</title>
+    <link rel="icon" type="image/png" href="/brand/favicon.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #F5C144;
+            --gold-dim: rgba(245, 193, 68, 0.12);
+            --dark: #09090b;
+            --sidebar: #111113;
+            --card: #161618;
+            --border: rgba(255,255,255,0.07);
+            --text: #f4f4f5;
+            --muted: #71717a;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* === BACKGROUND === */
+        .bg-scene {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        /* Editorial grain texture */
+        .bg-scene::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            opacity: 0.4;
+        }
+
+        /* Single gold orb, top-left only — matching dashboard's gold accent */
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            animation: drift 16s ease-in-out infinite;
+        }
+
+        .bg-orb-1 {
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, #F5C144, transparent 65%);
+            top: -280px;
+            left: -200px;
+            animation-delay: 0s;
+        }
+
+        /* Subtle grid — finer than old one */
+        .bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            40% { transform: translate(20px, -15px) scale(1.04); }
+            70% { transform: translate(-10px, 20px) scale(0.97); }
+        }
+
+        /* === LAYOUT === */
+        .main {
+            flex: 1;
+            display: flex;
+            align-items: stretch;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* LEFT COLUMN — Branding */
+        .brand-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 80px;
+            border-right: 1px solid var(--border);
+            max-width: 520px;
+        }
+
+        /* RIGHT COLUMN — Form */
+        .form-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 48px;
+        }
+
+        .form-inner {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        /* === BRANDING === */
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 56px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+            color: #09090b;
+            flex-shrink: 0;
+        }
+
+        .logo-text {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            color: white;
+        }
+        .logo-text span { color: var(--gold); }
+
+        .brand-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid rgba(245,193,68,0.2);
+            background: rgba(245,193,68,0.06);
+            padding: 5px 12px;
+            border-radius: 100px;
+            margin-bottom: 28px;
+        }
+
+        .headline {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            color: white;
+            margin-bottom: 22px;
+        }
+
+        .headline em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .sub-text {
+            font-size: 0.9rem;
+            color: var(--muted);
+            line-height: 1.75;
+            margin-bottom: 44px;
+            max-width: 340px;
+        }
+
+        /* Feature pills */
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.85rem;
+            color: #a1a1aa;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .feature-item:last-child { border-bottom: none; }
+
+        .feature-item .fi-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            background: var(--gold-dim);
+            border: 1px solid rgba(245,193,68,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+
+        /* === FORM CARD === */
+        .form-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 36px;
+            box-shadow:
+                0 0 0 1px rgba(255,255,255,0.03),
+                0 32px 64px rgba(0,0,0,0.5);
+            width: 100%;
+        }
+
+        .form-header {
+            margin-bottom: 28px;
+        }
+
+        .form-header h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -0.4px;
+            margin-bottom: 5px;
+        }
+
+        .form-header p {
+            font-size: 0.82rem;
+            color: var(--muted);
+        }
+
+        /* === TABS === */
+        .tabs {
+            display: flex;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            padding: 3px;
+            margin-bottom: 26px;
+            gap: 2px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 9px 8px;
+            text-align: center;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--muted);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.01em;
+        }
+
+        .tab-btn.active {
+            background: var(--gold);
+            color: #09090b;
+        }
+
+        /* === FORM FIELDS === */
+        .form-field { margin-bottom: 16px; }
+
+        .form-field label {
+            display: block;
+            font-size: 0.69rem;
+            font-weight: 600;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 7px;
+        }
+
+        .input-wrap { position: relative; }
+
+        .input-wrap i {
+            position: absolute;
+            left: 13px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #3f3f46;
+            font-size: 13px;
+            pointer-events: none;
+        }
+
+        .input-wrap input {
+            width: 100%;
+            padding: 12px 13px 12px 38px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 9px;
+            color: white;
+            font-size: 0.875rem;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .input-wrap input::placeholder { color: #3f3f46; }
+
+        .input-wrap input:focus {
+            border-color: rgba(245,193,68,0.4);
+            background: rgba(245,193,68,0.03);
+            box-shadow: 0 0 0 3px rgba(245,193,68,0.07);
+        }
+
+        /* Invite code input */
+        .invite-input-wrap input {
+            width: 100%;
+            padding: 16px 18px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 6px;
+            text-align: center;
+            text-transform: uppercase;
+            font-family: 'Inter', monospace;
+            transition: all 0.2s;
+            outline: none;
+        }
+
+        .invite-input-wrap input::placeholder {
+            color: #27272a;
+            letter-spacing: 4px;
+        }
+
+        .invite-input-wrap input:focus {
+            border-color: rgba(245,193,68,0.5);
+            box-shadow: 0 0 0 3px rgba(245,193,68,0.08);
+        }
+
+        /* === MESSAGES === */
+        .msg {
+            padding: 11px 13px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            margin-bottom: 16px;
+            display: none;
+            animation: slideDown 0.2s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .msg.error {
+            background: rgba(239,68,68,0.08);
+            border: 1px solid rgba(239,68,68,0.25);
+            color: #f87171;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .msg.success {
+            background: rgba(34,197,94,0.08);
+            border: 1px solid rgba(34,197,94,0.25);
+            color: #4ade80;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* === SUBMIT BUTTON === */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background: var(--gold);
+            border: none;
+            border-radius: 10px;
+            color: #09090b;
+            font-size: 0.9rem;
+            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            letter-spacing: -0.2px;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            background: #e5b030;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 18px rgba(245,193,68,0.25);
+        }
+
+        .btn-submit:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* === MISC === */
+        .forgot {
+            text-align: right;
+            margin-bottom: 16px;
+        }
+
+        .forgot a {
+            color: var(--muted);
+            font-size: 0.78rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .forgot a:hover { color: var(--gold); }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 18px 0;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .divider span { font-size: 0.72rem; color: var(--muted); }
+
+        .invite-hint {
+            text-align: center;
+            font-size: 0.76rem;
+            color: var(--muted);
+            margin-top: 12px;
+            line-height: 1.6;
+        }
+
+        .invite-hint a { color: var(--gold); text-decoration: none; }
+
+        .auth-pane { display: none; }
+        .auth-pane.active { display: block; }
+
+        /* === INVITE SECTION === */
+        .invite-section { text-align: center; margin-bottom: 20px; }
+
+        .invite-section .invite-icon {
+            width: 52px;
+            height: 52px;
+            background: var(--gold-dim);
+            border: 1px solid rgba(245,193,68,0.2);
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin: 0 auto 14px;
+        }
+
+        .invite-section h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .invite-section p {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.55;
+        }
+
+        /* === FOOTER === */
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 18px;
+            font-size: 0.75rem;
+            color: #3f3f46;
+            border-top: 1px solid var(--border);
+        }
+
+        footer a { color: var(--gold); text-decoration: none; }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 860px) {
+            .main { flex-direction: column; }
+            .brand-side {
+                max-width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border);
+                padding: 40px 32px 32px;
+                text-align: center;
+                align-items: center;
+            }
+            .logo-row { justify-content: center; }
+            .sub-text { max-width: 100%; }
+            .feature-list { display: none; }
+            .form-side { padding: 40px 24px 60px; }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background -->
+    <div class="bg-scene">
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-grid"></div>
+    </div>
+
+    <!-- Main Layout -->
+    <main class="main">
+
+        <!-- LEFT: Branding -->
+        <div class="brand-side">
+            <div class="logo-row">
+                <div class="logo-icon">L</div>
+                <div class="logo-text">LDS <span>Talent</span></div>
+            </div>
+
+            <div class="brand-eyebrow">
+                <i class="fas fa-lock" style="font-size:9px"></i>
+                Acesso Restrito
+            </div>
+
+            <h1 class="headline">
+                O Hub de<br>
+                <em>Talentos LDS</em><br>
+                mais completo
+            </h1>
+
+            <p class="sub-text">
+                Plataforma exclusiva para a equipa LDS — 207+ formadores, Business Matcher com IA e propostas automáticas para clientes.
+            </p>
+
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="fi-icon"><i class="fas fa-users"></i></div>
+                    <span>207 formadores com perfis completos</span>
+                </div>
+                <div class="feature-item">
+                    <div class="fi-icon"><i class="fas fa-robot"></i></div>
+                    <span>Business Matcher com Inteligência Artificial</span>
+                </div>
+                <div class="feature-item">
+                    <div class="fi-icon"><i class="fas fa-file-pdf"></i></div>
+                    <span>Gerador de propostas One-Pager em PDF</span>
+                </div>
+                <div class="feature-item">
+                    <div class="fi-icon"><i class="fas fa-chart-bar"></i></div>
+                    <span>Analytics e métricas da equipa em tempo real</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: Form -->
+        <div class="form-side">
+            <div class="form-inner">
+                <div class="form-card">
+                    <div class="form-header">
+                        <h2>Bem-vindo de volta</h2>
+                        <p>Acesse o portal exclusivo LDS</p>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div class="tabs">
+                        <button class="tab-btn active" onclick="switchTab('login', this)">Entrar</button>
+                        <button class="tab-btn" onclick="switchTab('invite', this)">Código Convite</button>
+                        <button class="tab-btn" onclick="switchTab('signup', this)">Nova Conta</button>
+                    </div>
+
+                    <!-- Message -->
+                    <div id="msg" class="msg"></div>
+
+                    <!-- LOGIN PANE -->
+                    <div id="pane-login" class="auth-pane active">
+                        <form onsubmit="handleLogin(event)">
+                            <div class="form-field">
+                                <label>Email</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" id="loginEmail" placeholder="nome@lisbondigitalschool.com" required>
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label>Password</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" id="loginPassword" placeholder="A sua password" required>
+                                </div>
+                            </div>
+
+                            <div class="forgot">
+                                <a href="#" onclick="handleForgotPassword(event)">Esqueceu a password?</a>
+                            </div>
+
+                            <button type="submit" class="btn-submit" id="loginBtn">
+                                <i class="fas fa-arrow-right"></i>
+                                Entrar na plataforma
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- INVITE CODE PANE -->
+                    <div id="pane-invite" class="auth-pane">
+                        <div class="invite-section">
+                            <div class="invite-icon">🔑</div>
+                            <h3>Código de Convite</h3>
+                            <p>Insira o código exclusivo que recebeu da equipa LDS para aceder ao portal.</p>
+                        </div>
+
+                        <form onsubmit="handleInviteCode(event)">
+                            <div class="form-field">
+                                <div class="invite-input-wrap">
+                                    <input type="text" id="inviteCode" placeholder="LDS-XXXX" maxlength="10" required
+                                        oninput="this.value = this.value.toUpperCase().replace(/[^A-Z0-9-]/g, '')">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-submit" id="inviteBtn">
+                                <i class="fas fa-key"></i>
+                                Verificar Código
+                            </button>
+
+                            <p class="invite-hint">
+                                Não tem um código? Contacte a equipa LDS em<br>
+                                <a href="mailto:geral@lisbondigitalschool.com">geral@lisbondigitalschool.com</a>
+                            </p>
+                        </form>
+                    </div>
+
+                    <!-- SIGNUP PANE -->
+                    <div id="pane-signup" class="auth-pane">
+                        <form onsubmit="handleSignup(event)">
+                            <div class="form-field">
+                                <label>Nome Completo</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" id="signupName" placeholder="O seu nome completo" required>
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label>Email</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" id="signupEmail" placeholder="nome@lisbondigitalschool.com" required>
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label>Password</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" id="signupPassword" placeholder="Mínimo 6 caracteres" required minlength="6">
+                                </div>
+                            </div>
+
+                            <div class="form-field">
+                                <label>Confirmar Password</label>
+                                <div class="input-wrap">
+                                    <i class="fas fa-lock"></i>
+                                    <input type="password" id="signupConfirmPassword" placeholder="Repetir password" required minlength="6">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn-submit" id="signupBtn">
+                                <i class="fas fa-user-plus"></i>
+                                Criar Conta
+                            </button>
+                        </form>
+
+                        <div class="divider"><span>Apenas emails @lisbondigitalschool.com</span></div>
+                    </div>
+
+                </div><!-- /form-card -->
+            </div><!-- /form-inner -->
+        </div><!-- /form-side -->
+
+    </main>
+
+    <footer>
+        &copy; 2025 <a href="https://lisbondigitalschool.com" target="_blank">Lisbon Digital School</a> — Portal Interno. Uso Exclusivo.
+    </footer>
+
+
+
+
+
+
+
+    <script>
+        // === SUPABASE INIT ===
+        let supabaseClient;
+
+        // Valid invite codes (offline check, no backend needed)
+        const INVITE_CODES = ['LDS-2025', 'LDS-TEAM', 'LDS-VIP1', 'LDS-HUB1', 'LDS-EXEC'];
+
+        async function loadConfig() {
+            try {
+                const response = await fetch('/api/config');
+                const config = await response.json();
+                if (config.supabaseUrl && config.supabaseKey) {
+                    supabaseClient = supabase.createClient(config.supabaseUrl, config.supabaseKey);
+                    checkAuth();
+                }
+            } catch (err) {
+                // Running locally without backend — skip Supabase
+                console.log('No backend config, running in local mode.');
+            }
+        }
+
+        async function checkAuth() {
+            if (!supabaseClient) return;
+            try {
+                const { data: { session } } = await supabaseClient.auth.getSession();
+                if (session) window.location.href = getRedirectUrl();
+            } catch (err) { console.error(err); }
+        }
+
+        function getRedirectUrl() {
+            const params = new URLSearchParams(window.location.search);
+            const redirect = params.get('redirect');
+            if (redirect && redirect.startsWith('/')) return redirect;
+            return '/index.html';
+        }
+
+        // === TAB SWITCH ===
+        function switchTab(tab, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.querySelectorAll('.auth-pane').forEach(p => p.classList.remove('active'));
+            document.getElementById('pane-' + tab).classList.add('active');
+            hideMsg();
+        }
+
+        // === MESSAGES ===
+        function showMsg(text, type) {
+            const el = document.getElementById('msg');
+            const icon = type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-check';
+            el.innerHTML = `<i class="fas ${icon}"></i> ${text}`;
+            el.className = `msg ${type}`;
+        }
+
+        function hideMsg() {
+            const el = document.getElementById('msg');
+            el.className = 'msg';
+            el.innerHTML = '';
+        }
+
+        function setLoading(btnId, on, label) {
+            const btn = document.getElementById(btnId);
+            if (on) {
+                btn.disabled = true;
+                btn.innerHTML = '<div class="spinner"></div> A verificar...';
+            } else {
+                btn.disabled = false;
+                btn.innerHTML = label;
+            }
+        }
+
+        // === LOGIN ===
+        async function handleLogin(event) {
+            event.preventDefault();
+            hideMsg();
+
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+
+            setLoading('loginBtn', true);
+
+            // Fallback: allow local access without Supabase
+            if (!supabaseClient) {
+                if (email.endsWith('@lisbondigitalschool.com') || email === 'tonicif10@gmail.com') {
+                    showMsg('Acesso local concedido. A redirecionar...', 'success');
+                    setTimeout(() => { window.location.href = getRedirectUrl(); }, 1000);
+                } else {
+                    showMsg('Email não autorizado. Use o seu email LDS.', 'error');
+                    setLoading('loginBtn', false, '<i class="fas fa-arrow-right"></i> Entrar na plataforma');
+                }
+                return;
+            }
+
+            try {
+                const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                if (error) throw error;
+                showMsg('Login com sucesso! A redirecionar...', 'success');
+                setTimeout(() => { window.location.href = getRedirectUrl(); }, 1000);
+            } catch (err) {
+                let msg = 'Email ou password incorretos.';
+                if (err.message?.includes('Email not confirmed')) msg = 'Por favor confirme o seu email antes de entrar.';
+                showMsg(msg, 'error');
+                setLoading('loginBtn', false, '<i class="fas fa-arrow-right"></i> Entrar na plataforma');
+            }
+        }
+
+        // === INVITE CODE ===
+        function handleInviteCode(event) {
+            event.preventDefault();
+            hideMsg();
+
+            const code = document.getElementById('inviteCode').value.trim().toUpperCase();
+            setLoading('inviteBtn', true);
+
+            setTimeout(() => {
+                if (INVITE_CODES.includes(code)) {
+                    showMsg('Código válido! A redirecionar...', 'success');
+                    // Store access in session
+                    sessionStorage.setItem('lds_access', 'invite:' + code);
+                    setTimeout(() => { window.location.href = getRedirectUrl(); }, 1200);
+                } else {
+                    showMsg('Código inválido. Verifique e tente novamente.', 'error');
+                    setLoading('inviteBtn', false, '<i class="fas fa-key"></i> Verificar Código');
+                }
+            }, 800);
+        }
+
+        // === SIGNUP ===
+        async function handleSignup(event) {
+            event.preventDefault();
+            hideMsg();
+
+            const name = document.getElementById('signupName').value.trim();
+            const email = document.getElementById('signupEmail').value.trim().toLowerCase();
+            const password = document.getElementById('signupPassword').value;
+            const confirm = document.getElementById('signupConfirmPassword').value;
+
+            const allowedDomains = ['@lisbondigitalschool.com'];
+            const allowedEmails = ['tonicif10@gmail.com'];
+
+            if (!allowedDomains.some(d => email.endsWith(d)) && !allowedEmails.includes(email)) {
+                showMsg('Apenas emails @lisbondigitalschool.com podem registar-se.', 'error');
+                return;
+            }
+
+            if (password !== confirm) {
+                showMsg('As passwords não coincidem.', 'error');
+                return;
+            }
+
+            setLoading('signupBtn', true);
+
+            if (!supabaseClient) {
+                showMsg('Sistema de registo não disponível em modo local.', 'error');
+                setLoading('signupBtn', false, '<i class="fas fa-user-plus"></i> Criar Conta');
+                return;
+            }
+
+            try {
+                const { data, error } = await supabaseClient.auth.signUp({
+                    email, password,
+                    options: { data: { full_name: name } }
+                });
+                if (error) throw error;
+                if (data.user?.identities?.length === 0) {
+                    showMsg('Este email já está registado. Tente fazer login.', 'error');
+                } else {
+                    showMsg('Conta criada! Verifique o seu email para confirmar.', 'success');
+                    document.getElementById('pane-signup').querySelector('form').reset();
+                }
+            } catch (err) {
+                let msg = 'Erro ao criar conta.';
+                if (err.message?.includes('already registered')) msg = 'Este email já está registado.';
+                showMsg(msg, 'error');
+            }
+
+            setLoading('signupBtn', false, '<i class="fas fa-user-plus"></i> Criar Conta');
+        }
+
+        // === FORGOT PASSWORD ===
+        async function handleForgotPassword(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            if (!email) {
+                showMsg('Insira o seu email antes de clicar em "Esqueceu a password".', 'error');
+                return;
+            }
+            if (!supabaseClient) {
+                showMsg('Reset de password não disponível em modo local.', 'error');
+                return;
+            }
+            try {
+                await supabaseClient.auth.resetPasswordForEmail(email);
+                showMsg('Email de recuperação enviado! Verifique a sua caixa.', 'success');
+            } catch (err) {
+                showMsg('Erro ao enviar email de recuperação.', 'error');
+            }
+        }
+
+        // Init
+        loadConfig();
+
+        // Animate input on invite paste
+        document.addEventListener('DOMContentLoaded', () => {
+            const inv = document.getElementById('inviteCode');
+            if (inv) {
+                inv.addEventListener('keyup', () => {
+                    if (inv.value.length >= 8) {
+                        inv.style.borderColor = 'rgba(250,204,21,0.6)';
+                    } else {
+                        inv.style.borderColor = '';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

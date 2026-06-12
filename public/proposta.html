@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposta de Formadores | LDS</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="./final_rich_data_docs.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --gold: #FACC15;
+            --dark: #0f172a;
+            --text: #1e293b;
+            --muted: #64748b;
+            --border: #e2e8f0;
+            --card: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f1f5f9;
+            color: var(--text);
+        }
+
+        /* === SCREEN UI === */
+        .screen-toolbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: #0f172a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 14px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .toolbar-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .toolbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .toolbar-logo .icon {
+            width: 32px;
+            height: 32px;
+            background: var(--gold);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 800;
+            color: #020617;
+        }
+
+        .toolbar-badge {
+            font-size: 0.75rem;
+            color: #64748b;
+            padding: 4px 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+        }
+
+        .toolbar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-toolbar {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 18px;
+            border-radius: 9px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-print {
+            background: var(--gold);
+            color: #020617;
+        }
+
+        .btn-print:hover {
+            background: #f59e0b;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(250, 204, 21, 0.3);
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.06);
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Cliente input */
+        .cliente-input-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cliente-input-wrap label {
+            font-size: 0.78rem;
+            color: #64748b;
+            white-space: nowrap;
+        }
+
+        .cliente-input-wrap input {
+            padding: 7px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 7px;
+            color: white;
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            width: 200px;
+            transition: border-color 0.2s;
+        }
+
+        .cliente-input-wrap input:focus {
+            border-color: rgba(250, 204, 21, 0.5);
+        }
+
+        /* === PRINTABLE DOCUMENT === */
+        .document {
+            max-width: 900px;
+            margin: 90px auto 60px;
+            background: white;
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        /* === PAGE COVER === */
+        .cover {
+            background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e1b4b 100%);
+            padding: 80px 70px;
+            position: relative;
+            overflow: hidden;
+            min-height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cover-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .cover-orb-1 {
+            width: 400px;
+            height: 400px;
+            background: #FACC15;
+            top: -150px;
+            right: -100px;
+        }
+
+        .cover-orb-2 {
+            width: 300px;
+            height: 300px;
+            background: #3B82F6;
+            bottom: -100px;
+            left: -50px;
+        }
+
+        .cover-top {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cover-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .cover-logo .icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gold);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 800;
+            color: #020617;
+        }
+
+        .cover-logo-text {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .cover-date {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.45);
+        }
+
+        .cover-body {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cover-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 14px;
+        }
+
+        .cover-title {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+        .cover-subtitle {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.55);
+            max-width: 480px;
+            line-height: 1.6;
+        }
+
+        .cover-footer-row {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .cover-stats {
+            display: flex;
+            gap: 32px;
+        }
+
+        .cover-stat {
+            text-align: center;
+        }
+
+        .cover-stat .num {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .cover-stat .lbl {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cover-confidential {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.25);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* === SECTION HEADERS === */
+        .section-divider {
+            padding: 20px 70px 12px;
+            background: #f8fafc;
+            border-top: 3px solid var(--gold);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-divider .sdiv-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(250, 204, 21, 0.12);
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: #d97706;
+        }
+
+        .section-divider h2 {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted);
+        }
+
+        /* === TRAINER CARDS === */
+        .trainers-wrap {
+            padding: 32px 70px;
+            display: flex;
+            flex-direction: column;
+            gap: 36px;
+        }
+
+        .trainer-card {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            page-break-inside: avoid;
+        }
+
+        .trainer-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px 28px;
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+        }
+
+        .trainer-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 14px;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px solid rgba(250, 204, 21, 0.4);
+        }
+
+        .trainer-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .trainer-avatar .initials {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: white;
+        }
+
+        .trainer-header-info {
+            flex: 1;
+        }
+
+        .trainer-header-info .cat {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 4px;
+        }
+
+        .trainer-header-info .name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        .trainer-header-info .role {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.55);
+        }
+
+        .trainer-badges-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .t-badge {
+            font-size: 0.65rem;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 6px;
+        }
+
+        .t-badge-gold {
+            background: rgba(250, 204, 21, 0.15);
+            border: 1px solid rgba(250, 204, 21, 0.3);
+            color: var(--gold);
+        }
+
+        .t-badge-blue {
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+        }
+
+        .t-badge-green {
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #4ade80;
+        }
+
+        .t-badge-purple {
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: #a78bfa;
+        }
+
+        .trainer-body {
+            padding: 24px 28px;
+            display: grid;
+            grid-template-columns: 1fr 220px;
+            gap: 24px;
+        }
+
+        .trainer-bio {
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.75;
+        }
+
+        .trainer-bio-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        /* Skills in proposla */
+        .skills-col {}
+
+        .skill-row-prop {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            margin-bottom: 10px;
+        }
+
+        .skill-name-prop {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .skill-bar-prop {
+            height: 5px;
+            background: #e2e8f0;
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .skill-fill-prop {
+            height: 100%;
+            border-radius: 100px;
+            background: linear-gradient(90deg, #FACC15, #F59E0B);
+        }
+
+        /* Highlights (timeline items) */
+        .trainer-highlights {
+            padding: 0 28px 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .highlights-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            padding-top: 16px;
+            margin-bottom: 12px;
+        }
+
+        .highlights-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .highlight-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.78rem;
+            color: #475569;
+        }
+
+        /* === TERMS SECTION === */
+        .terms-section {
+            padding: 32px 70px;
+            background: #f8fafc;
+            border-top: 1px solid var(--border);
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .terms-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .terms-card h3 {
+            font-size: 0.78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            margin-bottom: 12px;
+        }
+
+        .terms-card ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .terms-card ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: #475569;
+        }
+
+        .terms-card ul li::before {
+            content: '✓';
+            color: var(--gold);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* === DOCUMENT FOOTER === */
+        .doc-footer {
+            padding: 24px 70px;
+            background: #020617;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .doc-footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .doc-footer-logo .icon {
+            width: 28px;
+            height: 28px;
+            background: var(--gold);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 800;
+            color: #020617;
+        }
+
+        .doc-footer-logo span {
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .doc-footer-disclaimer {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.2);
+            text-align: right;
+        }
+
+        /* ======= PRINT STYLES ======= */
+        @media print {
+            .screen-toolbar {
+                display: none !important;
+            }
+
+            body {
+                background: white !important;
+            }
+
+            .document {
+                margin: 0;
+                box-shadow: none;
+                max-width: 100%;
+            }
+
+            .trainer-card {
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Empty state */
+        .empty-state {
+            padding: 80px 40px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        .empty-state .icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Screen-only toolbar -->
+    <div class="screen-toolbar">
+        <div class="toolbar-left">
+            <div class="toolbar-logo">
+                <div class="icon">L</div>
+                LDS Talent
+            </div>
+            <span class="toolbar-badge">Proposta Gerada</span>
+        </div>
+
+        <div class="toolbar-right">
+            <div class="cliente-input-wrap">
+                <label>Cliente:</label>
+                <input type="text" id="clienteInput" placeholder="Nome do cliente..." oninput="updateClienteName()">
+            </div>
+            <a href="index.html" class="btn-toolbar btn-back">
+                <i class="fas fa-arrow-left"></i> Voltar
+            </a>
+            <button class="btn-toolbar btn-print" onclick="window.print()">
+                <i class="fas fa-print"></i> Imprimir / Guardar PDF
+            </button>
+        </div>
+    </div>
+
+    <!-- Document (printable) -->
+    <div class="document" id="document">
+        <div id="doc-content">
+            <div class="empty-state">
+                <div class="icon">⏳</div>
+                <p>A carregar proposta...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============================================================
+        // HELPERS
+        // ============================================================
+        function getParams() {
+            const p = new URLSearchParams(window.location.search);
+            const ids = (p.get('ids') || '').split(',').map(Number).filter(Boolean);
+            const cliente = p.get('cliente') || '';
+            return { ids, cliente };
+        }
+
+        function getPhotoSrc(foto) {
+            if (!foto || foto.length < 3) return null;
+            return './assets/' + foto;
+        }
+
+        function getColor(name) {
+            const colors = ['#3B82F6', '#8B5CF6', '#10B981', '#EF4444', '#F59E0B', '#06B6D4', '#EC4899', '#6366F1'];
+            let h = 0;
+            for (let c of name) h += c.charCodeAt(0);
+            return colors[h % colors.length];
+        }
+
+        function getInitials(name) {
+            if (!name) return '?';
+            const p = name.trim().split(' ');
+            return p.length === 1 ? p[0][0].toUpperCase() : (p[0][0] + p[p.length - 1][0]).toUpperCase();
+        }
+
+        function computeSkills(t) {
+            const stats = { Estratégia: 65, Criatividade: 65, Técnico: 60, Comunicação: 70, Liderança: 60 };
+            const role = (t.cargo || '').toLowerCase();
+            const bio = ((t.bio_completa || '') + ' ' + (t.bio_curta || '')).toLowerCase();
+            const tags = (t.categorias || []).join(' ').toLowerCase();
+
+            if (role.includes('director') || role.includes('head') || role.includes('ceo') || role.includes('founder')) stats.Liderança += 20;
+            if (role.includes('strateg') || role.includes('consult') || bio.includes('estratégia')) stats.Estratégia += 20;
+            if (role.includes('creative') || role.includes('designer') || tags.includes('influencer')) stats.Criatividade += 22;
+            if (role.includes('data') || role.includes('seo') || role.includes('tech')) stats.Técnico += 22;
+            if (role.includes('speaker') || role.includes('formador')) stats.Comunicação += 18;
+            Object.keys(stats).forEach(k => stats[k] = Math.min(97, stats[k] + Math.floor(Math.random() * 8)));
+            return stats;
+        }
+
+        function today() {
+            const d = new Date();
+            return d.toLocaleDateString('pt-PT', { day: '2-digit', month: 'long', year: 'numeric' });
+        }
+
+        function updateClienteName() {
+            const v = document.getElementById('clienteInput').value || 'Cliente';
+            document.getElementById('cover-cliente').textContent = `Para: ${v}`;
+        }
+
+        // ============================================================
+        // RENDER
+        // ============================================================
+        function render() {
+            const { ids, cliente } = getParams();
+
+            // Pre-fill cliente input
+            if (cliente) {
+                const inp = document.getElementById('clienteInput');
+                if (inp) inp.value = cliente;
+            }
+
+            const selected = trainers.filter(t => ids.includes(t.id));
+
+            if (selected.length === 0) {
+                document.getElementById('doc-content').innerHTML = `
+          <div class="empty-state">
+            <div class="icon">🔍</div>
+            <p>Nenhum formador selecionado.</p>
+            <p style="margin-top:8px;font-size:.85rem;">Volte ao Hub, adicione formadores à lista e clique "Gerar Proposta".</p>
+            <a href="index.html" style="display:inline-block;margin-top:20px;padding:10px 22px;background:#FACC15;color:#020617;font-weight:700;border-radius:9px;text-decoration:none;">Voltar ao Hub</a>
+          </div>`;
+                return;
+            }
+
+            // Build trainer cards HTML
+            const cardsHtml = selected.map((t, idx) => {
+                const photoSrc = getPhotoSrc(t.foto);
+                const initials = getInitials(t.nome);
+                const bgColor = getColor(t.nome);
+
+                let avatarHtml;
+                if (photoSrc) {
+                    avatarHtml = `<img src="${photoSrc}"
+            onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'initials\\' style=\\'background:${bgColor};width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;font-weight:800;color:white;\\'>${initials}</div>'"
+            alt="${t.nome}">`;
+                } else {
+                    avatarHtml = `<div class="initials" style="background:${bgColor};">${initials}</div>`;
+                }
+
+                // Flags/badges for header
+                const headerBadges = [];
+                if (t.flags?.inovacao_lab) headerBadges.push({ label: 'Innovation Lab', cls: 't-badge-purple' });
+                if (t.flags?.ingles) headerBadges.push({ label: 'English Ready', cls: 't-badge-blue' });
+                if (t.flags?.corporate) headerBadges.push({ label: 'Corporate', cls: 't-badge-blue' });
+                if (t.badges?.some(b => b?.includes('Novo'))) headerBadges.push({ label: 'Novo Talento', cls: 't-badge-green' });
+                const catsValid = (t.categorias || []).filter(c => c && c !== 'nan');
+                if (catsValid.length) headerBadges.push({ label: catsValid[0], cls: 't-badge-gold' });
+
+                const badgesHtml = headerBadges.map(b => `<span class="t-badge ${b.cls}">${b.label}</span>`).join('');
+
+                // Skills
+                const skills = computeSkills(t);
+                const skillsHtml = Object.entries(skills).map(([k, v]) => `
+          <div class="skill-row-prop">
+            <div class="skill-name-prop"><span>${k}</span><span>${v}</span></div>
+            <div class="skill-bar-prop"><div class="skill-fill-prop" style="width:${v}%"></div></div>
+          </div>`).join('');
+
+                // Carreira highlights
+                const carreira = (t.timeline?.carreira || []).filter(c => c && c.trim()).slice(0, 6);
+                const highlightsHtml = carreira.length > 0 ? carreira.map(c => `
+          <div class="highlight-pill"><i class="fas fa-circle" style="font-size:5px;color:#FACC15;"></i>${c}</div>`).join('') :
+                    `<p style="font-size:.8rem;color:#94a3b8;">—</p>`;
+
+                const bio = t.bio_completa || t.bio_curta || 'Especialista LDS com vasta experiência na área.';
+
+                return `
+        <div class="trainer-card">
+          <!-- Header -->
+          <div class="trainer-header">
+            <div class="trainer-avatar">${avatarHtml}</div>
+            <div class="trainer-header-info">
+              <div class="cat">${catsValid[0] || 'Especialista LDS'}</div>
+              <div class="name">${t.nome}</div>
+              <div class="role">${t.cargo}</div>
+              ${badgesHtml ? `<div class="trainer-badges-header">${badgesHtml}</div>` : ''}
+            </div>
+          </div>
+
+          <!-- Body -->
+          <div class="trainer-body">
+            <div>
+              <div class="trainer-bio-label">Sobre</div>
+              <p class="trainer-bio">${bio}</p>
+            </div>
+            <div class="skills-col">
+              <div class="trainer-bio-label">Competências</div>
+              ${skillsHtml}
+            </div>
+          </div>
+
+          <!-- Highlights / Carreira -->
+          ${carreira.length > 0 ? `
+          <div class="trainer-highlights">
+            <div class="highlights-label">Experiência Profissional</div>
+            <div class="highlights-list">${highlightsHtml}</div>
+          </div>` : ''}
+        </div>`;
+            }).join('');
+
+            const clienteLabel = cliente || 'Cliente';
+            const docCount = selected.reduce((acc, t) => acc + (t.documentos?.length || 0), 0);
+
+            document.getElementById('doc-content').innerHTML = `
+        <!-- COVER -->
+        <div class="cover">
+          <div class="cover-orb cover-orb-1"></div>
+          <div class="cover-orb cover-orb-2"></div>
+
+          <div class="cover-top">
+            <div class="cover-logo">
+              <div class="icon">L</div>
+              <span class="cover-logo-text">LDS Talent Hub</span>
+            </div>
+            <span class="cover-date">${today()}</span>
+          </div>
+
+          <div class="cover-body">
+            <div class="cover-label">Proposta de Formadores</div>
+            <div class="cover-title">Os melhores<br>Formadores LDS</div>
+            <div class="cover-subtitle">
+              Apresentamos uma seleção personalizada de formadores LDS com perfil ideal para o projeto em questão.
+            </div>
+          </div>
+
+          <div class="cover-footer-row">
+            <div class="cover-stats">
+              <div class="cover-stat">
+                <div class="num">${selected.length}</div>
+                <div class="lbl">Formadores</div>
+              </div>
+              <div class="cover-stat">
+                <div class="num">${docCount}</div>
+                <div class="lbl">Documentos</div>
+              </div>
+            </div>
+            <div id="cover-cliente" style="font-size:0.85rem;color:rgba(255,255,255,0.45);">Para: ${clienteLabel}</div>
+            <div class="cover-confidential">Confidencial</div>
+          </div>
+        </div>
+
+        <!-- SECTION: FORMADORES -->
+        <div class="section-divider">
+          <div class="sdiv-icon"><i class="fas fa-users"></i></div>
+          <h2>Perfis Seleccionados</h2>
+        </div>
+
+        <div class="trainers-wrap">${cardsHtml}</div>
+
+        <!-- TERMS -->
+        <div class="terms-section">
+          <div class="section-divider" style="padding:0;margin-bottom:20px;border-top:none;border-bottom:none;background:transparent;">
+            <div class="sdiv-icon"><i class="fas fa-handshake"></i></div>
+            <h2>Condições & Próximos Passos</h2>
+          </div>
+          <div class="terms-grid">
+            <div class="terms-card">
+              <h3>O que está incluído</h3>
+              <ul>
+                <li>Perfis completos de cada formador</li>
+                <li>Competências validadas pela LDS</li>
+                <li>Experiência profissional comprovada</li>
+                <li>Documentação completa disponível</li>
+              </ul>
+            </div>
+            <div class="terms-card">
+              <h3>Próximos passos</h3>
+              <ul>
+                <li>Revisão interna da proposta</li>
+                <li>Confirmação de disponibilidade</li>
+                <li>Reunião de briefing com o formador</li>
+                <li>Formalização de contrato</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="doc-footer">
+          <div class="doc-footer-logo">
+            <div class="icon">L</div>
+            <span>Lisbon Digital School © 2025</span>
+          </div>
+          <div class="doc-footer-disclaimer">
+            Documento confidencial gerado pelo LDS Talent Hub.<br>
+            Uso interno. Não partilhar sem autorização.
+          </div>
+        </div>
+      `;
+        }
+
+        render();
+    </script>
+</body>
+
+</html>
