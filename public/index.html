@@ -1031,10 +1031,9 @@
           <input type="text" id="magic-input" onkeyup="runMagicHelper(event)"
             class="flex-1 bg-transparent border-none text-white text-base px-3 py-4 focus:ring-0 placeholder-gray-500 focus:outline-none"
             placeholder="Ex: 'Head de Social Media com exp. em FMCG e Inglês'..." autocomplete="off">
-          <div class="hidden md:flex items-center gap-2 px-4">
-            <kbd onclick="closeMagicMatcher()"
-              class="px-2 py-0.5 bg-gray-700 border border-gray-600 rounded text-[10px] text-gray-400 font-mono cursor-pointer hover:bg-gray-600 hover:text-white transition">ESC</kbd>
-          </div>
+          <button onclick="closeMagicMatcher()" class="px-3 flex items-center text-gray-400 hover:text-white transition">
+            <i class="fa-solid fa-xmark text-base"></i>
+          </button>
         </div>
 
         <!-- Live result count badge -->
