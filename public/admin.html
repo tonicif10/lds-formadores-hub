@@ -3,269 +3,888 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin — LDS Talent Hub</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Admin Panel — LDS Talent Hub</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap');
-    * { font-family: 'Inter', sans-serif; }
-    body { background: #09090b; color: #e5e7eb; }
-    .gold { color: #C9A84C; }
-    .bg-gold { background: #C9A84C; }
-    .border-gold { border-color: #C9A84C; }
-    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: #18181b; } ::-webkit-scrollbar-thumb { background: #3f3f46; border-radius: 3px; }
-    .card { background: #18181b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; }
-    .input { background: #27272a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 8px 12px; color: #e5e7eb; width: 100%; font-size: 14px; transition: border-color 0.2s; }
-    .input:focus { outline: none; border-color: #C9A84C; }
-    .btn-gold { background: #C9A84C; color: #09090b; font-weight: 700; padding: 8px 18px; border-radius: 8px; font-size: 13px; cursor: pointer; transition: opacity 0.2s; border: none; }
-    .btn-gold:hover { opacity: 0.85; }
-    .btn-outline { border: 1px solid rgba(255,255,255,0.15); background: transparent; color: #9ca3af; font-size: 13px; padding: 7px 14px; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
-    .btn-outline:hover { border-color: rgba(255,255,255,0.35); color: #e5e7eb; }
-    .badge { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 8px; border-radius: 20px; }
-    .badge-green { background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.25); }
-    .badge-amber { background: rgba(245,158,11,0.15); color: #fbbf24; border: 1px solid rgba(245,158,11,0.25); }
-    .badge-red { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
-    .badge-blue { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.25); }
-    .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 50; display: flex; align-items: center; justify-content: center; padding: 20px; }
-    .modal { background: #18181b; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; width: 100%; max-width: 740px; max-height: 90vh; overflow-y: auto; }
-    .stat-card { background: #18181b; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 20px 24px; }
-    .photo-thumb { width: 40px; height: 40px; border-radius: 8px; object-fit: cover; object-position: top; background: #27272a; }
-    .row-hover:hover { background: rgba(255,255,255,0.03); }
-    textarea.input { resize: vertical; min-height: 90px; }
-    .tag { display: inline-flex; align-items: center; gap: 4px; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 3px 8px; font-size: 11px; color: #9ca3af; }
-    .toast { position: fixed; bottom: 24px; right: 24px; z-index: 9999; padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600; box-shadow: 0 8px 30px rgba(0,0,0,0.5); transition: all 0.3s; }
-    .toast-success { background: #166534; color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
-    .toast-error   { background: #7f1d1d; color: #f87171; border: 1px solid rgba(248,113,113,0.3); }
+    :root {
+      --gold: #C9A84C;
+      --gold-dim: rgba(201,168,76,0.15);
+      --bg: #07070a;
+      --surface: #0f0f13;
+      --surface2: #161619;
+      --surface3: #1e1e23;
+      --border: rgba(255,255,255,0.07);
+      --border2: rgba(255,255,255,0.12);
+      --text: #e8e8ed;
+      --text2: #a0a0b0;
+      --text3: #5a5a72;
+      --green: #22c55e;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --blue: #3b82f6;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --sidebar-w: 240px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 14px; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; display: flex; overflow: hidden; }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 99px; }
+
+    /* ── SIDEBAR ── */
+    #sidebar {
+      width: var(--sidebar-w);
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+      overflow-y: auto;
+    }
+    .sidebar-logo {
+      padding: 22px 20px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-logo-text { font-size: 15px; font-weight: 800; color: white; letter-spacing: -0.3px; }
+    .sidebar-logo-text span { color: var(--gold); }
+    .sidebar-logo-sub { font-size: 10px; color: var(--text3); margin-top: 2px; letter-spacing: 0.5px; text-transform: uppercase; }
+    .sidebar-nav { padding: 12px 10px; flex: 1; }
+    .nav-label { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); padding: 8px 10px 6px; }
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 12px; border-radius: var(--radius-sm);
+      color: var(--text2); font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.15s; margin-bottom: 2px;
+      border: none; background: none; width: 100%; text-align: left;
+    }
+    .nav-item:hover { background: var(--surface3); color: var(--text); }
+    .nav-item.active { background: var(--gold-dim); color: var(--gold); }
+    .nav-item i { width: 16px; text-align: center; font-size: 12px; }
+    .nav-item .badge-count {
+      margin-left: auto; background: var(--red); color: white;
+      font-size: 10px; font-weight: 700; padding: 1px 6px;
+      border-radius: 99px; min-width: 18px; text-align: center;
+    }
+    .sidebar-footer {
+      padding: 14px 12px;
+      border-top: 1px solid var(--border);
+    }
+    .user-chip {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 10px; border-radius: var(--radius-sm);
+      background: var(--surface2);
+    }
+    .user-avatar {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: var(--gold-dim); border: 1px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; color: var(--gold);
+      flex-shrink: 0;
+    }
+    .user-email { font-size: 11px; color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; }
+    .user-role { font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; }
+    .btn-signout {
+      display: flex; align-items: center; gap: 8px; width: 100%;
+      margin-top: 8px; padding: 8px 10px; border-radius: var(--radius-sm);
+      background: none; border: 1px solid var(--border); color: var(--text3);
+      font-size: 12px; cursor: pointer; transition: all 0.15s;
+    }
+    .btn-signout:hover { border-color: var(--red); color: var(--red); }
+
+    /* ── MAIN ── */
+    #main {
+      flex: 1; display: flex; flex-direction: column;
+      height: 100vh; overflow: hidden;
+    }
+    /* Top bar */
+    #topbar {
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      padding: 0 28px; height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .topbar-title { font-size: 16px; font-weight: 700; color: white; }
+    .topbar-sub { font-size: 11px; color: var(--text3); margin-top: 1px; }
+    .topbar-actions { display: flex; align-items: center; gap: 10px; }
+
+    /* Content area */
+    #content { flex: 1; overflow-y: auto; padding: 24px 28px; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 16px; border-radius: var(--radius-sm);
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      border: none; transition: all 0.15s; white-space: nowrap;
+    }
+    .btn i { font-size: 11px; }
+    .btn-primary { background: var(--gold); color: #09090b; }
+    .btn-primary:hover { background: #d4af62; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(201,168,76,0.3); }
+    .btn-secondary { background: var(--surface3); color: var(--text2); border: 1px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--border2); color: var(--text); }
+    .btn-danger { background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.25); }
+    .btn-danger:hover { background: rgba(239,68,68,0.2); }
+    .btn-sm { padding: 5px 11px; font-size: 12px; }
+    .btn-icon { padding: 7px 9px; }
+
+    /* ── STAT CARDS ── */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .stat-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 20px;
+      position: relative; overflow: hidden; transition: border-color 0.2s;
+    }
+    .stat-card:hover { border-color: var(--border2); }
+    .stat-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    }
+    .stat-card.green::before { background: var(--green); }
+    .stat-card.amber::before { background: var(--amber); }
+    .stat-card.red::before { background: var(--red); }
+    .stat-card.blue::before { background: var(--blue); }
+    .stat-card.gold::before { background: var(--gold); }
+    .stat-value { font-size: 28px; font-weight: 800; color: white; line-height: 1; }
+    .stat-label { font-size: 11px; color: var(--text3); margin-top: 6px; font-weight: 500; }
+    .stat-icon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 24px; opacity: 0.08; }
+    .stat-delta { font-size: 10px; margin-top: 4px; }
+
+    /* ── TOOLBAR ── */
+    .toolbar {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 16px; flex-wrap: wrap;
+    }
+    .search-wrap {
+      position: relative; flex: 1; min-width: 220px;
+    }
+    .search-wrap i { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 12px; }
+    .search-wrap input { padding-left: 34px; }
+    input, select, textarea {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); padding: 8px 12px;
+      color: var(--text); font-size: 13px; font-family: inherit;
+      transition: border-color 0.15s; width: 100%;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none; border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+    }
+    input::placeholder, textarea::placeholder { color: var(--text3); }
+    select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%235a5a72' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 30px; }
+
+    /* ── TABLE ── */
+    .table-wrap {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+    }
+    .table-header {
+      padding: 14px 18px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .table-info { font-size: 12px; color: var(--text3); }
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      padding: 10px 16px; text-align: left;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; color: var(--text3);
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    thead th.sortable { cursor: pointer; user-select: none; }
+    thead th.sortable:hover { color: var(--text); }
+    thead th.sorted { color: var(--gold); }
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.1s; cursor: pointer;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(255,255,255,0.025); }
+    tbody td { padding: 12px 16px; vertical-align: middle; }
+    .trainer-cell { display: flex; align-items: center; gap: 12px; }
+    .trainer-thumb {
+      width: 38px; height: 38px; border-radius: 9px;
+      object-fit: cover; object-position: top;
+      background: var(--surface3); flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+    .trainer-thumb-placeholder {
+      width: 38px; height: 38px; border-radius: 9px;
+      background: var(--surface3); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: var(--text3);
+      border: 1px solid var(--border);
+    }
+    .trainer-name { font-size: 13px; font-weight: 600; color: white; line-height: 1.3; }
+    .trainer-cargo { font-size: 11px; color: var(--text3); margin-top: 1px; }
+    .td-actions { display: flex; align-items: center; gap: 6px; justify-content: flex-end; }
+    .action-btn {
+      width: 30px; height: 30px; border-radius: 7px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid var(--border); background: none;
+      color: var(--text3); cursor: pointer; font-size: 11px;
+      transition: all 0.15s;
+    }
+    .action-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+    .action-btn.danger:hover { border-color: var(--red); color: #f87171; background: rgba(239,68,68,0.1); }
+
+    /* ── BADGES ── */
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.4px; padding: 3px 8px; border-radius: 99px;
+    }
+    .badge::before { content: ''; width: 5px; height: 5px; border-radius: 99px; }
+    .badge-green { background: rgba(34,197,94,0.12); color: #4ade80; border: 1px solid rgba(34,197,94,0.2); }
+    .badge-green::before { background: #4ade80; }
+    .badge-amber { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.2); }
+    .badge-amber::before { background: #fbbf24; }
+    .badge-red { background: rgba(239,68,68,0.12); color: #f87171; border: 1px solid rgba(239,68,68,0.2); }
+    .badge-red::before { background: #f87171; }
+    .badge-blue { background: rgba(59,130,246,0.12); color: #60a5fa; border: 1px solid rgba(59,130,246,0.2); }
+    .badge-blue::before { background: #60a5fa; }
+    .badge-gold { background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(201,168,76,0.25); }
+    .badge-gold::before { background: var(--gold); }
+
+    /* ── FLAGS ── */
+    .flag-chip {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 9px; font-weight: 600; padding: 2px 7px;
+      border-radius: 99px; border: 1px solid var(--border);
+      color: var(--text3); background: var(--surface3);
+    }
+    .flag-chip i { font-size: 8px; }
+
+    /* ── PAGINATION ── */
+    .pagination {
+      display: flex; align-items: center; justify-content: center;
+      gap: 6px; padding: 14px 0 4px;
+    }
+    .page-btn {
+      width: 32px; height: 32px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 600; cursor: pointer;
+      border: 1px solid var(--border); background: none; color: var(--text2);
+      transition: all 0.15s;
+    }
+    .page-btn:hover { border-color: var(--border2); color: white; }
+    .page-btn.active { background: var(--gold); border-color: var(--gold); color: #09090b; }
+    .page-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    /* ── MODAL OVERLAY ── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(4px);
+      z-index: 200; display: flex; align-items: flex-start;
+      justify-content: center; padding: 20px; overflow-y: auto;
+    }
+    .modal-overlay.hidden { display: none; }
+
+    /* ── EDITOR MODAL ── */
+    #editor-modal {
+      background: var(--surface); border: 1px solid var(--border2);
+      border-radius: 18px; width: 100%; max-width: 900px;
+      margin: auto; display: flex; flex-direction: column;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.8);
+    }
+    .modal-head {
+      padding: 22px 28px 18px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .modal-head h2 { font-size: 17px; font-weight: 700; color: white; }
+    .modal-head p { font-size: 12px; color: var(--text3); margin-top: 2px; }
+    .modal-close {
+      width: 32px; height: 32px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--surface3); border: 1px solid var(--border);
+      color: var(--text3); cursor: pointer; font-size: 14px;
+      transition: all 0.15s;
+    }
+    .modal-close:hover { color: white; border-color: var(--border2); }
+
+    /* MODAL LAYOUT — Two-column with live preview */
+    .modal-body { display: flex; min-height: 0; }
+    .modal-form-area { flex: 1; padding: 24px 28px; overflow-y: auto; max-height: 75vh; }
+    .modal-preview-area {
+      width: 260px; flex-shrink: 0;
+      border-left: 1px solid var(--border);
+      padding: 24px 20px;
+      background: var(--surface2);
+      border-radius: 0 0 18px 0;
+    }
+    .preview-label { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); margin-bottom: 14px; }
+
+    /* PREVIEW CARD */
+    .preview-card {
+      background: var(--surface3); border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+    }
+    .preview-photo-wrap { width: 100%; aspect-ratio: 3/4; overflow: hidden; position: relative; background: #1a1a20; }
+    .preview-photo { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .preview-placeholder {
+      width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+      font-size: 32px; font-weight: 800; color: var(--text3);
+    }
+    .preview-body { padding: 14px; }
+    .preview-name { font-size: 13px; font-weight: 700; color: white; }
+    .preview-cargo { font-size: 10px; color: var(--text3); margin-top: 3px; }
+    .preview-cats { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px; }
+    .preview-cat { font-size: 9px; padding: 2px 7px; border-radius: 99px; background: var(--gold-dim); color: var(--gold); border: 1px solid rgba(201,168,76,0.25); font-weight: 600; }
+    .preview-flags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 4px; }
+
+    /* FORM SECTIONS */
+    .form-section { margin-bottom: 22px; }
+    .form-section-title {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
+      color: var(--text3); margin-bottom: 12px;
+      padding-bottom: 8px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .form-section-title i { font-size: 10px; color: var(--gold); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-row.single { grid-template-columns: 1fr; }
+    .form-row.third { grid-template-columns: 1fr 1fr 1fr; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 11px; font-weight: 600; color: var(--text2); }
+    .form-group label span { color: var(--text3); font-weight: 400; margin-left: 4px; }
+    .char-counter { font-size: 10px; color: var(--text3); text-align: right; margin-top: 3px; }
+    textarea { resize: vertical; min-height: 80px; }
+
+    /* FOTO INPUT + PREVIEW */
+    .foto-row { display: flex; gap: 12px; align-items: flex-start; }
+    .foto-row > :first-child { flex: 1; }
+    .foto-mini {
+      width: 54px; height: 54px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--surface3);
+      overflow: hidden; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text3); font-size: 20px;
+    }
+    .foto-mini img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+    /* CHIPS */
+    .chips-area {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      padding: 10px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); min-height: 42px;
+    }
+    .chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--surface3); border: 1px solid var(--border2);
+      border-radius: 99px; padding: 4px 10px 4px 10px;
+      font-size: 11px; color: var(--text2);
+    }
+    .chip .chip-del {
+      background: none; border: none; cursor: pointer;
+      color: var(--text3); font-size: 12px; line-height: 1;
+      padding: 0; transition: color 0.15s; display: flex;
+    }
+    .chip .chip-del:hover { color: var(--red); }
+    .chip-input { display: flex; gap: 8px; margin-top: 8px; }
+    .chip-input input { flex: 1; padding: 6px 10px; font-size: 12px; }
+    .chip-input button { flex-shrink: 0; padding: 6px 12px; border-radius: var(--radius-sm); background: var(--surface3); border: 1px solid var(--border); color: var(--text2); cursor: pointer; font-size: 12px; transition: all 0.15s; }
+    .chip-input button:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* CHECKBOXES */
+    .checkbox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .checkbox-item {
+      display: flex; align-items: center; gap: 9px;
+      padding: 9px 12px; border-radius: var(--radius-sm);
+      border: 1px solid var(--border); cursor: pointer;
+      background: var(--bg); transition: all 0.15s;
+    }
+    .checkbox-item:hover { border-color: var(--border2); }
+    .checkbox-item input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--gold); cursor: pointer; }
+    .checkbox-item .label { font-size: 12px; color: var(--text2); }
+    .checkbox-item .icon { font-size: 14px; }
+
+    /* MODAL FOOTER */
+    .modal-foot {
+      padding: 16px 28px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    /* ── ALERT BANNER ── */
+    #alert-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+      padding: 14px 28px; display: flex; align-items: center;
+      justify-content: space-between; font-size: 13px; font-weight: 600;
+    }
+    #alert-banner.hidden { display: none; }
+    #alert-banner.warning {
+      background: rgba(245,158,11,0.15);
+      border-bottom: 1px solid rgba(245,158,11,0.3);
+      color: #fbbf24;
+    }
+    #alert-banner.success {
+      background: rgba(34,197,94,0.15);
+      border-bottom: 1px solid rgba(34,197,94,0.3);
+      color: #4ade80;
+    }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed; bottom: 24px; right: 24px; z-index: 9999;
+      padding: 13px 20px; border-radius: 11px; font-size: 13px; font-weight: 600;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5); transition: all 0.3s;
+      display: flex; align-items: center; gap: 9px;
+    }
+    #toast.hidden { opacity: 0; pointer-events: none; transform: translateY(8px); }
+    #toast.success { background: #14532d; color: #4ade80; border: 1px solid rgba(74,222,128,0.25); }
+    #toast.error { background: #7f1d1d; color: #f87171; border: 1px solid rgba(248,113,113,0.25); }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      padding: 60px 20px; text-align: center; color: var(--text3);
+    }
+    .empty-state i { font-size: 36px; margin-bottom: 14px; opacity: 0.3; display: block; }
+    .empty-state p { font-size: 14px; }
+
+    /* ── ALERTS TAB ── */
+    .alert-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px 20px; margin-bottom: 12px;
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .alert-card-icon { width: 36px; height: 36px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 14px; }
+    .alert-card-icon.warn { background: rgba(245,158,11,0.15); color: #fbbf24; }
+    .alert-card-icon.info { background: rgba(59,130,246,0.15); color: #60a5fa; }
+
+    /* ── CONFIRM DIALOG ── */
+    #confirm-dialog {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px); z-index: 9000;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #confirm-dialog.hidden { display: none; }
+    .confirm-box {
+      background: var(--surface); border: 1px solid var(--border2);
+      border-radius: 16px; padding: 28px; max-width: 380px; width: 90%;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.7);
+    }
+    .confirm-icon { font-size: 28px; margin-bottom: 14px; color: var(--red); }
+    .confirm-box h3 { font-size: 16px; font-weight: 700; color: white; margin-bottom: 8px; }
+    .confirm-box p { font-size: 13px; color: var(--text2); line-height: 1.6; }
+    .confirm-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 22px; }
+
+    /* ── TAB VIEWS ── */
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* ── CAT SELECT CHIPS ── */
+    .cat-checkboxes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .cat-check-item {
+      display: flex; align-items: center;
+      padding: 5px 11px; border-radius: 99px;
+      border: 1px solid var(--border); cursor: pointer;
+      font-size: 11px; font-weight: 500; color: var(--text3);
+      background: var(--bg); transition: all 0.15s;
+    }
+    .cat-check-item:has(input:checked) { border-color: var(--gold); background: var(--gold-dim); color: var(--gold); }
+    .cat-check-item input { display: none; }
+    .cat-check-item span { pointer-events: none; }
+
+    @media (max-width: 768px) {
+      #sidebar { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .modal-preview-area { display: none; }
+    }
   </style>
 </head>
-<body class="min-h-screen">
+<body>
 
-<!-- TOP NAV -->
-<header style="background:#0f0f11;border-bottom:1px solid rgba(255,255,255,0.06);" class="sticky top-0 z-40 px-6 py-4 flex items-center justify-between">
-  <div class="flex items-center gap-4">
-    <a href="index.html" class="flex items-center gap-2 text-gray-500 hover:text-white transition text-sm">
-      <i class="fa-solid fa-arrow-left text-xs"></i> Voltar ao Hub
-    </a>
-    <div class="w-px h-4 bg-white/10"></div>
-    <span class="font-bold text-white text-sm">LDS <span class="gold">Admin</span></span>
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sidebar-logo">
+    <div class="sidebar-logo-text">LDS <span>Talent</span> Hub</div>
+    <div class="sidebar-logo-sub">Admin Panel</div>
   </div>
-  <div class="flex items-center gap-3">
-    <span id="admin-email" class="text-xs text-gray-500"></span>
-    <button onclick="exportJSON()" class="btn-outline text-xs flex items-center gap-1.5">
-      <i class="fa-solid fa-download text-[10px]"></i> Exportar JSON
+  <div class="sidebar-nav">
+    <div class="nav-label">Gestão</div>
+    <button class="nav-item active" onclick="showView('trainers', this)">
+      <i class="fa-solid fa-users"></i> Formadores
     </button>
-    <button onclick="signOut()" class="btn-outline text-xs flex items-center gap-1.5">
-      <i class="fa-solid fa-right-from-bracket text-[10px]"></i> Sair
+    <button class="nav-item" onclick="showView('alertas', this)">
+      <i class="fa-solid fa-triangle-exclamation"></i> Alertas de Dados
+      <span class="badge-count" id="alert-count">—</span>
+    </button>
+    <div class="nav-label" style="margin-top:8px">Site</div>
+    <button class="nav-item" onclick="window.open('index.html','_blank')">
+      <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Site
+    </button>
+    <button class="nav-item" onclick="exportJSON()">
+      <i class="fa-solid fa-download"></i> Exportar JSON
     </button>
   </div>
-</header>
+  <div class="sidebar-footer">
+    <div class="user-chip">
+      <div class="user-avatar" id="user-initials">?</div>
+      <div>
+        <div class="user-email" id="admin-email">A carregar...</div>
+        <div class="user-role">Admin</div>
+      </div>
+    </div>
+    <button class="btn-signout" onclick="signOut()">
+      <i class="fa-solid fa-right-from-bracket"></i> Sair da Conta
+    </button>
+  </div>
+</nav>
 
 <!-- MAIN -->
-<main class="max-w-7xl mx-auto px-6 py-8">
-
-  <!-- STATS ROW -->
-  <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8" id="stats-row">
-    <div class="stat-card"><div class="text-2xl font-bold text-white" id="stat-total">—</div><div class="text-xs text-gray-500 mt-1">Total Formadores</div></div>
-    <div class="stat-card"><div class="text-2xl font-bold text-green-400" id="stat-ativos">—</div><div class="text-xs text-gray-500 mt-1">Ativos</div></div>
-    <div class="stat-card"><div class="text-2xl font-bold text-amber-400" id="stat-inativos">—</div><div class="text-xs text-gray-500 mt-1">Inativos</div></div>
-    <div class="stat-card"><div class="text-2xl font-bold gold" id="stat-com-foto">—</div><div class="text-xs text-gray-500 mt-1">Com Foto</div></div>
-    <div class="stat-card"><div class="text-2xl font-bold text-blue-400" id="stat-com-cursos">—</div><div class="text-xs text-gray-500 mt-1">Com Cursos</div></div>
-  </div>
-
-  <!-- TOOLBAR -->
-  <div class="flex flex-wrap items-center gap-3 mb-6">
-    <div class="relative flex-1 min-w-[200px]">
-      <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs"></i>
-      <input id="admin-search" type="text" placeholder="Pesquisar formador..." class="input pl-8 pr-4 py-2.5" oninput="renderTable()" />
+<div id="main">
+  <!-- TOP BAR -->
+  <div id="topbar">
+    <div>
+      <div class="topbar-title" id="topbar-title">Formadores</div>
+      <div class="topbar-sub" id="topbar-sub">Gerir todos os formadores do Talent Hub</div>
     </div>
-    <select id="filter-status" class="input w-auto py-2.5" onchange="renderTable()">
-      <option value="all">Todos</option>
-      <option value="active">Ativos</option>
-      <option value="inactive">Inativos</option>
-      <option value="no-photo">Sem Foto</option>
-      <option value="no-bio">Sem Bio</option>
-    </select>
-    <select id="filter-cat" class="input w-auto py-2.5" onchange="renderTable()">
-      <option value="">Todas as categorias</option>
-    </select>
-    <button onclick="openAddModal()" class="btn-gold flex items-center gap-2">
-      <i class="fa-solid fa-plus text-xs"></i> Novo Formador
-    </button>
+    <div class="topbar-actions">
+      <button class="btn btn-secondary btn-sm" onclick="refreshData()">
+        <i class="fa-solid fa-arrows-rotate"></i> Atualizar
+      </button>
+      <button class="btn btn-primary btn-sm" onclick="openAddModal()">
+        <i class="fa-solid fa-plus"></i> Novo Formador
+      </button>
+    </div>
   </div>
 
-  <!-- TABLE -->
-  <div class="card overflow-hidden">
-    <table class="w-full text-sm">
-      <thead>
-        <tr style="border-bottom:1px solid rgba(255,255,255,0.06);">
-          <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider w-12">#</th>
-          <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Formador</th>
-          <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider hidden md:table-cell">Categorias</th>
-          <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider hidden lg:table-cell">Cursos</th>
-          <th class="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Estado</th>
-          <th class="px-4 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Ações</th>
-        </tr>
-      </thead>
-      <tbody id="admin-tbody"></tbody>
-    </table>
-    <div id="table-empty" class="hidden py-16 text-center text-gray-600 text-sm">Nenhum formador encontrado.</div>
-    <div id="table-count" class="px-4 py-3 text-xs text-gray-600 border-t border-white/5"></div>
-  </div>
-</main>
+  <!-- CONTENT -->
+  <div id="content">
 
-<!-- ═══════════════════════════════════════
-     EDIT / ADD MODAL
-════════════════════════════════════════ -->
-<div id="modal" class="modal-backdrop hidden" onclick="handleBackdropClick(event)">
-  <div class="modal p-6 md:p-8" onclick="event.stopPropagation()">
-    <div class="flex items-center justify-between mb-6">
-      <h2 class="text-lg font-bold text-white" id="modal-title">Editar Formador</h2>
-      <button onclick="closeModal()" class="text-gray-500 hover:text-white transition text-xl">&times;</button>
+    <!-- ═══ VIEW: FORMADORES ═══ -->
+    <div id="view-trainers" class="view active">
+
+      <!-- STATS -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <i class="fa-solid fa-users stat-icon"></i>
+          <div class="stat-value" id="stat-total">—</div>
+          <div class="stat-label">Total Formadores</div>
+        </div>
+        <div class="stat-card green">
+          <i class="fa-solid fa-circle-check stat-icon"></i>
+          <div class="stat-value" id="stat-ativos">—</div>
+          <div class="stat-label">Ativos</div>
+        </div>
+        <div class="stat-card amber">
+          <i class="fa-solid fa-box-archive stat-icon"></i>
+          <div class="stat-value" id="stat-inativos">—</div>
+          <div class="stat-label">Inativos / Alumni</div>
+        </div>
+        <div class="stat-card gold">
+          <i class="fa-solid fa-image stat-icon"></i>
+          <div class="stat-value" id="stat-com-foto">—</div>
+          <div class="stat-label">Com Fotografia</div>
+        </div>
+        <div class="stat-card blue">
+          <i class="fa-solid fa-graduation-cap stat-icon"></i>
+          <div class="stat-value" id="stat-com-cursos">—</div>
+          <div class="stat-label">Com Cursos</div>
+        </div>
+        <div class="stat-card red">
+          <i class="fa-solid fa-pen stat-icon"></i>
+          <div class="stat-value" id="stat-sem-bio">—</div>
+          <div class="stat-label">Sem Biografia</div>
+        </div>
+      </div>
+
+      <!-- TOOLBAR -->
+      <div class="toolbar">
+        <div class="search-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input id="search" type="text" placeholder="Pesquisar por nome ou cargo..." oninput="renderTable()" />
+        </div>
+        <select id="filter-status" style="width:150px" onchange="renderTable()">
+          <option value="all">Todos os Estados</option>
+          <option value="active">✅ Ativos</option>
+          <option value="inactive">📦 Inativos</option>
+          <option value="no-photo">📷 Sem Foto</option>
+          <option value="no-bio">📝 Sem Bio</option>
+          <option value="no-cursos">📚 Sem Cursos</option>
+        </select>
+        <select id="filter-cat" style="width:175px" onchange="renderTable()">
+          <option value="">Todas as Categorias</option>
+        </select>
+        <select id="filter-flag" style="width:160px" onchange="renderTable()">
+          <option value="">Todos os Flags</option>
+          <option value="corporate">Corporate Ready</option>
+          <option value="ingles">English Fluent</option>
+          <option value="inovacao_lab">Inovação Lab</option>
+          <option value="novos_talentos">Novos Talentos</option>
+        </select>
+        <select id="page-size" style="width:110px" onchange="currentPage=1;renderTable()">
+          <option value="25">25 por pág.</option>
+          <option value="50">50 por pág.</option>
+          <option value="100">100 por pág.</option>
+          <option value="9999">Todos</option>
+        </select>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-wrap">
+        <div class="table-header">
+          <div class="table-info" id="table-count">A carregar...</div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th style="width:40px"></th>
+              <th class="sortable" onclick="setSort('nome')">
+                Formador <i class="fa-solid fa-sort" id="sort-nome" style="font-size:9px;color:var(--text3)"></i>
+              </th>
+              <th class="hidden-sm">Categorias</th>
+              <th>Cursos</th>
+              <th>Flags</th>
+              <th>Estado</th>
+              <th style="text-align:right">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="table-body"></tbody>
+        </table>
+        <div id="table-empty" class="empty-state hidden">
+          <i class="fa-solid fa-face-meh"></i>
+          <p>Nenhum formador encontrado com estes filtros.</p>
+        </div>
+        <div class="pagination" id="pagination"></div>
+      </div>
     </div>
 
-    <form id="trainer-form" onsubmit="saveTrainer(event)" class="space-y-5">
-      <input type="hidden" id="f-id" />
+    <!-- ═══ VIEW: ALERTAS ═══ -->
+    <div id="view-alertas" class="view">
+      <div id="alerts-list"></div>
+    </div>
 
-      <!-- Row 1: Nome + Cargo -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-xs text-gray-400 mb-1.5 font-medium">Nome Completo *</label>
-          <input id="f-nome" type="text" class="input" required placeholder="Ex: João Silva" />
-        </div>
-        <div>
-          <label class="block text-xs text-gray-400 mb-1.5 font-medium">Cargo / Título</label>
-          <input id="f-cargo" type="text" class="input" placeholder="Ex: Especialista em Marketing Digital" />
-        </div>
-      </div>
+  </div><!-- /content -->
+</div><!-- /main -->
 
-      <!-- Row 2: Foto -->
+<!-- ══════════════════════════════════════════════
+     EDITOR MODAL
+══════════════════════════════════════════════ -->
+<div id="editor-overlay" class="modal-overlay hidden" onclick="handleOverlayClick(event)">
+  <div id="editor-modal" onclick="event.stopPropagation()">
+    <div class="modal-head">
       <div>
-        <label class="block text-xs text-gray-400 mb-1.5 font-medium">URL da Foto</label>
-        <div class="flex gap-3 items-start">
-          <div class="flex-1">
-            <input id="f-foto" type="text" class="input" placeholder="assets/trainers/nome-apelido.jpg" oninput="previewPhoto()" />
-            <p class="text-[10px] text-gray-600 mt-1">Coloca o caminho relativo da foto (deve estar na pasta assets/trainers/)</p>
+        <h2 id="modal-title">Editar Formador</h2>
+        <p id="modal-subtitle">Preenche os campos e clica em Guardar</p>
+      </div>
+      <button class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="modal-body">
+      <!-- FORM AREA -->
+      <div class="modal-form-area">
+        <form id="trainer-form" onsubmit="saveTrainer(event)">
+          <input type="hidden" id="f-id" />
+
+          <!-- IDENTIDADE -->
+          <div class="form-section">
+            <div class="form-section-title"><i class="fa-solid fa-id-card"></i> Identidade</div>
+            <div class="form-row" style="margin-bottom:12px">
+              <div class="form-group">
+                <label>Nome Completo <span>*</span></label>
+                <input id="f-nome" type="text" placeholder="Ex: João Silva" required oninput="updatePreview()" />
+              </div>
+              <div class="form-group">
+                <label>Cargo / Título</label>
+                <input id="f-cargo" type="text" placeholder="Ex: Especialista em Marketing Digital" oninput="updatePreview()" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Fotografia <span>(URL direto ou caminho assets/trainers/...)</span></label>
+              <div class="foto-row">
+                <div class="form-group" style="margin:0">
+                  <input id="f-foto" type="text" placeholder="https://... ou assets/trainers/nome.jpg" oninput="updateFotoPreview();updatePreview()" />
+                  <div style="font-size:10px;color:var(--text3);margin-top:4px">
+                    <i class="fa-solid fa-circle-info" style="font-size:9px"></i> Para usar foto do site LDS: começa por <code style="color:var(--gold)">RAW:</code> seguido do URL completo
+                  </div>
+                </div>
+                <div class="foto-mini" id="foto-mini-prev">
+                  <i class="fa-regular fa-image"></i>
+                </div>
+              </div>
+            </div>
           </div>
-          <div id="foto-preview" class="w-14 h-14 rounded-lg bg-zinc-800 border border-white/10 overflow-hidden flex items-center justify-center flex-shrink-0">
-            <i class="fa-solid fa-user text-gray-600"></i>
+
+          <!-- ESTADO & FLAGS -->
+          <div class="form-section">
+            <div class="form-section-title"><i class="fa-solid fa-sliders"></i> Estado & Flags</div>
+            <div class="form-row" style="margin-bottom:12px">
+              <div class="form-group">
+                <label>Estado no Talent Hub</label>
+                <select id="f-ativo" onchange="updatePreview()">
+                  <option value="true">✅ Ativo</option>
+                  <option value="false">📦 Inativo / Alumni</option>
+                </select>
+              </div>
+            </div>
+            <div class="checkbox-grid">
+              <label class="checkbox-item">
+                <input type="checkbox" id="f-corporate" onchange="updatePreview()" />
+                <span class="icon">🏢</span>
+                <span class="label">Corporate Ready</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" id="f-ingles" onchange="updatePreview()" />
+                <span class="icon">🇬🇧</span>
+                <span class="label">Disponível em Inglês</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" id="f-inovacao" onchange="updatePreview()" />
+                <span class="icon">🧪</span>
+                <span class="label">Inovação Lab</span>
+              </label>
+              <label class="checkbox-item">
+                <input type="checkbox" id="f-novos" onchange="updatePreview()" />
+                <span class="icon">⭐</span>
+                <span class="label">Novo Talento</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- CATEGORIAS -->
+          <div class="form-section">
+            <div class="form-section-title"><i class="fa-solid fa-tag"></i> Categorias da Tab</div>
+            <div class="chips-area" id="cats-chips"><span style="font-size:11px;color:var(--text3)">Nenhuma categoria selecionada</span></div>
+            <div style="margin-top:10px">
+              <div class="cat-checkboxes" id="cat-checkboxes"></div>
+            </div>
+          </div>
+
+          <!-- BIOGRAFIA -->
+          <div class="form-section">
+            <div class="form-section-title"><i class="fa-solid fa-align-left"></i> Biografia</div>
+            <div class="form-group" style="margin-bottom:12px">
+              <label>Bio Curta <span>(resumo para o cartão — máx. 300 caracteres)</span></label>
+              <textarea id="f-bio-curta" maxlength="300" rows="3" placeholder="Resumo profissional breve..." oninput="updateCharCounter(this,'cc-bio-curta',300)"></textarea>
+              <div class="char-counter"><span id="cc-bio-curta">0</span>/300</div>
+            </div>
+            <div class="form-group">
+              <label>Bio Completa <span>(aparece no dossier completo)</span></label>
+              <textarea id="f-bio-completa" rows="5" placeholder="Descrição detalhada do percurso profissional..."></textarea>
+            </div>
+          </div>
+
+          <!-- EXPERIÊNCIA -->
+          <div class="form-section">
+            <div class="form-section-title"><i class="fa-solid fa-briefcase"></i> Experiência</div>
+            <div class="form-group" style="margin-bottom:12px">
+              <label>Marcas / Clientes <span>(adiciona uma de cada vez)</span></label>
+              <div class="chips-area" id="marcas-chips"><span style="font-size:11px;color:var(--text3)">Nenhuma marca adicionada</span></div>
+              <div class="chip-input">
+                <input id="marca-input" type="text" placeholder="Ex: Google, Meta, NOS..." onkeydown="if(event.key==='Enter'){event.preventDefault();addChip('marca-input','marcas-chips','marcas-list')}" />
+                <button type="button" onclick="addChip('marca-input','marcas-chips','marcas-list')"><i class="fa-solid fa-plus"></i> Adicionar</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Cursos / Temas que Leciona <span>(adiciona um de cada vez)</span></label>
+              <div class="chips-area" id="cursos-chips"><span style="font-size:11px;color:var(--text3)">Nenhum curso adicionado</span></div>
+              <div class="chip-input">
+                <input id="curso-input" type="text" placeholder="Ex: Google Ads, SEO, Social Media..." onkeydown="if(event.key==='Enter'){event.preventDefault();addChip('curso-input','cursos-chips','cursos-list')}" />
+                <button type="button" onclick="addChip('curso-input','cursos-chips','cursos-list')"><i class="fa-solid fa-plus"></i> Adicionar</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hidden data arrays -->
+          <input type="hidden" id="marcas-list" value="[]" />
+          <input type="hidden" id="cursos-list" value="[]" />
+        </form>
+      </div>
+
+      <!-- LIVE PREVIEW -->
+      <div class="modal-preview-area">
+        <div class="preview-label"><i class="fa-solid fa-eye" style="margin-right:4px;color:var(--gold)"></i> Preview ao vivo</div>
+        <div class="preview-card">
+          <div class="preview-photo-wrap">
+            <div id="prev-photo-placeholder" class="preview-placeholder">?</div>
+            <img id="prev-photo" class="preview-photo" src="" style="display:none" onerror="this.style.display='none';document.getElementById('prev-photo-placeholder').style.display='flex'" />
+          </div>
+          <div class="preview-body">
+            <div class="preview-name" id="prev-nome">Nome do Formador</div>
+            <div class="preview-cargo" id="prev-cargo">Cargo</div>
+            <div class="preview-cats" id="prev-cats"></div>
+            <div class="preview-flags" id="prev-flags"></div>
           </div>
         </div>
-      </div>
-
-      <!-- Row 3: Bio -->
-      <div>
-        <label class="block text-xs text-gray-400 mb-1.5 font-medium">Bio Curta <span class="text-gray-600">(máx. 300 caracteres)</span></label>
-        <textarea id="f-bio-curta" class="input" maxlength="300" rows="3" placeholder="Resumo profissional breve..."></textarea>
-      </div>
-      <div>
-        <label class="block text-xs text-gray-400 mb-1.5 font-medium">Bio Completa</label>
-        <textarea id="f-bio-completa" class="input" rows="5" placeholder="Descrição detalhada do percurso profissional..."></textarea>
-      </div>
-
-      <!-- Row 4: Categorias + Status -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-xs text-gray-400 mb-1.5 font-medium">Categorias da Tab</label>
-          <div class="flex flex-wrap gap-1.5 p-2.5 bg-zinc-800 rounded-lg border border-white/10 min-h-[40px] mb-1.5" id="tab-cats-display"></div>
-          <select id="tab-cat-select" class="input text-xs" onchange="addTabCat()">
-            <option value="">+ Adicionar categoria</option>
-            <option>Escola</option><option>AI</option><option>Social Media</option>
-            <option>Performance</option><option>Estratégia</option><option>Produto</option>
-            <option>Ecommerce</option><option>Gaming</option><option>Cursos Inovação</option>
-            <option>Completo Influencers</option><option>UX & Design</option><option>Vídeo & Imagem</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-xs text-gray-400 mb-1.5 font-medium">Estado</label>
-          <select id="f-ativo" class="input">
-            <option value="true">✅ Ativo</option>
-            <option value="false">📦 Inativo</option>
-          </select>
-
-          <label class="block text-xs text-gray-400 mb-1.5 font-medium mt-4">Flags</label>
-          <div class="grid grid-cols-2 gap-2">
-            <label class="flex items-center gap-2 text-xs text-gray-300 cursor-pointer">
-              <input type="checkbox" id="f-corporate" class="accent-yellow-500" /> Corporate Ready
-            </label>
-            <label class="flex items-center gap-2 text-xs text-gray-300 cursor-pointer">
-              <input type="checkbox" id="f-ingles" class="accent-yellow-500" /> English Fluent
-            </label>
-            <label class="flex items-center gap-2 text-xs text-gray-300 cursor-pointer">
-              <input type="checkbox" id="f-inovacao" class="accent-yellow-500" /> Inovação Lab
-            </label>
-            <label class="flex items-center gap-2 text-xs text-gray-300 cursor-pointer">
-              <input type="checkbox" id="f-novos" class="accent-yellow-500" /> Novo Talento
-            </label>
-          </div>
+        <div style="margin-top:16px;font-size:10px;color:var(--text3);line-height:1.6">
+          <i class="fa-solid fa-info-circle"></i> Este preview mostra como o cartão aparecerá no Talent Hub.
         </div>
       </div>
+    </div>
 
-      <!-- Row 5: Marcas + Formação -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label class="block text-xs text-gray-400 mb-1.5 font-medium">Marcas / Clientes <span class="text-gray-600">(uma por linha)</span></label>
-          <textarea id="f-carreira" class="input" rows="4" placeholder="Google&#10;Meta&#10;NOS"></textarea>
-        </div>
-        <div>
-          <label class="block text-xs text-gray-400 mb-1.5 font-medium">Cursos / Temas que Leciona <span class="text-gray-600">(um por linha)</span></label>
-          <textarea id="f-cursos" class="input" rows="4" placeholder="Marketing Digital&#10;Google Ads&#10;SEO"></textarea>
-        </div>
-      </div>
-
-      <!-- Buttons -->
-      <div class="flex items-center justify-between pt-2 border-t border-white/5">
-        <button type="button" id="delete-btn" onclick="confirmDelete()" class="text-red-500 hover:text-red-400 text-xs font-medium transition hidden">
-          <i class="fa-solid fa-trash mr-1"></i> Eliminar formador
+    <div class="modal-foot">
+      <button type="button" id="delete-btn" class="btn btn-danger btn-sm hidden" onclick="confirmDeleteTrainer()">
+        <i class="fa-solid fa-trash"></i> Eliminar Formador
+      </button>
+      <div style="display:flex;gap:10px;margin-left:auto">
+        <button type="button" onclick="closeModal()" class="btn btn-secondary">Cancelar</button>
+        <button type="submit" form="trainer-form" class="btn btn-primary">
+          <i class="fa-solid fa-floppy-disk"></i> Guardar Alterações
         </button>
-        <div class="flex gap-3 ml-auto">
-          <button type="button" onclick="closeModal()" class="btn-outline">Cancelar</button>
-          <button type="submit" class="btn-gold flex items-center gap-2">
-            <i class="fa-solid fa-floppy-disk text-xs"></i> Guardar
-          </button>
-        </div>
       </div>
-    </form>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM DIALOG -->
+<div id="confirm-dialog" class="hidden">
+  <div class="confirm-box">
+    <div class="confirm-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+    <h3 id="confirm-title">Tens a certeza?</h3>
+    <p id="confirm-message"></p>
+    <div class="confirm-actions">
+      <button class="btn btn-secondary btn-sm" onclick="closeConfirm()">Cancelar</button>
+      <button class="btn btn-danger btn-sm" id="confirm-ok-btn" onclick="doConfirmedAction()">
+        <i class="fa-solid fa-trash"></i> Eliminar
+      </button>
+    </div>
   </div>
 </div>
 
 <!-- TOAST -->
-<div id="toast" class="toast hidden"></div>
+<div id="toast" class="hidden"></div>
 
-<!-- ═══ SCRIPTS ═══ -->
+<!-- ALERT BANNER -->
+<div id="alert-banner" class="hidden"></div>
+
 <script>
-// ─── DATA ────────────────────────────────────────────────────────────────────
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// CONSTANTS & STATE
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 let trainers = [];
-let currentTabCats = [];
-let editingId = null;
-
-// Load from final_rich_data_docs.js
-async function loadTrainers() {
-  if (sb) {
-    try {
-      const { data, error } = await sb.from('lds_trainers').select('*').order('id', { ascending: true });
-      if (!error && data && data.length > 0) {
-        trainers = data;
-        return;
-      }
-    } catch(e) { console.error(e); }
-  }
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src = 'final_rich_data_docs.js?v=' + Date.now();
-    script.onload = () => {
-      if (typeof window.trainers !== 'undefined') {
-        trainers = window.trainers;
-      }
-      resolve();
-    };
-    script.onerror = reject;
-    document.head.appendChild(script);
-  });
-}
-
-// ─── SUPABASE AUTH ───────────────────────────────────────────────────────────
 let sb = null;
+let editingId = null;
+let currentPage = 1;
+let sortKey = 'nome';
+let sortDir = 1;
+let confirmCallback = null;
+let editingTabCats = [];
+
+const ALL_CATEGORIES = [
+  'Escola LDS','Influencers','Gaming','Ecommerce','Inovação','Produto',
+  'AI','Social Media','Performance','Estratégia','UX & Design','Vídeo & Imagem','NaN'
+];
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// INIT
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+(async () => {
+  await initAuth();
+  await loadTrainers();
+  populateCatFilter();
+  renderStats();
+  renderTable();
+  renderAlerts();
+})();
 
 async function initAuth() {
   try {
@@ -276,15 +895,39 @@ async function initAuth() {
       const { data: { session } } = await sb.auth.getSession();
       if (!session) {
         window.location.href = '/login.html?redirect=/admin.html';
-        return false;
+        return;
       }
-      document.getElementById('admin-email').textContent = session.user.email;
+      const email = session.user.email;
+      document.getElementById('admin-email').textContent = email;
+      document.getElementById('user-initials').textContent = email.slice(0,2).toUpperCase();
     }
   } catch {
-    // Running locally without backend — allow access
-    console.log('Running in local mode — skipping auth check');
+    document.getElementById('admin-email').textContent = 'Modo local';
+    document.getElementById('user-initials').textContent = 'LO';
   }
-  return true;
+}
+
+async function loadTrainers() {
+  if (sb) {
+    try {
+      const { data, error } = await sb.from('lds_trainers').select('*').order('id', { ascending: true });
+      if (!error && data && data.length > 0) { trainers = data; return; }
+    } catch(e) {}
+  }
+  await new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = 'final_rich_data_docs.js?v=' + Date.now();
+    s.onload = () => { if (typeof window.trainers !== 'undefined') trainers = window.trainers; resolve(); };
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+
+async function refreshData() {
+  trainers = [];
+  await loadTrainers();
+  renderStats(); renderTable(); renderAlerts();
+  showToast('Dados atualizados!', 'success');
 }
 
 async function signOut() {
@@ -292,64 +935,107 @@ async function signOut() {
   window.location.href = '/login.html';
 }
 
-// ─── INIT ────────────────────────────────────────────────────────────────────
-(async () => {
-  const ok = await initAuth();
-  if (!ok) return;
-  await loadTrainers();
-  renderStats();
-  populateCatFilter();
-  renderTable();
-})();
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// NAVIGATION
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+function showView(name, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  btn.classList.add('active');
 
-// ─── STATS ───────────────────────────────────────────────────────────────────
+  const titles = {
+    trainers: ['Formadores', 'Gerir todos os formadores do Talent Hub'],
+    alertas: ['Alertas de Dados', 'Formadores com dados incompletos que precisam de atenção']
+  };
+  if (titles[name]) {
+    document.getElementById('topbar-title').textContent = titles[name][0];
+    document.getElementById('topbar-sub').textContent = titles[name][1];
+  }
+
+  const showAdd = name === 'trainers';
+  document.querySelector('.topbar-actions .btn-primary').style.display = showAdd ? '' : 'none';
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// STATS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 function renderStats() {
   const total = trainers.length;
   const ativos = trainers.filter(t => t.ativo !== false).length;
   const inativos = total - ativos;
   const comFoto = trainers.filter(t => t.foto && t.foto.trim()).length;
-  const comCursos = trainers.filter(t => t.cursos && t.cursos.length > 0).length;
-  document.getElementById('stat-total').textContent = total;
-  document.getElementById('stat-ativos').textContent = ativos;
-  document.getElementById('stat-inativos').textContent = inativos;
-  document.getElementById('stat-com-foto').textContent = comFoto;
-  document.getElementById('stat-com-cursos').textContent = comCursos;
+  const comCursos = trainers.filter(t => (t.cursos||[]).length > 0).length;
+  const semBio = trainers.filter(t => !t.bio_curta || t.bio_curta.trim().length < 10).length;
+
+  const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+  set('stat-total', total);
+  set('stat-ativos', ativos);
+  set('stat-inativos', inativos);
+  set('stat-com-foto', comFoto);
+  set('stat-com-cursos', comCursos);
+  set('stat-sem-bio', semBio);
+
+  const alertCount = semBio + (total - comFoto);
+  document.getElementById('alert-count').textContent = alertCount;
 }
 
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// CATEGORY FILTER
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 function populateCatFilter() {
   const cats = new Set();
-  trainers.forEach(t => (t.tab_categories || []).forEach(c => cats.add(c)));
+  trainers.forEach(t => (t.tab_categories||[]).forEach(c => cats.add(c)));
   const sel = document.getElementById('filter-cat');
   [...cats].sort().forEach(c => {
     const o = document.createElement('option');
-    o.value = c; o.textContent = c;
-    sel.appendChild(o);
+    o.value = c; o.textContent = c; sel.appendChild(o);
   });
 }
 
-// ─── TABLE ───────────────────────────────────────────────────────────────────
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// TABLE
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 function getFiltered() {
-  const q = document.getElementById('admin-search').value.toLowerCase().trim();
+  const q = (document.getElementById('search').value||'').toLowerCase().trim();
   const status = document.getElementById('filter-status').value;
   const cat = document.getElementById('filter-cat').value;
+  const flag = document.getElementById('filter-flag').value;
 
   return trainers.filter(t => {
     if (q && !t.nome.toLowerCase().includes(q) && !(t.cargo||'').toLowerCase().includes(q)) return false;
     if (status === 'active' && t.ativo === false) return false;
     if (status === 'inactive' && t.ativo !== false) return false;
     if (status === 'no-photo' && t.foto && t.foto.trim()) return false;
-    if (status === 'no-bio') {
-      const generic = ['Especialista LDS.', 'Formador especialista em Marketing Digital.', ''];
-      if (!generic.includes(t.bio_curta || '')) return false;
-    }
-    if (cat && !(t.tab_categories || []).includes(cat)) return false;
+    if (status === 'no-bio' && t.bio_curta && t.bio_curta.trim().length >= 10) return false;
+    if (status === 'no-cursos' && (t.cursos||[]).length > 0) return false;
+    if (cat && !(t.tab_categories||[]).includes(cat)) return false;
+    if (flag && !(t.flags && t.flags[flag])) return false;
     return true;
   });
 }
 
+function setSort(key) {
+  if (sortKey === key) sortDir *= -1; else { sortKey = key; sortDir = 1; }
+  renderTable();
+}
+
 function renderTable() {
-  const filtered = getFiltered();
-  const tbody = document.getElementById('admin-tbody');
+  let filtered = getFiltered();
+
+  // Sort
+  filtered.sort((a, b) => {
+    if (sortKey === 'nome') return (a.nome||'').localeCompare(b.nome||'') * sortDir;
+    return 0;
+  });
+
+  const pageSize = parseInt(document.getElementById('page-size').value);
+  const totalPages = Math.ceil(filtered.length / pageSize);
+  if (currentPage > totalPages) currentPage = 1;
+
+  const paginated = pageSize === 9999 ? filtered : filtered.slice((currentPage-1)*pageSize, currentPage*pageSize);
+
+  const tbody = document.getElementById('table-body');
   const empty = document.getElementById('table-empty');
   const count = document.getElementById('table-count');
 
@@ -358,272 +1044,472 @@ function renderTable() {
     empty.classList.remove('hidden');
   } else {
     empty.classList.add('hidden');
-    tbody.innerHTML = filtered.map(t => {
-      const isAtivo = t.ativo !== false;
-      const hasPhoto = t.foto && t.foto.trim();
-      const cursosCount = (t.cursos || []).length;
-      const cats = (t.tab_categories || []).slice(0, 2).join(', ');
-      const photoEl = hasPhoto
-        ? `<img src="${t.foto}" class="photo-thumb" onerror="this.outerHTML='<div class=\\'photo-thumb flex items-center justify-center bg-zinc-800 text-gray-600 text-xs font-bold\\'>${getInitials(t.nome)}</div>'" />`
-        : `<div class="photo-thumb flex items-center justify-center bg-zinc-800 text-gray-600 text-xs font-bold">${getInitials(t.nome)}</div>`;
-
-      return `<tr class="row-hover border-b border-white/4 cursor-pointer" onclick="openEditModal(${t.id})">
-        <td class="px-4 py-3 text-gray-600 text-xs">${t.id}</td>
-        <td class="px-4 py-3">
-          <div class="flex items-center gap-3">
-            ${photoEl}
-            <div>
-              <div class="font-medium text-white text-sm">${t.nome}</div>
-              <div class="text-xs text-gray-500">${t.cargo || '—'}</div>
-            </div>
-          </div>
-        </td>
-        <td class="px-4 py-3 hidden md:table-cell text-xs text-gray-400">${cats || '—'}</td>
-        <td class="px-4 py-3 hidden lg:table-cell">
-          ${cursosCount > 0 ? `<span class="badge badge-blue">${cursosCount} temas</span>` : '<span class="text-gray-600 text-xs">—</span>'}
-        </td>
-        <td class="px-4 py-3">
-          ${isAtivo
-            ? '<span class="badge badge-green">Ativo</span>'
-            : '<span class="badge badge-amber">Inativo</span>'}
-        </td>
-        <td class="px-4 py-3 text-right">
-          <button onclick="event.stopPropagation(); openEditModal(${t.id})" class="text-gray-500 hover:text-white transition text-xs px-2 py-1">
-            <i class="fa-solid fa-pen"></i>
-          </button>
-        </td>
-      </tr>`;
-    }).join('');
+    tbody.innerHTML = paginated.map(t => renderRow(t)).join('');
   }
 
-  count.textContent = `${filtered.length} de ${trainers.length} formadores`;
+  count.textContent = `${filtered.length} formador${filtered.length !== 1 ? 'es' : ''} de ${trainers.length} total`;
+  renderPagination(totalPages);
 }
 
-function getInitials(name) {
-  return name.split(' ').filter(w => w.length > 2).slice(0, 2).map(w => w[0]).join('').toUpperCase() || '?';
+function renderRow(t) {
+  const isAtivo = t.ativo !== false;
+  const hasPhoto = t.foto && t.foto.trim();
+  const cursoCount = (t.cursos||[]).length;
+  const cats = (t.tab_categories||[]).slice(0,2);
+  const flags = t.flags || {};
+
+  const photoEl = hasPhoto
+    ? `<img src="${getPhotoSrc(t.foto)}" class="trainer-thumb" onerror="this.outerHTML='<div class=\\'trainer-thumb-placeholder\\'>${getInitials(t.nome)}</div>'" />`
+    : `<div class="trainer-thumb-placeholder">${getInitials(t.nome)}</div>`;
+
+  const flagChips = [
+    flags.corporate && '<span class="flag-chip"><i class="fa-solid fa-building"></i> Corp</span>',
+    flags.ingles && '<span class="flag-chip"><i class="fa-solid fa-language"></i> EN</span>',
+    flags.inovacao_lab && '<span class="flag-chip"><i class="fa-solid fa-flask"></i> Lab</span>',
+    flags.novos_talentos && '<span class="flag-chip"><i class="fa-solid fa-star"></i> Novo</span>',
+  ].filter(Boolean).join('');
+
+  return `<tr onclick="openEditModal(${t.id})">
+    <td style="padding:10px 8px 10px 16px">${photoEl}</td>
+    <td>
+      <div class="trainer-name">${escHtml(t.nome)}</div>
+      <div class="trainer-cargo">${escHtml(t.cargo||'—')}</div>
+    </td>
+    <td>${cats.map(c => `<span class="badge badge-gold" style="margin-right:3px;margin-bottom:2px">${escHtml(c)}</span>`).join('') || '<span style="color:var(--text3);font-size:12px">—</span>'}</td>
+    <td>${cursoCount > 0 ? `<span class="badge badge-blue">${cursoCount} temas</span>` : '<span style="color:var(--text3);font-size:12px">—</span>'}</td>
+    <td>${flagChips || '<span style="color:var(--text3);font-size:12px">—</span>'}</td>
+    <td>${isAtivo ? '<span class="badge badge-green">Ativo</span>' : '<span class="badge badge-amber">Inativo</span>'}</td>
+    <td>
+      <div class="td-actions">
+        <button class="action-btn" onclick="event.stopPropagation();openEditModal(${t.id})" title="Editar"><i class="fa-solid fa-pen"></i></button>
+        <button class="action-btn danger" onclick="event.stopPropagation();promptDelete(${t.id})" title="Eliminar"><i class="fa-solid fa-trash"></i></button>
+      </div>
+    </td>
+  </tr>`;
 }
 
-// ─── MODAL ───────────────────────────────────────────────────────────────────
+function renderPagination(totalPages) {
+  const pg = document.getElementById('pagination');
+  if (totalPages <= 1) { pg.innerHTML = ''; return; }
+
+  let html = `<button class="page-btn" onclick="goPage(${currentPage-1})" ${currentPage===1?'disabled':''}><i class="fa-solid fa-chevron-left" style="font-size:10px"></i></button>`;
+  for (let i = 1; i <= totalPages; i++) {
+    if (totalPages > 8 && i > 2 && i < totalPages - 1 && Math.abs(i - currentPage) > 2) {
+      if (i === 3 || i === totalPages - 2) html += '<span style="color:var(--text3);padding:0 4px">…</span>';
+      continue;
+    }
+    html += `<button class="page-btn ${i===currentPage?'active':''}" onclick="goPage(${i})">${i}</button>`;
+  }
+  html += `<button class="page-btn" onclick="goPage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}><i class="fa-solid fa-chevron-right" style="font-size:10px"></i></button>`;
+  pg.innerHTML = html;
+}
+
+function goPage(p) {
+  const pageSize = parseInt(document.getElementById('page-size').value);
+  const totalPages = Math.ceil(getFiltered().length / pageSize);
+  currentPage = Math.min(Math.max(1, p), totalPages);
+  renderTable();
+  document.getElementById('content').scrollTop = 0;
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// ALERTS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+function renderAlerts() {
+  const semFoto = trainers.filter(t => !t.foto || !t.foto.trim());
+  const semBio = trainers.filter(t => !t.bio_curta || t.bio_curta.trim().length < 10);
+
+  let html = '';
+
+  if (semFoto.length > 0) {
+    html += `<div class="alert-card">
+      <div class="alert-card-icon warn"><i class="fa-solid fa-image"></i></div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:white;margin-bottom:4px">${semFoto.length} formadores sem fotografia</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.6">
+          ${semFoto.slice(0,8).map(t => `<span onclick="openEditModal(${t.id})" style="cursor:pointer;color:var(--gold);text-decoration:underline">${escHtml(t.nome)}</span>`).join(', ')}${semFoto.length > 8 ? ` e mais ${semFoto.length-8}...` : ''}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  if (semBio.length > 0) {
+    html += `<div class="alert-card">
+      <div class="alert-card-icon info"><i class="fa-solid fa-pen"></i></div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:white;margin-bottom:4px">${semBio.length} formadores sem biografia</div>
+        <div style="font-size:12px;color:var(--text2);line-height:1.6">
+          ${semBio.slice(0,8).map(t => `<span onclick="openEditModal(${t.id})" style="cursor:pointer;color:var(--gold);text-decoration:underline">${escHtml(t.nome)}</span>`).join(', ')}${semBio.length > 8 ? ` e mais ${semBio.length-8}...` : ''}
+        </div>
+      </div>
+    </div>`;
+  }
+
+  if (!html) {
+    html = `<div class="alert-card">
+      <div class="alert-card-icon" style="background:rgba(34,197,94,0.15);color:#4ade80"><i class="fa-solid fa-circle-check"></i></div>
+      <div style="font-size:14px;color:white;font-weight:600">Tudo em ordem! Nenhum alerta ativo.</div>
+    </div>`;
+  }
+
+  document.getElementById('alerts-list').innerHTML = html;
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// MODAL
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 function openAddModal() {
   editingId = null;
-  currentTabCats = [];
+  editingTabCats = [];
   document.getElementById('modal-title').textContent = '+ Novo Formador';
+  document.getElementById('modal-subtitle').textContent = 'Preenche os dados do novo formador';
   document.getElementById('trainer-form').reset();
   document.getElementById('f-id').value = '';
   document.getElementById('f-ativo').value = 'true';
   document.getElementById('delete-btn').classList.add('hidden');
-  updateTabCatsDisplay();
-  updateFotoPreview('');
-  document.getElementById('modal').classList.remove('hidden');
+  document.getElementById('marcas-list').value = '[]';
+  document.getElementById('cursos-list').value = '[]';
+  renderChips('marcas-chips','marcas-list');
+  renderChips('cursos-chips','cursos-list');
+  renderCatCheckboxes();
+  updateFotoPreview();
+  updatePreview();
+  document.getElementById('editor-overlay').classList.remove('hidden');
 }
 
 function openEditModal(id) {
   const t = trainers.find(x => x.id === id);
   if (!t) return;
   editingId = id;
-  currentTabCats = [...(t.tab_categories || [])];
+  editingTabCats = [...(t.tab_categories||[])];
 
   document.getElementById('modal-title').textContent = 'Editar — ' + t.nome;
+  document.getElementById('modal-subtitle').textContent = 'ID #' + t.id;
   document.getElementById('f-id').value = t.id;
-  document.getElementById('f-nome').value = t.nome || '';
-  document.getElementById('f-cargo').value = t.cargo || '';
-  document.getElementById('f-foto').value = t.foto || '';
-  document.getElementById('f-bio-curta').value = t.bio_curta || '';
-  document.getElementById('f-bio-completa').value = t.bio_completa || '';
+  document.getElementById('f-nome').value = t.nome||'';
+  document.getElementById('f-cargo').value = t.cargo||'';
+  document.getElementById('f-foto').value = t.foto||'';
+  document.getElementById('f-bio-curta').value = t.bio_curta||'';
+  document.getElementById('f-bio-completa').value = t.bio_completa||'';
   document.getElementById('f-ativo').value = t.ativo === false ? 'false' : 'true';
 
-  const flags = t.flags || {};
+  // Update char counter
+  updateCharCounter(document.getElementById('f-bio-curta'), 'cc-bio-curta', 300);
+
+  const flags = t.flags||{};
   document.getElementById('f-corporate').checked = !!flags.corporate;
   document.getElementById('f-ingles').checked = !!flags.ingles;
   document.getElementById('f-inovacao').checked = !!flags.inovacao_lab;
   document.getElementById('f-novos').checked = !!flags.novos_talentos;
 
-  document.getElementById('f-carreira').value = ((t.timeline || {}).carreira || []).join('\n');
+  // Marcas
+  const marcas = (t.timeline||{}).carreira || [];
+  document.getElementById('marcas-list').value = JSON.stringify(marcas);
+  renderChips('marcas-chips','marcas-list');
 
-  // Cursos → text (just tema titles)
-  const cursosText = (t.cursos || []).map(c => (typeof c === 'object' ? c.tema : c)).join('\n');
-  document.getElementById('f-cursos').value = cursosText;
+  // Cursos
+  const cursos = (t.cursos||[]).map(c => typeof c === 'object' ? c.tema : c);
+  document.getElementById('cursos-list').value = JSON.stringify(cursos);
+  renderChips('cursos-chips','cursos-list');
 
   document.getElementById('delete-btn').classList.remove('hidden');
-  updateTabCatsDisplay();
-  updateFotoPreview(t.foto || '');
-  document.getElementById('modal').classList.remove('hidden');
+  renderCatCheckboxes();
+  updateFotoPreview();
+  updatePreview();
+  document.getElementById('editor-overlay').classList.remove('hidden');
 }
 
 function closeModal() {
-  document.getElementById('modal').classList.add('hidden');
+  document.getElementById('editor-overlay').classList.add('hidden');
   editingId = null;
 }
 
-function handleBackdropClick(e) {
-  if (e.target === document.getElementById('modal')) closeModal();
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('editor-overlay')) closeModal();
 }
 
-// ─── FOTO PREVIEW ────────────────────────────────────────────────────────────
-function previewPhoto() {
-  const val = document.getElementById('f-foto').value.trim();
-  updateFotoPreview(val);
-}
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// LIVE PREVIEW
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+function updatePreview() {
+  const nome = document.getElementById('f-nome').value || 'Nome do Formador';
+  const cargo = document.getElementById('f-cargo').value || 'Cargo';
+  const foto = document.getElementById('f-foto').value.trim();
 
-function updateFotoPreview(src) {
-  const el = document.getElementById('foto-preview');
-  if (src) {
-    el.innerHTML = `<img src="${src}" class="w-full h-full object-cover object-top" onerror="this.parentElement.innerHTML='<i class=\\'fa-solid fa-image-slash text-gray-600\\'></i>'" />`;
+  document.getElementById('prev-nome').textContent = nome;
+  document.getElementById('prev-cargo').textContent = cargo;
+  document.getElementById('prev-photo-placeholder').textContent = getInitials(nome) || '?';
+
+  const imgEl = document.getElementById('prev-photo');
+  if (foto) {
+    const src = getPhotoSrc(foto);
+    imgEl.src = src;
+    imgEl.style.display = 'block';
+    document.getElementById('prev-photo-placeholder').style.display = 'none';
   } else {
-    el.innerHTML = `<i class="fa-solid fa-user text-gray-600"></i>`;
+    imgEl.style.display = 'none';
+    document.getElementById('prev-photo-placeholder').style.display = 'flex';
+  }
+
+  // Cats
+  document.getElementById('prev-cats').innerHTML = editingTabCats.map(c =>
+    `<span class="preview-cat">${escHtml(c)}</span>`
+  ).join('');
+
+  // Flags
+  const flagMap = [
+    ['f-corporate','🏢','Corp Ready'],
+    ['f-ingles','🇬🇧','EN'],
+    ['f-inovacao','🧪','Lab'],
+    ['f-novos','⭐','Novo'],
+  ];
+  document.getElementById('prev-flags').innerHTML = flagMap
+    .filter(([id]) => document.getElementById(id)?.checked)
+    .map(([,icon,label]) => `<span class="flag-chip">${icon} ${label}</span>`)
+    .join('');
+}
+
+function updateFotoPreview() {
+  const val = document.getElementById('f-foto').value.trim();
+  const el = document.getElementById('foto-mini-prev');
+  if (val) {
+    el.innerHTML = `<img src="${getPhotoSrc(val)}" style="width:100%;height:100%;object-fit:cover;object-position:top" onerror="this.parentElement.innerHTML='<i class=\\'fa-solid fa-triangle-exclamation\\' style=\\'color:#f87171\\'></i>'" />`;
+  } else {
+    el.innerHTML = '<i class="fa-regular fa-image"></i>';
   }
 }
 
-// ─── TAB CATS ────────────────────────────────────────────────────────────────
-function addTabCat() {
-  const sel = document.getElementById('tab-cat-select');
-  const val = sel.value;
-  if (!val || currentTabCats.includes(val)) { sel.value = ''; return; }
-  currentTabCats.push(val);
-  sel.value = '';
-  updateTabCatsDisplay();
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// CATEGORIES
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+function renderCatCheckboxes() {
+  const container = document.getElementById('cat-checkboxes');
+  container.innerHTML = ALL_CATEGORIES.map(c => {
+    const checked = editingTabCats.includes(c) ? 'checked' : '';
+    return `<label class="cat-check-item">
+      <input type="checkbox" value="${escHtml(c)}" ${checked} onchange="toggleCat('${escHtml(c)}',this.checked)" />
+      <span>${escHtml(c)}</span>
+    </label>`;
+  }).join('');
+  renderCatsChips();
 }
 
-function removeTabCat(cat) {
-  currentTabCats = currentTabCats.filter(c => c !== cat);
-  updateTabCatsDisplay();
+function toggleCat(cat, checked) {
+  if (checked && !editingTabCats.includes(cat)) editingTabCats.push(cat);
+  else if (!checked) editingTabCats = editingTabCats.filter(c => c !== cat);
+  renderCatsChips();
+  updatePreview();
 }
 
-function updateTabCatsDisplay() {
-  document.getElementById('tab-cats-display').innerHTML = currentTabCats.map(c =>
-    `<span class="tag">${c} <button type="button" onclick="removeTabCat('${c}')" class="hover:text-red-400 ml-1">&times;</button></span>`
-  ).join('') || '<span class="text-xs text-gray-600 p-1">Nenhuma categoria</span>';
+function renderCatsChips() {
+  const el = document.getElementById('cats-chips');
+  if (editingTabCats.length === 0) {
+    el.innerHTML = '<span style="font-size:11px;color:var(--text3)">Nenhuma categoria selecionada</span>';
+  } else {
+    el.innerHTML = editingTabCats.map(c =>
+      `<span class="chip">${escHtml(c)}<button class="chip-del" type="button" onclick="toggleCat('${escHtml(c)}',false);document.querySelector('.cat-check-item input[value=\\'${escHtml(c)}\\']').checked=false">×</button></span>`
+    ).join('');
+  }
 }
 
-// ─── SAVE ────────────────────────────────────────────────────────────────────
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// CHIPS (Marcas / Cursos)
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+function addChip(inputId, chipsId, listId) {
+  const input = document.getElementById(inputId);
+  const val = input.value.trim();
+  if (!val) return;
+  const list = JSON.parse(document.getElementById(listId).value || '[]');
+  if (!list.includes(val)) { list.push(val); document.getElementById(listId).value = JSON.stringify(list); }
+  renderChips(chipsId, listId);
+  input.value = '';
+  input.focus();
+}
+
+function removeChip(listId, chipsId, val) {
+  const list = JSON.parse(document.getElementById(listId).value || '[]');
+  document.getElementById(listId).value = JSON.stringify(list.filter(x => x !== val));
+  renderChips(chipsId, listId);
+}
+
+function renderChips(chipsId, listId) {
+  const list = JSON.parse(document.getElementById(listId).value || '[]');
+  const el = document.getElementById(chipsId);
+  if (list.length === 0) {
+    const emptyMsg = chipsId.includes('marcas') ? 'Nenhuma marca adicionada' : 'Nenhum curso adicionado';
+    el.innerHTML = `<span style="font-size:11px;color:var(--text3)">${emptyMsg}</span>`;
+  } else {
+    el.innerHTML = list.map(v =>
+      `<span class="chip">${escHtml(v)}<button class="chip-del" type="button" onclick="removeChip('${listId}','${chipsId}','${escHtml(v)}')">×</button></span>`
+    ).join('');
+  }
+}
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// SAVE
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 async function saveTrainer(e) {
   e.preventDefault();
-
   const nome = document.getElementById('f-nome').value.trim();
   if (!nome) { showToast('Nome é obrigatório.', 'error'); return; }
 
-  const cursosRaw = document.getElementById('f-cursos').value.trim();
-  const cursos = cursosRaw ? cursosRaw.split('\n').filter(l => l.trim()).map(tema => ({ tema: tema.trim(), objetivos: '', publico: '', duracao: '' })) : [];
+  const marcas = JSON.parse(document.getElementById('marcas-list').value || '[]');
+  const cursosRaw = JSON.parse(document.getElementById('cursos-list').value || '[]');
+  const cursos = cursosRaw.map(tema => ({ tema, objetivos: '', publico: '', duracao: '' }));
 
-  const carreiraRaw = document.getElementById('f-carreira').value.trim();
-  const carreira = carreiraRaw ? carreiraRaw.split('\n').filter(l => l.trim()) : [];
-
-  let tData = {
-      nome,
-      cargo: document.getElementById('f-cargo').value.trim(),
-      foto: document.getElementById('f-foto').value.trim(),
-      bio_curta: document.getElementById('f-bio-curta').value.trim() || 'Formador LDS.',
-      bio_completa: document.getElementById('f-bio-completa').value.trim() || 'Formador LDS.',
-      ativo: document.getElementById('f-ativo').value === 'true',
-      flags: {
-        corporate: document.getElementById('f-corporate').checked,
-        ingles: document.getElementById('f-ingles').checked,
-        inovacao_lab: document.getElementById('f-inovacao').checked,
-        novos_talentos: document.getElementById('f-novos').checked,
-      },
-      tab_categories: currentTabCats,
-      timeline: { carreira },
-      cursos
+  const tData = {
+    nome,
+    cargo: document.getElementById('f-cargo').value.trim(),
+    foto: document.getElementById('f-foto').value.trim(),
+    bio_curta: document.getElementById('f-bio-curta').value.trim(),
+    bio_completa: document.getElementById('f-bio-completa').value.trim(),
+    ativo: document.getElementById('f-ativo').value === 'true',
+    flags: {
+      corporate: document.getElementById('f-corporate').checked,
+      ingles: document.getElementById('f-ingles').checked,
+      inovacao_lab: document.getElementById('f-inovacao').checked,
+      novos_talentos: document.getElementById('f-novos').checked,
+    },
+    tab_categories: editingTabCats,
+    timeline: { carreira: marcas },
+    cursos,
   };
 
   try {
-      if (editingId !== null) {
-        tData.id = editingId;
-        const idx = trainers.findIndex(t => t.id === editingId);
-        if (idx !== -1 && trainers[idx].timeline) {
-            tData.timeline = { ...trainers[idx].timeline, carreira };
-        }
-        
-        if (sb) {
-            const { error } = await sb.from('lds_trainers').update(tData).eq('id', editingId);
-            if (error) throw error;
-        }
-        if (idx !== -1) trainers[idx] = { ...trainers[idx], ...tData };
-        showToast('✅ Formador atualizado na Base de Dados!', 'success');
+    if (editingId !== null) {
+      tData.id = editingId;
+      const idx = trainers.findIndex(t => t.id === editingId);
+      if (sb) {
+        const { error } = await sb.from('lds_trainers').update(tData).eq('id', editingId);
+        if (error) throw error;
+        showToast('✅ Guardado na base de dados em tempo real!', 'success');
       } else {
-        const maxId = trainers.length > 0 ? Math.max(...trainers.map(t => t.id)) : 0;
-        tData.id = maxId + 1;
-        if (sb) {
-            const { error } = await sb.from('lds_trainers').insert(tData);
-            if (error) throw error;
-        }
-        trainers.push(tData);
-        showToast('✅ Formador adicionado à Base de Dados!', 'success');
+        showToast('✅ Guardado localmente (exporta o JSON para publicar)', 'success');
       }
+      if (idx !== -1) trainers[idx] = { ...trainers[idx], ...tData };
+    } else {
+      const maxId = trainers.length > 0 ? Math.max(...trainers.map(t => t.id||0)) : 0;
+      tData.id = maxId + 1;
+      if (sb) {
+        const { error } = await sb.from('lds_trainers').insert(tData);
+        if (error) throw error;
+        showToast('✅ Novo formador adicionado!', 'success');
+      } else {
+        showToast('✅ Formador adicionado localmente!', 'success');
+      }
+      trainers.push(tData);
+    }
   } catch (err) {
-      console.error(err);
-      showToast('❌ Erro ao gravar. Tente de novo.', 'error');
-      return;
+    console.error(err);
+    showToast('❌ Erro ao guardar. Tenta de novo.', 'error');
+    return;
   }
 
   closeModal();
   renderStats();
   renderTable();
+  renderAlerts();
 }
 
-// ─── DELETE ──────────────────────────────────────────────────────────────────
-async function confirmDelete() {
-  if (!editingId) return;
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// DELETE
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+function promptDelete(id) {
+  const t = trainers.find(x => x.id === id);
+  if (!t) return;
+  editingId = id;
+  showConfirm(
+    'Eliminar Formador?',
+    `Estás prestes a eliminar permanentemente "<strong>${escHtml(t.nome)}</strong>". Esta ação é irreversível.`,
+    doDelete
+  );
+}
+
+function confirmDeleteTrainer() {
   const t = trainers.find(x => x.id === editingId);
   if (!t) return;
-  if (!confirm(`Tens a certeza que queres eliminar "${t.nome}"?\n\nEsta ação é irreversível.`)) return;
-  
+  showConfirm(
+    'Eliminar Formador?',
+    `Estás prestes a eliminar permanentemente "<strong>${escHtml(t.nome)}</strong>". Esta ação é irreversível.`,
+    doDelete
+  );
+}
+
+async function doDelete() {
+  if (!editingId) return;
   try {
-      if (sb) {
-          const { error } = await sb.from('lds_trainers').delete().eq('id', editingId);
-          if (error) throw error;
-      }
-      trainers = trainers.filter(x => x.id !== editingId);
-      showToast('🗑️ Formador eliminado da Base de Dados.', 'success');
-      closeModal();
-      renderStats();
-      renderTable();
+    if (sb) {
+      const { error } = await sb.from('lds_trainers').delete().eq('id', editingId);
+      if (error) throw error;
+    }
+    trainers = trainers.filter(x => x.id !== editingId);
+    closeModal();
+    closeConfirm();
+    renderStats(); renderTable(); renderAlerts();
+    showToast('🗑️ Formador eliminado.', 'success');
   } catch (err) {
-      console.error(err);
-      showToast('❌ Erro a eliminar.', 'error');
+    console.error(err);
+    showToast('❌ Erro ao eliminar.', 'error');
   }
 }
 
-// ─── EXPORT JSON ─────────────────────────────────────────────────────────────
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// CONFIRM DIALOG
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+function showConfirm(title, msg, cb) {
+  document.getElementById('confirm-title').textContent = title;
+  document.getElementById('confirm-message').innerHTML = msg;
+  confirmCallback = cb;
+  document.getElementById('confirm-dialog').classList.remove('hidden');
+}
+function doConfirmedAction() { if (confirmCallback) confirmCallback(); }
+function closeConfirm() { document.getElementById('confirm-dialog').classList.add('hidden'); confirmCallback = null; }
+
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// EXPORT
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 function exportJSON() {
   const js = `const trainers = ${JSON.stringify(trainers, null, 2)};\n`;
   const blob = new Blob([js], { type: 'application/javascript' });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'final_rich_data_docs.js';
-  a.click();
+  const a = document.createElement('a'); a.href = url; a.download = 'final_rich_data_docs.js'; a.click();
   URL.revokeObjectURL(url);
   showToast('📥 JSON exportado! Substitui o ficheiro em public/', 'success');
 }
 
-// ─── SAVE REMINDER ───────────────────────────────────────────────────────────
-let reminderShown = false;
-function showSaveReminder() {
-  if (reminderShown) return;
-  reminderShown = true;
-  const banner = document.createElement('div');
-  banner.id = 'save-banner';
-  banner.className = 'fixed top-16 left-0 right-0 z-50 flex items-center justify-between px-6 py-3 text-sm font-medium';
-  banner.style.background = 'rgba(201,168,76,0.15)';
-  banner.style.borderBottom = '1px solid rgba(201,168,76,0.3)';
-  banner.innerHTML = `
-    <span class="text-yellow-200"><i class="fa-solid fa-triangle-exclamation mr-2 text-yellow-400"></i>Tens alterações não guardadas no servidor.</span>
-    <button onclick="exportJSON()" class="btn-gold text-xs">
-      <i class="fa-solid fa-download mr-1"></i> Exportar final_rich_data_docs.js
-    </button>`;
-  document.body.appendChild(banner);
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+// HELPERS
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+function getInitials(name) {
+  if (!name) return '?';
+  return name.split(' ').filter(w => w.length > 2).slice(0, 2).map(w => w[0]).join('').toUpperCase() || name[0].toUpperCase();
 }
 
-// ─── TOAST ───────────────────────────────────────────────────────────────────
+function getPhotoSrc(foto) {
+  if (!foto) return '';
+  if (foto.startsWith('RAW:')) return foto.substring(4);
+  if (foto.startsWith('http')) return foto;
+  if (foto.startsWith('assets/')) return foto;
+  return `assets/${foto}`;
+}
+
+function escHtml(str) {
+  return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function updateCharCounter(textarea, counterId, max) {
+  const el = document.getElementById(counterId);
+  if (el) el.textContent = textarea.value.length;
+}
+
 function showToast(msg, type = 'success') {
   const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = `toast ${type === 'success' ? 'toast-success' : 'toast-error'}`;
+  el.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-circle-check' : 'fa-circle-xmark'}"></i> ${msg}`;
+  el.className = type;
   el.classList.remove('hidden');
-  setTimeout(() => el.classList.add('hidden'), 3200);
+  clearTimeout(el._timer);
+  el._timer = setTimeout(() => el.classList.add('hidden'), 3500);
 }
 </script>
-
 </body>
 </html>
