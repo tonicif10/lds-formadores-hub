@@ -3414,6 +3414,107 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
       }
     }
 
+    let dgertActive = false;
+
+    function toggleDgertView() {
+      // Hide others
+      ['comparator-view', 'business-matcher-view', 'innovation-section', 'main-trainers-view', 'analytics-view'].forEach(id => {
+        const el = document.getElementById(id); if (el) el.classList.add('hidden');
+      });
+      const mr = document.getElementById('matcher-results'); if (mr) mr.classList.add('hidden');
+
+      // Reset others
+      matcherActive = false;
+      comparatorActive = false;
+      const bmBtn = document.getElementById('btn-business-matcher');
+      const cmpBtn = document.getElementById('btn-comparator');
+      const dgertBtn = document.getElementById('btn-dgert-admin');
+      
+      if (bmBtn) bmBtn.classList.remove('bg-white/10', 'text-white');
+      if (cmpBtn) cmpBtn.classList.remove('bg-white/10', 'text-white');
+
+      const view = document.getElementById('dgert-view');
+      dgertActive = view.classList.contains('hidden');
+      
+      if (dgertActive) {
+        view.classList.remove('hidden');
+        if (dgertBtn) dgertBtn.classList.add('bg-white/10', 'text-white');
+        renderDgertTable();
+        setTimeout(() => view.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+      } else {
+        view.classList.add('hidden');
+        if (dgertBtn) dgertBtn.classList.remove('bg-white/10', 'text-white');
+        document.getElementById('innovation-section').classList.remove('hidden');
+        document.getElementById('main-trainers-view').classList.remove('hidden');
+      }
+    }
+
+    function renderDgertTable() {
+      const tbody = document.getElementById('dgert-table-body');
+      if (!tbody) return;
+      
+      const searchInput = document.getElementById('dgert-search');
+      const s = searchInput ? searchInput.value.toLowerCase() : '';
+      
+      // Filter trainers
+      let filtered = trainers.filter(t => {
+        if (!s) return true;
+        return (t.nome && t.nome.toLowerCase().includes(s)) || (t.cargo && t.cargo.toLowerCase().includes(s));
+      });
+      
+      let compliant = 0;
+      let pending = 0;
+      let missing = 0;
+      
+      const rows = filtered.map(t => {
+        const hasDGERT = t.badges && (t.badges.includes('DGERT') || t.badges.includes('DGERT Ready'));
+        const hasCV = hasDGERT; // Temp mock
+        const hasID = hasDGERT; // Temp mock
+        
+        const isCompliant = hasDGERT;
+        const isMissing = !hasDGERT;
+        
+        if (isCompliant) compliant++;
+        else missing++;
+        
+        const statusBadge = isCompliant 
+          ? '<span class="px-2 py-1 bg-emerald-500/10 text-emerald-500 rounded-md text-[10px] font-bold uppercase">Conforme</span>'
+          : '<span class="px-2 py-1 bg-red-500/10 text-red-500 rounded-md text-[10px] font-bold uppercase">Em Falta</span>';
+            
+        const getIcon = (has) => has 
+          ? '<i class="fa-solid fa-check text-emerald-500"></i>' 
+          : '<i class="fa-solid fa-xmark text-red-500/50"></i>';
+          
+        return `
+          <tr class="hover:bg-white/5 transition group">
+            <td class="p-4">
+              <div class="flex items-center gap-3">
+                <img src="${getPhotoSrc(t)}" class="w-8 h-8 rounded-full object-cover border border-white/10" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(t.nome)}&background=random'">
+                <div>
+                  <p class="font-bold text-white leading-tight">${t.nome}</p>
+                  <p class="text-[10px] text-gray-500 mt-0.5">${t.cargo || 'Formador LDS'}</p>
+                </div>
+              </div>
+            </td>
+            <td class="p-4 text-center">${statusBadge}</td>
+            <td class="p-4 text-center">${getIcon(hasDGERT)}</td>
+            <td class="p-4 text-center">${getIcon(hasCV)}</td>
+            <td class="p-4 text-center">${getIcon(hasID)}</td>
+            <td class="p-4 text-center"><span class="text-[10px] text-gray-500">-</span></td>
+            <td class="p-4 text-right">
+              <button onclick="openModal(${t.id})" class="text-xs text-lds-gold hover:text-white transition px-3 py-1.5 bg-white/5 rounded-md hover:bg-white/10">Ver Perfil</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+      
+      tbody.innerHTML = rows;
+      
+      document.getElementById('dgert-stat-compliant').innerText = compliant;
+      document.getElementById('dgert-stat-pending').innerText = pending;
+      document.getElementById('dgert-stat-missing').innerText = missing;
+    }
+
     function _renderFlagWidget(el, icon, color, title, count, total, note) {
       const pct = total > 0 ? Math.round(count / total * 100) : 0;
       const targetEl = document.getElementById(el);
