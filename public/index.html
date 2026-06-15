@@ -3489,7 +3489,7 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
           <tr class="hover:bg-white/5 transition group">
             <td class="p-4">
               <div class="flex items-center gap-3">
-                <img src="${getPhotoSrc(t)}" class="w-8 h-8 rounded-full object-cover border border-white/10" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(t.nome)}&background=random'">
+                <img src="${getPhotoSrc(t.foto)}" class="w-8 h-8 rounded-full object-cover border border-white/10" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(t.nome)}&background=random'">
                 <div>
                   <p class="font-bold text-white leading-tight">${t.nome}</p>
                   <p class="text-[10px] text-gray-500 mt-0.5">${t.cargo || 'Formador LDS'}</p>
