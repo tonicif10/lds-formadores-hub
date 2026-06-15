@@ -1502,8 +1502,8 @@
       </div>
     </div>
 
-  <!-- PDF TEMPLATE (HIDDEN) -->
-  <div id="pdf-template-container" class="hidden fixed top-0 left-0 z-50">
+  <!-- PDF TEMPLATE (OFF-SCREEN) -->
+  <div id="pdf-template-container" style="position: absolute; top: -9999px; left: -9999px; width: 800px;">
     <div id="pdf-content" class="w-[800px] h-[1131px] bg-white text-gray-900 p-12 relative overflow-hidden font-sans border-t-[16px] border-lds-gold flex flex-col">
       
       <!-- Watermark / Background Elements -->
@@ -3664,26 +3664,36 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
       const teaching = t.timeline && t.timeline.formacao ? t.timeline.formacao : ['Experiência formativa extensa na LDS.'];
       teachingContainer.innerHTML = teaching.map(c => `<li><span class="text-lds-gold mr-3">■</span>${c}</li>`).join('');
 
-      // Make Template temporarily visible to print
-      const container = document.getElementById('pdf-template-container');
-      container.classList.remove('hidden');
+      // Wait for image to load to prevent html2canvas rendering empty or shifting
+      const img = photoContainer.querySelector('img');
+      const processPdf = () => {
+        const element = document.getElementById('pdf-content');
+        
+        // html2pdf Options
+        const opt = {
+          margin:       0,
+          filename:     `LDS_Proposta_${t.nome.replace(/\s+/g, '_')}.pdf`,
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { 
+            scale: 2, 
+            useCORS: true, 
+            backgroundColor: '#ffffff',
+            scrollY: 0,
+            scrollX: 0
+          },
+          jsPDF:        { unit: 'px', format: [800, 1131], orientation: 'portrait' }
+        };
 
-      const element = document.getElementById('pdf-content');
-      
-      // html2pdf Options
-      const opt = {
-        margin:       0,
-        filename:     `LDS_Proposta_${t.nome.replace(/\s+/g, '_')}.pdf`,
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true, backgroundColor: '#ffffff', logging: false },
-        jsPDF:        { unit: 'px', format: [800, 1131], orientation: 'portrait' }
+        // Generate
+        html2pdf().set(opt).from(element).save();
       };
 
-      // Generate
-      html2pdf().set(opt).from(element).save().then(() => {
-        // Hide again
-        container.classList.add('hidden');
-      });
+      if (img && !img.complete) {
+        img.onload = processPdf;
+        img.onerror = processPdf;
+      } else {
+        processPdf();
+      }
     }
 
     function generateProposal() {
