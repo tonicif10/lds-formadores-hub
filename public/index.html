@@ -3456,8 +3456,10 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
       const searchInput = document.getElementById('dgert-search');
       const s = searchInput ? searchInput.value.toLowerCase() : '';
       
-      // Filter trainers
+      // Only show active trainers
       let filtered = trainers.filter(t => {
+        const isAtivo = (t.ativo !== false);
+        if (!isAtivo) return false;
         if (!s) return true;
         return (t.nome && t.nome.toLowerCase().includes(s)) || (t.cargo && t.cargo.toLowerCase().includes(s));
       });
@@ -3467,12 +3469,16 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
       let missing = 0;
       
       const rows = filtered.map(t => {
-        const hasDGERT = t.badges && (t.badges.includes('DGERT') || t.badges.includes('DGERT Ready'));
-        const hasCV = hasDGERT; // Temp mock
-        const hasID = hasDGERT; // Temp mock
+        const docs = t.documentos || [];
         
-        const isCompliant = hasDGERT;
-        const isMissing = !hasDGERT;
+        // Check each document type from the real data
+        const hasFichaDGERT = docs.some(d => d.tipo === 'Ficha DGERT');
+        const hasCV = docs.some(d => d.tipo === 'CV' || (d.nome_ficheiro && d.nome_ficheiro.toLowerCase().includes('curriculum')));
+        const hasCCP = docs.some(d => d.tipo === 'CCP' || (d.nome_ficheiro && d.nome_ficheiro.toLowerCase().includes('ccp')));
+        const hasOutros = docs.some(d => d.tipo === 'Certificado' || d.tipo === 'Documento');
+        
+        // A formador is compliant if they have the DGERT form
+        const isCompliant = hasFichaDGERT;
         
         if (isCompliant) compliant++;
         else missing++;
@@ -3484,6 +3490,11 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
         const getIcon = (has) => has 
           ? '<i class="fa-solid fa-check text-emerald-500"></i>' 
           : '<i class="fa-solid fa-xmark text-red-500/50"></i>';
+          
+        const docCount = docs.length;
+        const docLabel = docCount > 0
+          ? `<span class="text-[10px] text-gray-400">${docCount} doc${docCount > 1 ? 's' : ''}</span>`
+          : `<span class="text-[10px] text-red-500/60">0 docs</span>`;
           
         return `
           <tr class="hover:bg-white/5 transition group">
@@ -3497,10 +3508,10 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
               </div>
             </td>
             <td class="p-4 text-center">${statusBadge}</td>
-            <td class="p-4 text-center">${getIcon(hasDGERT)}</td>
+            <td class="p-4 text-center">${getIcon(hasFichaDGERT)}</td>
             <td class="p-4 text-center">${getIcon(hasCV)}</td>
-            <td class="p-4 text-center">${getIcon(hasID)}</td>
-            <td class="p-4 text-center"><span class="text-[10px] text-gray-500">-</span></td>
+            <td class="p-4 text-center">${getIcon(hasCCP)}</td>
+            <td class="p-4 text-center">${docLabel}</td>
             <td class="p-4 text-right">
               <button onclick="openModal(${t.id})" class="text-xs text-lds-gold hover:text-white transition px-3 py-1.5 bg-white/5 rounded-md hover:bg-white/10">Ver Perfil</button>
             </td>
@@ -3508,7 +3519,7 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
         `;
       }).join('');
       
-      tbody.innerHTML = rows;
+      tbody.innerHTML = rows || '<tr><td colspan="7" class="p-8 text-center text-gray-500">Nenhum formador encontrado.</td></tr>';
       
       document.getElementById('dgert-stat-compliant').innerText = compliant;
       document.getElementById('dgert-stat-pending').innerText = pending;
