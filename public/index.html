@@ -311,31 +311,18 @@
 
 
 
-        <!-- Admin Panel Link -->
-        <div class="px-4 pb-3">
-          <a href="/admin.html"
-            class="w-full flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-lds-gold bg-yellow-500/5 border border-yellow-500/20 hover:bg-yellow-500/10 hover:border-yellow-500/40 transition rounded-lg group">
-            <span class="w-5 h-5 rounded bg-lds-gold/10 flex items-center justify-center text-lds-gold text-xs">
-              <i class="fa-solid fa-shield-halved"></i>
-            </span>
-            Admin Panel
-            <i class="fa-solid fa-arrow-up-right-from-square ml-auto text-[10px] text-lds-gold/50 group-hover:text-lds-gold transition"></i>
-          </a>
-        </div>
-
-        <!-- User Profile -->
-
+        <!-- Área de Gestão -->
         <div class="p-4 border-t border-lds-border bg-lds-sidebar">
-          <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 cursor-pointer group relative">
-            <div class="w-8 h-8 rounded bg-gray-700 flex items-center justify-center text-xs font-bold text-white">AD
+          <a href="/admin.html" class="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 cursor-pointer group transition-all">
+            <div class="w-8 h-8 rounded bg-lds-gold/10 flex items-center justify-center text-lds-gold">
+              <i class="fa-solid fa-gear text-sm group-hover:rotate-45 transition-transform duration-300"></i>
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium text-white truncate">Admin User</p>
-              <p class="text-[10px] text-gray-500 truncate">Manager</p>
+              <p class="text-sm font-semibold text-white truncate group-hover:text-lds-gold transition-colors">Área de Gestão</p>
+              <p class="text-[10px] text-gray-500 truncate">Admin Panel</p>
             </div>
-            <button onclick="openHealthModal()" class="text-gray-500 hover:text-white"><i
-                class="fa-solid fa-gear"></i></button>
-          </div>
+            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] text-gray-600 group-hover:text-lds-gold transition-colors"></i>
+          </a>
         </div>
   </aside>
 
