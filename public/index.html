@@ -651,8 +651,50 @@
           </div>
 
           <div class="p-6 space-y-6">
+            <!-- AI Insights (Glassmorphism) -->
+            <div id="analytics-ai-insights" class="bg-lds-gold/5 border border-lds-gold/30 rounded-xl p-5 relative overflow-hidden backdrop-blur-sm group hover:bg-lds-gold/10 transition-colors">
+              <div class="absolute -right-10 -top-10 w-40 h-40 bg-lds-gold/10 rounded-full blur-3xl group-hover:bg-lds-gold/20 transition duration-1000 pointer-events-none"></div>
+              <h3 class="text-xs font-bold text-lds-gold uppercase tracking-widest mb-3 flex items-center gap-2 relative z-10">
+                <i class="fa-solid fa-robot animate-pulse"></i> AI Intelligence Report
+              </h3>
+              <div id="ai-insights-content" class="space-y-2 relative z-10">
+                <!-- JS Injected -->
+              </div>
+            </div>
+
             <!-- KPI Row -->
             <div id="analytics-kpis" class="grid grid-cols-2 md:grid-cols-4 gap-4"></div>
+
+            <!-- Heatmap & Rates Row -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Heatmap Risco de Rutura -->
+              <div class="bg-lds-dark border border-lds-border rounded-xl p-5 flex flex-col justify-center items-center relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest w-full text-left mb-6 flex items-center gap-2">
+                  <i class="fa-solid fa-fire text-red-500"></i> Risco de Rutura (Disponibilidade Global Mês Atual)
+                </h3>
+                <div class="relative w-32 h-32 flex items-center justify-center mb-2">
+                  <!-- Conic gradient circle injected via JS -->
+                  <div id="heatmap-ring" class="absolute inset-0 rounded-full border-8 border-gray-800 transition-all duration-1000 group-hover:shadow-[0_0_15px_rgba(239,68,68,0.3)]" style="background: conic-gradient(#374151 0%, #374151 100%);"></div>
+                  <!-- Inner circle to make it a donut -->
+                  <div class="absolute inset-2 bg-lds-dark rounded-full z-10 flex flex-col items-center justify-center">
+                    <span id="heatmap-pct" class="text-2xl font-bold text-white">0%</span>
+                    <span class="text-[9px] text-gray-500 uppercase tracking-widest mt-1 text-center leading-tight">Taxa<br>Ocupação</span>
+                  </div>
+                </div>
+                <p id="heatmap-status" class="text-xs font-bold text-red-400 uppercase tracking-widest mt-2">Calculando...</p>
+              </div>
+
+              <!-- Distribuição Financeira (Rates) -->
+              <div class="bg-lds-dark border border-lds-border rounded-xl p-5 relative group">
+                <h3 class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-5 flex items-center gap-2">
+                  <i class="fa-solid fa-coins text-green-500"></i> Distribuição de Rates (Força de Vendas)
+                </h3>
+                <div id="analytics-rates-container" class="space-y-4">
+                  <!-- JS Injected -->
+                </div>
+              </div>
+            </div>
 
             <!-- Charts Row -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -3765,6 +3807,113 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
           <div class="text-xs text-gray-500 mt-1">${k.sub}</div>
         </div>`).join('');
 
+      // ── AI INSIGHTS ──────────────────────────────────────────────
+      const insightsContainer = document.getElementById('ai-insights-content');
+      if (insightsContainer) {
+        let insightsHTML = '';
+        
+        if (lab < 15) {
+          insightsHTML += `<p class="text-sm text-gray-300"><i class="fa-solid fa-triangle-exclamation text-yellow-500 mr-2"></i>Temos apenas <b>${lab} formadores</b> de Innovation Lab. A procura por Inteligência Artificial no B2B está a crescer, sugerimos foco em recrutamento nesta área.</p>`;
+        } else {
+          insightsHTML += `<p class="text-sm text-gray-300"><i class="fa-solid fa-check text-green-500 mr-2"></i>A oferta de Innovation Lab está saudável com ${lab} talentos.</p>`;
+        }
+        
+        if ((corporate / total) < 0.15) {
+          insightsHTML += `<p class="text-sm text-gray-300"><i class="fa-solid fa-circle-info text-blue-400 mr-2"></i>Apenas <b>${Math.round(corporate / total * 100)}%</b> do talento está com selo Corporate Ready. É necessário investir mais em capacitação interna.</p>`;
+        } else {
+          insightsHTML += `<p class="text-sm text-gray-300"><i class="fa-solid fa-arrow-trend-up text-green-400 mr-2"></i>Temos uma excelente base Corporate Ready pronta a alocar.</p>`;
+        }
+
+        insightsContainer.innerHTML = insightsHTML;
+      }
+
+      // ── GLOBAL AVAILABILITY HEATMAP ──────────────────────────────
+      let occupiedCount = 0;
+      trainers.forEach(t => {
+        if (!checkAvailability(t.id, 0)) occupiedCount++;
+      });
+      const occupiedPct = total > 0 ? Math.round((occupiedCount / total) * 100) : 0;
+      
+      const heatmapRing = document.getElementById('heatmap-ring');
+      const heatmapPctEl = document.getElementById('heatmap-pct');
+      const heatmapStatusEl = document.getElementById('heatmap-status');
+      
+      setTimeout(() => {
+        if (heatmapRing && heatmapPctEl && heatmapStatusEl) {
+          // Counter animation
+          let currentPct = 0;
+          const interval = setInterval(() => {
+            currentPct += Math.max(1, Math.floor((occupiedPct - currentPct) / 5));
+            if (currentPct >= occupiedPct) {
+              currentPct = occupiedPct;
+              clearInterval(interval);
+            }
+            heatmapPctEl.innerText = currentPct + '%';
+          }, 30);
+          
+          let ringColor = '#10B981'; // Green (Safe)
+          let statusText = 'Baixa Ocupação (Saudável)';
+          let statusColor = 'text-green-400';
+          let glowColor = 'rgba(16, 185, 129, 0.3)';
+          
+          if (occupiedPct >= 50 && occupiedPct < 75) {
+            ringColor = '#F59E0B'; // Amber
+            statusText = 'Ocupação Moderada';
+            statusColor = 'text-amber-400';
+            glowColor = 'rgba(245, 158, 11, 0.3)';
+          } else if (occupiedPct >= 75) {
+            ringColor = '#EF4444'; // Red
+            statusText = 'Risco de Rutura Elevado';
+            statusColor = 'text-red-500';
+            glowColor = 'rgba(239, 68, 68, 0.5)';
+          }
+          
+          heatmapRing.style.background = `conic-gradient(${ringColor} ${occupiedPct}%, #374151 ${occupiedPct}%)`;
+          heatmapRing.style.boxShadow = `0 0 20px ${glowColor}`;
+          
+          heatmapStatusEl.innerText = statusText;
+          heatmapStatusEl.className = `text-xs font-bold uppercase tracking-widest mt-2 ${statusColor}`;
+        }
+      }, 300);
+
+      // ── RATES DISTRIBUTION (CRM) ─────────────────────────────────
+      const ratesContainer = document.getElementById('analytics-rates-container');
+      if (ratesContainer) {
+        const ratesCount = { '0': 0, '1': 0, '2': 0, '3': 0, '4': 0 };
+        
+        trainers.forEach(t => {
+          const r = (t.crm && t.crm.rate) ? t.crm.rate : "0";
+          ratesCount[r]++;
+        });
+        
+        const rateLabels = {
+          '1': { label: '€ (Entry Level)', color: 'bg-green-400' },
+          '2': { label: '€€ (Standard)', color: 'bg-blue-400' },
+          '3': { label: '€€€ (Premium)', color: 'bg-purple-400' },
+          '4': { label: '€€€€ (Elite)', color: 'bg-yellow-400' },
+          '0': { label: 'Não Definido', color: 'bg-gray-600' }
+        };
+        
+        let ratesHTML = '';
+        Object.keys(rateLabels).forEach(r => {
+          const count = ratesCount[r];
+          const pct = total > 0 ? (count / total) * 100 : 0;
+          const colorClass = rateLabels[r].color;
+          
+          ratesHTML += `
+            <div class="group/rate">
+              <div class="flex justify-between text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 group-hover/rate:text-white transition">
+                <span>${rateLabels[r].label}</span>
+                <span>${count}</span>
+              </div>
+              <div class="w-full bg-gray-800 rounded-full h-1.5 overflow-hidden">
+                <div class="${colorClass} h-full rounded-full transition-all duration-1000 w-0 group-hover/rate:shadow-[0_0_10px_currentcolor]" style="width: 0%" data-target-width="${pct}%"></div>
+              </div>
+            </div>`;
+        });
+        ratesContainer.innerHTML = ratesHTML;
+      }
+
       // ── TAB CATEGORIES BAR CHART ───────────────────────────────
       const tabCounts = {};
       trainers.forEach(t => {
@@ -3780,7 +3929,7 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
             <span class="text-gray-500">${count}</span>
           </div>
           <div class="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
-            <div class="${barColors[i % barColors.length]} h-full rounded-full transition-all duration-700" style="width:${(count / maxTab) * 100}%"></div>
+            <div class="${barColors[i % barColors.length]} h-full rounded-full transition-all duration-1000 w-0 hover:shadow-[0_0_15px_currentcolor]" data-target-width="${(count / maxTab) * 100}%" style="width: 0%;"></div>
           </div>
         </div>`).join('');
 
@@ -3801,7 +3950,7 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
               <span class="text-gray-500">${count}</span>
             </div>
             <div class="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
-              <div class="bg-purple-500 h-full rounded-full" style="width:${(count / maxBadge) * 100}%"></div>
+              <div class="bg-purple-500 h-full rounded-full transition-all duration-1000 w-0 hover:shadow-[0_0_15px_currentcolor]" data-target-width="${(count / maxBadge) * 100}%" style="width: 0%;"></div>
             </div>
           </div>`).join('')
         : '<p class="text-gray-600 text-sm">Nenhum badge encontrado.</p>';
@@ -3825,6 +3974,13 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
             </div>`;
         }).join('')
         : '<p class="text-gray-500 text-sm col-span-full">Todas as áreas estão bem cobertas.</p>';
+
+      // ── TRIGGER ANIMATIONS ──────────────────────────────────────
+      setTimeout(() => {
+        document.querySelectorAll('[data-target-width]').forEach(el => {
+          el.style.width = el.getAttribute('data-target-width');
+        });
+      }, 100);
     }
 
     function generateOnePager(t) {
