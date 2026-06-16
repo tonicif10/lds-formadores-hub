@@ -1321,8 +1321,8 @@
               </h3>
               <p class="text-[10px] text-gray-400">Integração B2B simulada</p>
             </div>
-            <button class="bg-white/10 text-white hover:text-black font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded hover:bg-lds-gold transition flex items-center gap-2">
-               Sincronizar
+            <button id="btn-sync-calendar" onclick="syncCalendar(window.currentTrainerId)" class="bg-white/10 text-white hover:text-black font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded hover:bg-lds-gold transition flex items-center gap-2">
+               <i class="fa-solid fa-rotate"></i> <span id="sync-btn-text">Sincronizar</span>
             </button>
           </div>
           
@@ -3923,6 +3923,66 @@ Equipa B2B Lisbon Digital School`;
         console.error(err);
         alert('Erro ao tentar gerar proposta: ' + err.message);
       }
+    }
+
+    function syncCalendar(trainerId) {
+      const btn = document.getElementById('btn-sync-calendar');
+      const textSpan = document.getElementById('sync-btn-text');
+      const icon = btn.querySelector('i');
+      const calGrid = document.getElementById('modal-calendar-grid');
+      
+      if (!btn || !calGrid) return;
+      
+      // Visual feedback loading
+      icon.classList.add('fa-spin');
+      textSpan.innerText = 'A Sincronizar...';
+      btn.classList.add('opacity-70', 'pointer-events-none');
+      calGrid.classList.add('animate-pulse');
+      
+      setTimeout(() => {
+        // Regenerate the grid visually to fake a refresh
+        const t = trainers.find(x => x.id === trainerId);
+        if (t) {
+          const months = ['Este Mês', 'Próx. Mês', 'A 2 Meses'];
+          calGrid.innerHTML = months.map((mName, offset) => {
+            const isAvail = checkAvailability(t.id, offset);
+            if (isAvail) {
+              return `
+                <div class="bg-green-500/5 border border-green-500/20 rounded-xl p-3 flex flex-col items-center justify-center text-center">
+                  <i class="fa-solid fa-calendar-check text-green-400 text-lg mb-1"></i>
+                  <span class="text-white font-bold text-[11px] uppercase tracking-wider">${mName}</span>
+                  <span class="text-green-400 text-[9px] mt-0.5">Livre</span>
+                </div>
+              `;
+            } else {
+              return `
+                <div class="bg-red-500/5 border border-red-500/10 rounded-xl p-3 flex flex-col items-center justify-center text-center opacity-60">
+                  <i class="fa-solid fa-calendar-xmark text-red-400/50 text-lg mb-1"></i>
+                  <span class="text-gray-400 font-bold text-[11px] uppercase tracking-wider">${mName}</span>
+                  <span class="text-red-400 text-[9px] mt-0.5">Ocupado</span>
+                </div>
+              `;
+            }
+          }).join('');
+        }
+        
+        // Success state
+        calGrid.classList.remove('animate-pulse');
+        icon.classList.remove('fa-spin', 'fa-rotate');
+        icon.classList.add('fa-check', 'text-green-400');
+        textSpan.innerText = 'Sincronizado';
+        textSpan.classList.add('text-green-400');
+        
+        // Reset back to original state after 3 seconds
+        setTimeout(() => {
+          icon.classList.remove('fa-check', 'text-green-400');
+          icon.classList.add('fa-rotate');
+          textSpan.innerText = 'Sincronizar';
+          textSpan.classList.remove('text-green-400');
+          btn.classList.remove('opacity-70', 'pointer-events-none');
+        }, 3000);
+        
+      }, 1500);
     }
 
     function copyAIProposal() {
