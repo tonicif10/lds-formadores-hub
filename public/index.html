@@ -1480,10 +1480,10 @@
   </button>
 
   <!-- AI PROPOSAL MODAL -->
-  <div id="ai-proposal-modal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4">
-    <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="document.getElementById('ai-proposal-modal').classList.add('hidden')"></div>
+  <div id="ai-proposal-modal" class="fixed inset-0 hidden items-center justify-center p-4" style="z-index: 99999;">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="document.getElementById('ai-proposal-modal').classList.add('hidden'); document.getElementById('ai-proposal-modal').classList.remove('flex');"></div>
     <div class="relative w-full max-w-2xl bg-[#0F0F11] border border-lds-gold/30 rounded-2xl shadow-2xl p-8 z-10 flex flex-col">
-       <button onclick="document.getElementById('ai-proposal-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+       <button onclick="document.getElementById('ai-proposal-modal').classList.add('hidden'); document.getElementById('ai-proposal-modal').classList.remove('flex');" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
        <h3 class="text-2xl font-bold text-white mb-2 flex items-center gap-3"><i class="fa-solid fa-wand-magic-sparkles text-lds-gold"></i> Proposta IA Gerada</h3>
        <p class="text-gray-400 text-sm mb-6">Pronta a copiar e enviar ao cliente.</p>
        
@@ -3867,34 +3867,38 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
     }
 
     function generateAIProposal(trainerId, useOracleContext = false) {
-      const t = trainers.find(x => x.id === trainerId);
-      if (!t) return;
-      
-      const modal = document.getElementById('ai-proposal-modal');
-      const textEl = document.getElementById('ai-proposal-text');
-      
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      textEl.innerHTML = '<div class="flex items-center justify-center h-full gap-3 text-lds-gold"><i class="fa-solid fa-circle-notch fa-spin text-2xl"></i> <span class="font-bold">A gerar estratégia e syllabus à medida...</span></div>';
-      
-      setTimeout(() => {
-        const cat = t.categorias && t.categorias[0] && t.categorias[0] !== 'nan' ? t.categorias[0] : 'Estratégia Digital';
-        let contextSnippet = `Conforme conversámos sobre o vosso desafio em ${cat},`;
-        let syllabusFocus = `em ${cat}`;
-        
-        if (useOracleContext && oracleState.context) {
-           // We extract a small slice of the context just to show the dynamic merge
-           const clientNeed = oracleState.context.substring(0, 70).toLowerCase();
-           contextSnippet = `Em resposta ao vosso pedido específico ("${clientNeed}..."), fizemos um match na nossa base de talentos e`;
-           syllabusFocus = `direcionado para o vosso desafio`;
+      try {
+        const t = trainers.find(x => x.id === trainerId);
+        if (!t) {
+          alert('Erro: formador não encontrado.');
+          return;
         }
         
-        const proposal = `Olá [Nome do Cliente],
+        const modal = document.getElementById('ai-proposal-modal');
+        const textEl = document.getElementById('ai-proposal-text');
+        
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        textEl.innerHTML = '<div class="flex items-center justify-center h-full gap-3 text-lds-gold"><i class="fa-solid fa-circle-notch fa-spin text-2xl"></i> <span class="font-bold">A gerar estratégia e syllabus à medida...</span></div>';
+        
+        setTimeout(() => {
+          try {
+            const cat = t.categorias && t.categorias[0] && t.categorias[0] !== 'nan' ? t.categorias[0] : 'Estratégia Digital';
+            let contextSnippet = `Conforme conversámos sobre o vosso desafio em ${cat},`;
+            let syllabusFocus = `em ${cat}`;
+            
+            if (useOracleContext && oracleState && oracleState.context) {
+               const clientNeed = oracleState.context.substring(0, 70).toLowerCase();
+               contextSnippet = `Em resposta ao vosso pedido específico ("${clientNeed}..."), fizemos um match na nossa base de talentos e`;
+               syllabusFocus = `direcionado para o vosso desafio`;
+            }
+            
+            const proposal = `Olá [Nome do Cliente],
 
 Espero que se encontre bem.
 
 ${contextSnippet} acredito que a pessoa ideal para liderar esta formação / consultoria na vossa equipa é **${t.nome}**.
-${(t.bio_curta && t.bio_curta.length > 20) ? `Como sabem, a sua experiência encaixa perfeitamente naquilo que procuram: "${t.bio_curta.substring(0, 100)}..."` : 'É um(a) formador(a) com forte track-record comprovado na área exigida.'}
+${(t.bio_curta && t.bio_curta.length > 20) ? `Como sabem, a sua experiência encaixa perfeitamente naquilo que procuram: "${t.bio_curta.substring(0, 100).replace(/\n/g, ' ')}..."` : 'É um(a) formador(a) com forte track-record comprovado na área exigida.'}
 
 **🎯 Proposta de Action Plan (Syllabus Draft):**
 • Módulo 1: Auditoria, Fundamentos e Estratégia Inicial ${syllabusFocus}.
@@ -3908,9 +3912,17 @@ Podemos agendar uma call rápida de 15 minutos na terça-feira para alinharmos f
 Fico a aguardar o vosso feedback.
 Abraço,
 Equipa B2B Lisbon Digital School`;
-        
-        textEl.innerText = proposal;
-      }, 1500);
+            
+            textEl.innerText = proposal;
+          } catch(err) {
+            console.error(err);
+            textEl.innerText = "Ocorreu um erro ao gerar a proposta. Por favor, tente novamente.";
+          }
+        }, 1500);
+      } catch(err) {
+        console.error(err);
+        alert('Erro ao tentar gerar proposta: ' + err.message);
+      }
     }
 
     function copyAIProposal() {
