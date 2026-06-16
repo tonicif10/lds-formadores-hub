@@ -334,13 +334,31 @@
 
     <!-- Header (Solid & Professional) -->
     <header
-      class="bg-lds-sidebar sticky top-0 z-30 px-8 py-4 border-b border-lds-border flex items-center justify-between shadow-sm">
-      <div class="flex-1 max-w-xl relative">
-        <i
-          class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 z-10 text-sm"></i>
-        <input type="text" id="searchInput"
-          class="w-full bg-lds-card border border-lds-border text-white text-sm pl-10 pr-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition placeholder-gray-500"
-          placeholder="Pesquisar formadores, competências, empresas...">
+      class="bg-lds-sidebar sticky top-0 z-30 px-8 py-4 border-b border-lds-border flex items-center justify-between shadow-sm gap-4">
+      <div class="flex-1 max-w-xl relative flex items-center gap-4">
+        <div class="relative flex-1">
+          <i
+            class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 z-10 text-sm"></i>
+          <input type="text" id="searchInput"
+            class="w-full bg-lds-card border border-lds-border text-white text-sm pl-10 pr-4 py-2.5 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition placeholder-gray-500"
+            placeholder="Pesquisar formadores, competências, empresas...">
+        </div>
+        
+        <!-- B2B Feature: Calendar Filter -->
+        <div class="relative w-48 shrink-0">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <i class="fa-regular fa-calendar-days text-gray-400"></i>
+          </div>
+          <select id="monthFilter" class="w-full bg-lds-card border border-lds-border text-white text-sm pl-10 pr-8 py-2.5 rounded-lg focus:outline-none focus:border-lds-gold appearance-none cursor-pointer">
+            <option value="all">Ver todas as Agendas</option>
+            <option value="0">Disponível este Mês</option>
+            <option value="1">Disponível Próx. Mês</option>
+            <option value="2">Livre a 2 Meses</option>
+          </select>
+          <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+            <i class="fa-solid fa-chevron-down text-gray-500 text-xs"></i>
+          </div>
+        </div>
       </div>
 
       <!-- Live Stats (Clean) -->
@@ -1233,9 +1251,6 @@
           <h2 id="modal-name" class="text-3xl font-black text-white mb-2 leading-tight">Name</h2>
           <p id="modal-role" class="text-lds-gold font-medium mb-6 px-4">Role</p>
 
-          <!-- Disponibilidade (Mock) -->
-          <div id="modal-availability" class="mb-6 w-full text-center"></div>
-
           <!-- Action Buttons -->
           <div class="flex flex-col gap-3 w-full mb-8">
             <button id="btn-consulting" onclick="requestConsulting(window.currentTrainerId)"
@@ -1290,6 +1305,28 @@
         <div class="mb-12">
           <h3 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-4">Áreas de Especialidade</h3>
           <div class="flex flex-wrap gap-2" id="modal-skill-cloud">
+            <!-- JS Injected -->
+          </div>
+        </div>
+
+        <!-- B2B Calendar / Availability Box -->
+        <div class="mb-12 bg-white/5 border border-white/10 rounded-2xl p-6 relative overflow-hidden group hover:border-lds-gold/30 transition">
+          <!-- Ambient Glow -->
+          <div class="absolute -right-20 -top-20 w-40 h-40 bg-lds-gold/5 rounded-full blur-3xl group-hover:bg-lds-gold/10 transition duration-500 pointer-events-none"></div>
+          
+          <div class="flex items-start justify-between relative z-10">
+            <div>
+              <h3 class="text-sm font-bold text-white uppercase tracking-widest flex items-center gap-2 mb-1">
+                <i class="fa-regular fa-calendar-days text-lds-gold"></i> Agenda Integrada
+              </h3>
+              <p class="text-[10px] text-gray-400">Integração B2B simulada</p>
+            </div>
+            <button class="bg-white/10 text-white hover:text-black font-bold text-[10px] uppercase tracking-widest px-3 py-1.5 rounded hover:bg-lds-gold transition flex items-center gap-2">
+               Sincronizar
+            </button>
+          </div>
+          
+          <div id="modal-calendar-grid" class="mt-5 grid grid-cols-3 gap-3 relative z-10">
             <!-- JS Injected -->
           </div>
         </div>
@@ -1686,16 +1723,30 @@
           btnBio.classList.add('hidden');
         }
 
-        // Availability
-        const availabilityModes = [
-          { label: 'Disponibilidade Alta (Livre em 2 semanas)', color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20', icon: 'fa-calendar-check' },
-          { label: 'Agenda Limitada (Reservar c/ antecedência)', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20', icon: 'fa-calendar-minus' },
-          { label: 'Agenda Cheia (Disponível apenas próximo Q)', color: 'text-red-400', bg: 'bg-red-500/10 border-red-500/20', icon: 'fa-calendar-xmark' }
-        ];
-        const avail = availabilityModes[(t.id * 13) % 3];
-        const availEl = document.getElementById('modal-availability');
-        if (availEl) {
-          availEl.innerHTML = `<div class="inline-flex items-center gap-2 ${avail.bg} ${avail.color} border border-dashed px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wider"><i class="fa-solid ${avail.icon}"></i> ${avail.label}</div>`;
+        // B2B Calendar (Mock) inside Modal
+        const calGrid = document.getElementById('modal-calendar-grid');
+        if (calGrid) {
+          const months = ['Este Mês', 'Próx. Mês', 'A 2 Meses'];
+          calGrid.innerHTML = months.map((mName, offset) => {
+            const isAvail = checkAvailability(t.id, offset);
+            if (isAvail) {
+              return `
+                <div class="bg-green-500/5 border border-green-500/20 rounded-xl p-3 flex flex-col items-center justify-center text-center">
+                  <i class="fa-solid fa-calendar-check text-green-400 text-lg mb-1"></i>
+                  <span class="text-white font-bold text-[11px] uppercase tracking-wider">${mName}</span>
+                  <span class="text-green-400 text-[9px] mt-0.5">Livre</span>
+                </div>
+              `;
+            } else {
+              return `
+                <div class="bg-red-500/5 border border-red-500/10 rounded-xl p-3 flex flex-col items-center justify-center text-center opacity-60">
+                  <i class="fa-solid fa-calendar-xmark text-red-400/50 text-lg mb-1"></i>
+                  <span class="text-gray-400 font-bold text-[11px] uppercase tracking-wider">${mName}</span>
+                  <span class="text-red-400 text-[9px] mt-0.5">Ocupado</span>
+                </div>
+              `;
+            }
+          }).join('');
         }
 
         // Avatar (using assets folder)
@@ -2112,13 +2163,12 @@
                    ${(t.categorias && t.categorias[0] && t.categorias[0] !== 'nan') ? t.categorias[0] : (isAlumni ? 'Alumni LDS' : 'Geral')}
                  </span>
                  ${!isAlumni ? (() => {
-                    const modes = [
-                      { label: 'Alta', color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20', icon: 'fa-calendar-check' },
-                      { label: 'Limitada', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20', icon: 'fa-calendar-minus' },
-                      { label: 'Cheia', color: 'text-red-400', bg: 'bg-red-500/10 border-red-500/20', icon: 'fa-calendar-xmark' }
-                    ];
-                    const av = modes[(t.id * 13) % 3];
-                    return `<span class="text-[9px] uppercase font-bold tracking-widest ${av.color} ${av.bg} border px-2 py-1 rounded shadow-lg flex items-center gap-1 shrink-0"><i class="fa-solid ${av.icon}"></i> ${av.label}</span>`;
+                    const isAvailNow = checkAvailability(t.id, 0);
+                    if (isAvailNow) {
+                      return `<span class="text-[9px] uppercase font-bold tracking-widest text-green-400 bg-green-500/10 border-green-500/20 border px-2 py-1 rounded shadow-lg flex items-center gap-1 shrink-0"><i class="fa-solid fa-calendar-check"></i> Livre</span>`;
+                    } else {
+                      return `<span class="text-[9px] uppercase font-bold tracking-widest text-red-400 bg-red-500/10 border-red-500/20 border px-2 py-1 rounded shadow-lg flex items-center gap-1 shrink-0"><i class="fa-solid fa-calendar-xmark"></i> Ocupado</span>`;
+                    }
                  })() : ''}
                </div>
 
@@ -2158,8 +2208,18 @@
       category: 'all',
       activeFilter: null, // innovation, new, corporate, english
       statusFilter: 'active', // 'active' (LDS), 'inactive' (Alumni), or 'all'
-      adminMode: localStorage.getItem('lds_admin_mode') === 'true'
+      adminMode: localStorage.getItem('lds_admin_mode') === 'true',
+      month: 'all' // Calendar Mock Filter
     };
+
+    // B2B Feature: Calendar Mock Logic
+    // Returns true if available, false if busy for the given month offset (0=current, 1=next, 2=next+1)
+    function checkAvailability(trainerId, monthOffset) {
+      // Deterministic math based on ID to simulate calendar bookings
+      const seed = trainerId * 13 + (parseInt(monthOffset) * 7);
+      // ~70% chance of being available
+      return (seed % 100) < 70;
+    }
 
     // Global Shortlist Set (moved here for scope)
     const shortlist = new Set();
@@ -2407,7 +2467,13 @@
           }
         }
 
-        // 3. Quick Filter (Flags/Badges)
+        // 3. Calendar Filter
+        let matchesMonth = true;
+        if (appState.month !== 'all') {
+          matchesMonth = checkAvailability(t.id, appState.month);
+        }
+
+        // 4. Quick Filter (Flags/Badges)
         let matchesFilter = true;
         if (appState.activeFilter) {
           const f = t.flags || {};
@@ -2429,7 +2495,7 @@
           }
         }
 
-        return matchesSearch && matchesCategory && matchesFilter;
+        return matchesSearch && matchesCategory && matchesMonth && matchesFilter;
       });
 
       // Sort: Priority to Photos then Alphabetical
@@ -2487,7 +2553,15 @@
         updateUI();
       });
     }
-
+    
+    // B2B Calendar Listener
+    const monthFilter = document.getElementById('monthFilter');
+    if (monthFilter) {
+      monthFilter.addEventListener('change', e => {
+        appState.month = e.target.value;
+        updateUI();
+      });
+    }
 
     // --- ORACLE LOGIC ---
     let oracleState = { goal: '', context: '' };
