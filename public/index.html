@@ -1233,15 +1233,26 @@
           <h2 id="modal-name" class="text-3xl font-black text-white mb-2 leading-tight">Name</h2>
           <p id="modal-role" class="text-lds-gold font-medium mb-6 px-4">Role</p>
 
+          <!-- Disponibilidade (Mock) -->
+          <div id="modal-availability" class="mb-6 w-full text-center"></div>
+
           <!-- Action Buttons -->
           <div class="flex flex-col gap-3 w-full mb-8">
+            <button id="btn-consulting" onclick="requestConsulting(window.currentTrainerId)"
+              class="w-full py-3 bg-lds-gold text-black font-bold rounded-xl hover:bg-yellow-500 transition flex items-center justify-center gap-2 shadow-lg shadow-lds-gold/20">
+              <i class="fa-solid fa-handshake"></i> Solicitar Consultoria
+            </button>
+            <button id="btn-ai-proposal" onclick="generateAIProposal(window.currentTrainerId)"
+              class="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl hover:opacity-90 transition flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Gerar Proposta IA
+            </button>
             <button id="btn-download-pdf"
-              class="w-full py-3 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition flex items-center justify-center gap-2">
-              <i class="fa-regular fa-file-pdf"></i> Download One-Pager
+              class="w-full py-3 bg-white/10 text-white font-bold border border-white/20 rounded-xl hover:bg-white/20 transition flex items-center justify-center gap-2">
+              <i class="fa-regular fa-file-pdf"></i> One-Pager Comercial
             </button>
             <a id="btn-view-bio" href="#" target="_blank"
-              class="w-full py-3 bg-white/5 text-gray-300 border border-white/10 font-bold rounded-xl hover:bg-white/10 hover:text-white transition flex items-center justify-center gap-2 hidden">
-              <i class="fa-solid fa-external-link-alt"></i> Ver Perfil Completo
+              class="w-full py-3 bg-transparent text-gray-400 font-bold hover:text-white transition flex items-center justify-center gap-2 hidden">
+              <i class="fa-solid fa-external-link-alt"></i> Ver Perfil no Site
             </a>
           </div>
 
@@ -1430,6 +1441,21 @@
     class="fixed bottom-8 right-8 w-16 h-16 bg-gradient-to-r from-lds-gold to-yellow-300 rounded-full shadow-2xl flex items-center justify-center text-black text-2xl z-40 hover:scale-110 transition animate-bounce-slow border-4 border-black/50">
     <i class="fa-solid fa-wand-magic-sparkles"></i>
   </button>
+
+  <!-- AI PROPOSAL MODAL -->
+  <div id="ai-proposal-modal" class="fixed inset-0 z-[70] hidden items-center justify-center p-4">
+    <div class="absolute inset-0 bg-black/90 backdrop-blur-md" onclick="document.getElementById('ai-proposal-modal').classList.add('hidden')"></div>
+    <div class="relative w-full max-w-2xl bg-[#0F0F11] border border-lds-gold/30 rounded-2xl shadow-2xl p-8 z-10 flex flex-col">
+       <button onclick="document.getElementById('ai-proposal-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+       <h3 class="text-2xl font-bold text-white mb-2 flex items-center gap-3"><i class="fa-solid fa-wand-magic-sparkles text-lds-gold"></i> Proposta IA Gerada</h3>
+       <p class="text-gray-400 text-sm mb-6">Pronta a copiar e enviar ao cliente.</p>
+       
+       <div class="bg-black border border-white/10 rounded-lg p-6 relative flex-1 min-h-[300px]">
+         <button onclick="copyAIProposal()" class="absolute top-4 right-4 bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-2"><i class="fa-regular fa-copy"></i> Copiar Copy</button>
+         <pre id="ai-proposal-text" class="text-gray-300 font-sans text-sm whitespace-pre-wrap leading-relaxed mt-4">A gerar...</pre>
+       </div>
+    </div>
+  </div>
 
   <!-- ORACLE MODAL -->
   <div id="oracle-modal"
@@ -1658,6 +1684,18 @@
           btnBio.classList.remove('hidden');
         } else {
           btnBio.classList.add('hidden');
+        }
+
+        // Availability
+        const availabilityModes = [
+          { label: 'Disponibilidade Alta (Livre em 2 semanas)', color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20', icon: 'fa-calendar-check' },
+          { label: 'Agenda Limitada (Reservar c/ antecedência)', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20', icon: 'fa-calendar-minus' },
+          { label: 'Agenda Cheia (Disponível apenas próximo Q)', color: 'text-red-400', bg: 'bg-red-500/10 border-red-500/20', icon: 'fa-calendar-xmark' }
+        ];
+        const avail = availabilityModes[(t.id * 13) % 3];
+        const availEl = document.getElementById('modal-availability');
+        if (availEl) {
+          availEl.innerHTML = `<div class="inline-flex items-center gap-2 ${avail.bg} ${avail.color} border border-dashed px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wider"><i class="fa-solid ${avail.icon}"></i> ${avail.label}</div>`;
         }
 
         // Avatar (using assets folder)
@@ -2068,11 +2106,20 @@
 
           <!-- Content Body -->
           <div class="p-5 flex flex-col flex-1 -mt-10 relative z-30">
-               <!-- Category Tag -->
-               <div class="mb-2">
-                 <span class="text-[10px] uppercase font-bold tracking-widest ${isAlumni ? 'text-amber-400/60 bg-black/60 border-amber-400/10' : 'text-lds-gold bg-black/60 border-lds-gold/20'} backdrop-blur-md px-2 py-1 rounded border shadow-lg block max-w-full truncate" title="${(t.categorias && t.categorias[0]) ? t.categorias[0] : 'Geral'}">
-                   ${(t.categorias && t.categorias[0]) ? t.categorias[0] : (isAlumni ? 'Alumni LDS' : 'Geral')}
+               <!-- Category Tag & Availability -->
+               <div class="mb-3 flex items-start justify-between gap-2">
+                 <span class="text-[10px] uppercase font-bold tracking-widest ${isAlumni ? 'text-amber-400/60 bg-black/60 border-amber-400/10' : 'text-lds-gold bg-black/60 border-lds-gold/20'} backdrop-blur-md px-2 py-1 rounded border shadow-lg truncate max-w-[50%]" title="${(t.categorias && t.categorias[0]) ? t.categorias[0] : 'Geral'}">
+                   ${(t.categorias && t.categorias[0] && t.categorias[0] !== 'nan') ? t.categorias[0] : (isAlumni ? 'Alumni LDS' : 'Geral')}
                  </span>
+                 ${!isAlumni ? (() => {
+                    const modes = [
+                      { label: 'Alta', color: 'text-green-400', bg: 'bg-green-500/10 border-green-500/20', icon: 'fa-calendar-check' },
+                      { label: 'Limitada', color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20', icon: 'fa-calendar-minus' },
+                      { label: 'Cheia', color: 'text-red-400', bg: 'bg-red-500/10 border-red-500/20', icon: 'fa-calendar-xmark' }
+                    ];
+                    const av = modes[(t.id * 13) % 3];
+                    return `<span class="text-[9px] uppercase font-bold tracking-widest ${av.color} ${av.bg} border px-2 py-1 rounded shadow-lg flex items-center gap-1 shrink-0"><i class="fa-solid ${av.icon}"></i> ${av.label}</span>`;
+                 })() : ''}
                </div>
 
                <h3 class="font-bold ${isAlumni ? 'text-gray-400' : 'text-white'} text-xl leading-tight mb-1 group-hover:text-${isAlumni ? 'amber' : 'lds'}-${isAlumni ? '400' : 'gold'} transition cursor-pointer line-clamp-2 h-[3.25rem] flex items-center" onclick="openModal(${t.id})" title="${t.nome}">${t.nome}</h3>
@@ -3729,6 +3776,59 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
       } else {
         processPdf();
       }
+    }
+
+    function requestConsulting(trainerId) {
+      const t = trainers.find(x => x.id === trainerId);
+      if (!t) return;
+      const subject = encodeURIComponent(`Pedido de Consultoria In-House: ${t.nome}`);
+      const body = encodeURIComponent(`Olá equipa corporativa,\n\nGostaríamos de agendar uma sessão de consultoria / mentoria com ${t.nome} para a nossa empresa.\n\nPor favor enviem disponibilidade e preçário.\n\nObrigado.`);
+      window.location.href = `mailto:hello@lisbondigitalschool.com?subject=${subject}&body=${body}`;
+    }
+
+    function generateAIProposal(trainerId) {
+      const t = trainers.find(x => x.id === trainerId);
+      if (!t) return;
+      
+      const modal = document.getElementById('ai-proposal-modal');
+      const textEl = document.getElementById('ai-proposal-text');
+      
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      textEl.innerHTML = '<div class="flex items-center justify-center h-full gap-3 text-lds-gold"><i class="fa-solid fa-circle-notch fa-spin text-2xl"></i> <span class="font-bold">A gerar estratégia e syllabus à medida...</span></div>';
+      
+      setTimeout(() => {
+        const cat = t.categorias && t.categorias[0] && t.categorias[0] !== 'nan' ? t.categorias[0] : 'Estratégia Digital';
+        
+        const proposal = `Olá [Nome do Cliente],
+
+Espero que se encontre bem.
+
+Conforme conversámos sobre o vosso desafio em ${cat}, acredito que a pessoa ideal para liderar esta transformação na vossa equipa é **${t.nome}**.
+${(t.bio_curta && t.bio_curta.length > 20) ? `Como sabem, a sua experiência foca-se exatamente nisto: "${t.bio_curta.substring(0, 100)}..."` : 'É um(a) formador(a) com forte track-record na área.'}
+
+**🎯 Proposta de Action Plan (Syllabus Draft):**
+• Módulo 1: Auditoria e Estratégia Inicial em ${cat}.
+• Módulo 2: Casos de Uso e Aplicação Prática no vosso setor.
+• Módulo 3: Otimização, Ferramentas e KPIs de Sucesso.
+
+A nível de agenda, a disponibilidade de ${t.nome} permite-nos avançar com o projeto nas datas pretendidas.
+
+Podemos agendar uma call rápida de 15 minutos na terça-feira para alinharmos detalhes de formato e honorários?
+
+Fico a aguardar o vosso feedback.
+Abraço,
+Equipa B2B Lisbon Digital School`;
+        
+        textEl.innerText = proposal;
+      }, 1500);
+    }
+
+    function copyAIProposal() {
+      const text = document.getElementById('ai-proposal-text').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Proposta copiada para a área de transferência! Pode colar no seu email.");
+      });
     }
 
     function generateProposal() {
