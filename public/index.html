@@ -1558,7 +1558,11 @@
             <!-- JS Injected -->
           </div>
 
-          <button onclick="resetOracle()" class="mt-8 text-sm text-gray-500 hover:text-white underline">Começar de
+          <button onclick="toggleOracle(); generateAIProposal(oracleMatchId, true)" class="mt-6 w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl hover:opacity-90 transition flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Gerar Proposta Comercial para Cliente
+          </button>
+
+          <button onclick="resetOracle()" class="mt-6 text-sm text-gray-500 hover:text-white underline">Começar de
             novo</button>
         </div>
 
@@ -2602,6 +2606,8 @@
         inputEl.focus();
         return;
       }
+      
+      oracleState.context = query;
 
       // Transition UI to Loading
       document.getElementById('oracle-step-1').classList.add('hidden');
@@ -3860,7 +3866,7 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
       window.location.href = `mailto:hello@lisbondigitalschool.com?subject=${subject}&body=${body}`;
     }
 
-    function generateAIProposal(trainerId) {
+    function generateAIProposal(trainerId, useOracleContext = false) {
       const t = trainers.find(x => x.id === trainerId);
       if (!t) return;
       
@@ -3873,22 +3879,31 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
       
       setTimeout(() => {
         const cat = t.categorias && t.categorias[0] && t.categorias[0] !== 'nan' ? t.categorias[0] : 'Estratégia Digital';
+        let contextSnippet = `Conforme conversámos sobre o vosso desafio em ${cat},`;
+        let syllabusFocus = `em ${cat}`;
+        
+        if (useOracleContext && oracleState.context) {
+           // We extract a small slice of the context just to show the dynamic merge
+           const clientNeed = oracleState.context.substring(0, 70).toLowerCase();
+           contextSnippet = `Em resposta ao vosso pedido específico ("${clientNeed}..."), fizemos um match na nossa base de talentos e`;
+           syllabusFocus = `direcionado para o vosso desafio`;
+        }
         
         const proposal = `Olá [Nome do Cliente],
 
 Espero que se encontre bem.
 
-Conforme conversámos sobre o vosso desafio em ${cat}, acredito que a pessoa ideal para liderar esta transformação na vossa equipa é **${t.nome}**.
-${(t.bio_curta && t.bio_curta.length > 20) ? `Como sabem, a sua experiência foca-se exatamente nisto: "${t.bio_curta.substring(0, 100)}..."` : 'É um(a) formador(a) com forte track-record na área.'}
+${contextSnippet} acredito que a pessoa ideal para liderar esta formação / consultoria na vossa equipa é **${t.nome}**.
+${(t.bio_curta && t.bio_curta.length > 20) ? `Como sabem, a sua experiência encaixa perfeitamente naquilo que procuram: "${t.bio_curta.substring(0, 100)}..."` : 'É um(a) formador(a) com forte track-record comprovado na área exigida.'}
 
 **🎯 Proposta de Action Plan (Syllabus Draft):**
-• Módulo 1: Auditoria e Estratégia Inicial em ${cat}.
-• Módulo 2: Casos de Uso e Aplicação Prática no vosso setor.
-• Módulo 3: Otimização, Ferramentas e KPIs de Sucesso.
+• Módulo 1: Auditoria, Fundamentos e Estratégia Inicial ${syllabusFocus}.
+• Módulo 2: Casos de Uso Reais e Aplicação Prática no vosso setor.
+• Módulo 3: Ferramentas, Otimização e Medição de KPIs de Sucesso.
 
-A nível de agenda, a disponibilidade de ${t.nome} permite-nos avançar com o projeto nas datas pretendidas.
+A nível de agenda, a disponibilidade de ${t.nome} permite-nos arrancar com o projeto nas datas pretendidas.
 
-Podemos agendar uma call rápida de 15 minutos na terça-feira para alinharmos detalhes de formato e honorários?
+Podemos agendar uma call rápida de 15 minutos na terça-feira para alinharmos formato, honorários e o modelo de entrega?
 
 Fico a aguardar o vosso feedback.
 Abraço,
