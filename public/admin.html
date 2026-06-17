@@ -1589,6 +1589,9 @@ function handleExcelUpload(e) {
       return;
     }
 
+    let newCount = 0;
+    let updateCount = 0;
+
     parsedExcelData = json.map((row, index) => {
       let cats = [];
       if(row.categorias) {
@@ -1599,8 +1602,38 @@ function handleExcelUpload(e) {
       if(row.corporate) flagsObj.corporate = (row.corporate === 'true' || row.corporate === '1');
       if(row.ingles) flagsObj.ingles = (row.ingles === 'true' || row.ingles === '1');
 
+      // Smart Deduplication Logic (Name-based fallback)
+      let finalId = row.id ? parseInt(row.id) : null;
+      let isUpdate = false;
+
+      if (!finalId && row.nome) {
+        // Procura se já existe um formador com este nome exato na DB local
+        const existing = window.trainers.find(t => t.nome && t.nome.toLowerCase() === row.nome.toLowerCase().trim());
+        if (existing) {
+          finalId = existing.id; // Herda o ID antigo para fazer OVERWRITE no Supabase
+          isUpdate = true;
+          updateCount++;
+        } else {
+          finalId = Date.now() + index; // Gera um ID novo
+          newCount++;
+        }
+      } else if (finalId) {
+         // Se já trouxe ID, verifica se existe
+         const existing = window.trainers.find(t => t.id === finalId);
+         if(existing) {
+            isUpdate = true;
+            updateCount++;
+         } else {
+            newCount++;
+         }
+      } else {
+        finalId = Date.now() + index;
+        newCount++;
+      }
+
       return {
-        id: row.id ? parseInt(row.id) : (Date.now() + index),
+        _isUpdate: isUpdate,
+        id: finalId,
         nome: row.nome || 'Sem Nome',
         cargo: row.cargo || '',
         bio_curta: row.bio_curta || '',
@@ -1613,14 +1646,18 @@ function handleExcelUpload(e) {
     });
 
     document.getElementById('import-preview').style.display = 'block';
-    document.getElementById('import-count').textContent = parsedExcelData.length;
+    document.getElementById('import-count').innerHTML = `${parsedExcelData.length} lidos <span style="color:var(--text3); font-weight:normal;">(${newCount} novos, ${updateCount} atualizações)</span>`;
     
     let logHTML = '';
     parsedExcelData.forEach(t => {
+      const icon = t._isUpdate 
+        ? '<i class="fa-solid fa-arrows-rotate" style="color: var(--amber); margin-right: 6px;"></i> <span style="color:var(--amber); font-weight:700; font-size:10px; margin-right:4px;">[ATUALIZAR]</span>' 
+        : '<i class="fa-solid fa-plus" style="color: var(--green); margin-right: 6px;"></i> <span style="color:var(--green); font-weight:700; font-size:10px; margin-right:4px;">[NOVO]</span>';
+        
       logHTML += `<div style="font-size:12px; padding: 6px 0; border-bottom: 1px solid var(--border); color: var(--text2);">
-        <i class="fa-solid fa-check" style="color: var(--green); margin-right: 6px;"></i>
-        <strong style="color: white;">${escHtml(t.nome)}</strong> - ${escHtml(t.cargo)}
+        ${icon} <strong style="color: white;">${escHtml(t.nome)}</strong> - ${escHtml(t.cargo)}
       </div>`;
+      delete t._isUpdate; // Clean internal flag before sending to Supabase
     });
     document.getElementById('import-log').innerHTML = logHTML;
   };
