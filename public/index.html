@@ -287,7 +287,7 @@
             class="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 transition rounded-md">
             <span class="w-5 h-5 rounded bg-gray-500/10 flex items-center justify-center text-gray-400 text-xs"><i
                 class="fa-solid fa-layer-group"></i></span>
-            Laboratório
+            Squad Builder
           </button>
           <button onclick="toggleBusinessMatcher()" id="btn-business-matcher"
             class="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 transition rounded-md">
@@ -522,30 +522,40 @@
           <div class="border-b border-lds-border p-4 flex justify-between items-center bg-lds-sidebar">
             <div class="flex items-center gap-3">
               <div class="w-8 h-8 bg-blue-600/20 text-blue-400 rounded-lg flex items-center justify-center">
-                <i class="fa-solid fa-flask-vial"></i>
+                <i class="fa-solid fa-users-rays"></i>
               </div>
               <div>
-                <h2 class="text-base font-bold text-white leading-none">Laboratório de Talentos</h2>
-                <p class="text-[10px] text-gray-500 mt-0.5 uppercase tracking-widest">Workspace de Análise e Comparação
+                <h2 class="text-base font-bold text-white leading-none">Squad Builder</h2>
+                <p class="text-[10px] text-gray-500 mt-0.5 uppercase tracking-widest">Workspace de Criação de Propostas B2B
                 </p>
               </div>
             </div>
             <div class="flex gap-2 items-center">
               <!-- Stats -->
-              <div class="hidden sm:flex gap-4 mr-4 text-center">
+              <div class="hidden sm:flex gap-4 mr-4 text-center items-center">
                 <div>
                   <p class="text-lds-gold font-bold text-sm leading-none" id="lab-selected-count">0</p>
-                  <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-0.5">Selecionados</p>
+                  <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-0.5">No Squad</p>
                 </div>
-                <div class="w-px bg-lds-border"></div>
+                <div class="w-px h-6 bg-lds-border"></div>
                 <div>
                   <p class="text-blue-400 font-bold text-sm leading-none" id="lab-overlap-count">—</p>
-                  <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-0.5">Sobreposição</p>
+                  <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-0.5">Match</p>
                 </div>
+                
+                <!-- Admin Only Budget Simulator -->
+                <div id="squad-budget-container" class="hidden flex items-center gap-4 ml-2">
+                  <div class="w-px h-6 bg-lds-border"></div>
+                  <div>
+                    <p class="text-green-400 font-bold text-sm leading-none" id="squad-total-budget">€0</p>
+                    <p class="text-[9px] text-gray-500 uppercase tracking-widest mt-0.5">Orçamento Base</p>
+                  </div>
+                </div>
+
               </div>
               <button onclick="exportComparatorPDF()"
                 class="px-3 py-1.5 bg-lds-gold/10 text-lds-gold border border-lds-gold/30 text-xs font-bold rounded hover:bg-lds-gold hover:text-black transition">
-                <i class="fa-solid fa-file-arrow-down mr-1"></i> Gerar Proposta
+                <i class="fa-solid fa-file-pdf mr-1"></i> Exportar Client Pitch Deck
               </button>
               <button onclick="toggleComparatorView()"
                 class="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-white rounded hover:bg-white/5">
@@ -584,8 +594,8 @@
                 class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-2">
                 <i class="fa-solid fa-users-viewfinder text-2xl text-gray-600"></i>
               </div>
-              <h3 class="text-white font-bold text-lg">Workspace vazio</h3>
-              <p class="text-gray-500 text-sm max-w-xs">Adicione formadores ao laboratório clicando no botão <span
+              <h3 class="text-white font-bold text-lg">Squad vazio</h3>
+              <p class="text-gray-500 text-sm max-w-xs">Adicione formadores ao Squad B2B clicando no botão <span
                   class="text-lds-gold font-bold">+</span> em qualquer cartão da galeria.</p>
               <button onclick="toggleComparatorView()"
                 class="mt-2 px-5 py-2 bg-lds-gold/10 text-lds-gold border border-lds-gold/30 rounded-lg text-sm font-bold hover:bg-lds-gold hover:text-black transition">
@@ -3161,7 +3171,7 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
         const searchInput = document.getElementById('searchInput');
         if (searchInput) {
           searchInput.disabled = true; // Comparator handles its own search
-          searchInput.placeholder = "Laboratório Ativo...";
+          searchInput.placeholder = "Squad Builder Ativo...";
         }
 
       } else {
@@ -3327,6 +3337,17 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
                             </div>
                             <h3 class="font-bold text-white line-clamp-1">${t.nome}</h3>
                             <p class="text-xs text-gray-400 mt-1 line-clamp-1">${t.cargo}</p>
+
+                            <!-- Role Selection -->
+                            <div class="mt-3 relative w-full">
+                              <select class="w-full bg-black/40 border border-white/10 rounded px-2 py-1.5 text-xs text-lds-gold focus:outline-none focus:border-lds-gold/50 text-center appearance-none cursor-pointer hover:bg-white/5 transition">
+                                <option value="" disabled selected>Atribuir Papel...</option>
+                                <option value="keynote">🎤 Keynote Speaker</option>
+                                <option value="facilitador">🛠️ Facilitador Técnico</option>
+                                <option value="mentor">🤝 Mentor</option>
+                              </select>
+                              <i class="fa-solid fa-chevron-down absolute right-3 top-2.5 text-[10px] text-gray-500 pointer-events-none"></i>
+                            </div>
                           </div>
 
                           <div class="p-5 flex-1 space-y-6">
@@ -3367,9 +3388,40 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
                               </div>
                             </div>
                           </div>
-                        </div >
+        </div >
         `;
       }).join('');
+
+      // Calculate Budget (if adminMode)
+      const budgetContainer = document.getElementById('squad-budget-container');
+      if (budgetContainer) {
+        if (appState && appState.adminMode) {
+          budgetContainer.classList.remove('hidden');
+          const totalBudgetEl = document.getElementById('squad-total-budget');
+          
+          let rateMap = {
+            '€ (Entry Level)': 1,
+            '€€ (Standard)': 2,
+            '€€€ (Premium)': 3,
+            '€€€€ (Elite)': 4
+          };
+          
+          let totalWeight = 0;
+          selected.forEach(t => {
+             const r = t.rate_sugerido || '€€ (Standard)';
+             totalWeight += rateMap[r] || 2;
+          });
+          
+          let budgetSymbols = '€';
+          if (totalWeight > selected.length && totalWeight <= selected.length * 1.5) budgetSymbols = '€€';
+          else if (totalWeight > selected.length * 1.5 && totalWeight <= selected.length * 2.5) budgetSymbols = '€€€';
+          else if (totalWeight > selected.length * 2.5) budgetSymbols = '€€€€';
+          
+          if (totalBudgetEl) totalBudgetEl.textContent = budgetSymbols;
+        } else {
+          budgetContainer.classList.add('hidden');
+        }
+      }
     }
 
     /* REMOVE OLD COMPARATOR LOGIC VIA OVERRIDE */
@@ -4950,61 +5002,52 @@ Equipa B2B Lisbon Digital School`;
     }
 
     function runAIConsultant() {
-      const topicInput = document.getElementById('consult-topic');
-      const topic = topicInput.value.toLowerCase();
-      // Debug
-      console.log("Running AI for:", topic);
-
-      if (topic.length < 3) {
-        alert("Por favor descreva o tópico com mais detalhe.");
+      const selected = trainers.filter(t => shortlist.has(t.id));
+      const outputArea = document.getElementById('ai-consultant-output');
+      
+      if (selected.length === 0) {
+        alert("Adicione formadores ao Squad B2B clicando no botão + nos cartões primeiro!");
         return;
       }
-
-      // Reuse logic from Business Matcher/Magic Matcher
-      // Simple keyword scoring
-      const scores = trainers.map(t => {
-        let score = 0;
-        const corpus = (t.cargo + " " + (t.categorias || []).join(" ") + " " + t.bio_curta + " " + t.bio_completa).toLowerCase();
-
-        // Exact match boost
-        if (corpus.includes(topic)) score += 10;
-
-        // Partial word match
-        const words = topic.split(' ');
-        words.forEach(w => {
-          if (w.length > 2 && corpus.includes(w)) score += 2;
-        });
-
-        // Penalize if no match
-        if (score === 0) score = -1;
-
-        return { id: t.id, score };
+      
+      // Calculate missing elements or strong points
+      let techCount = 0;
+      let commsCount = 0;
+      let leaderCount = 0;
+      
+      selected.forEach(t => {
+         const corpus = ((t.cargo || "") + " " + (t.categorias || []).join(" ") + " " + (t.bio_curta || "")).toLowerCase();
+         if (corpus.includes('tech') || corpus.includes('data') || corpus.includes('ai') || corpus.includes('desenvolvimento') || corpus.includes('digital')) techCount++;
+         if (corpus.includes('comunicação') || corpus.includes('speaker') || corpus.includes('storytelling') || corpus.includes('apresentação')) commsCount++;
+         if (corpus.includes('liderança') || corpus.includes('director') || corpus.includes('head') || corpus.includes('manager') || corpus.includes('ceo')) leaderCount++;
       });
-
-      // Top Matches
-      const matches = scores.filter(s => s.score > 0).sort((a, b) => b.score - a.score).slice(0, 5);
-
-      if (matches.length === 0) {
-        alert("Não encontrámos formadores para este tópico. Tente termos como 'Liderança', 'AI', 'Vendas'.");
-        return;
+      
+      let message = `<div class="font-bold text-blue-400 mb-2"><i class="fa-solid fa-wand-magic-sparkles text-yellow-400 mr-2"></i> Gap Analysis do Squad B2B:</div>`;
+      
+      if (techCount > 0 && commsCount > 0 && leaderCount > 0) {
+         message += `<p class="text-gray-300">✅ <strong>Squad Perfeito!</strong> Tem especialistas técnicos, bons comunicadores e perfis experientes de liderança. Excelente proposta.</p>`;
+      } else if (techCount > 0 && leaderCount > 0 && commsCount === 0) {
+         message += `<p class="text-gray-300">⚠️ <strong>Aviso Soft Skills:</strong> O Squad é forte técnica e estrategicamente, mas falta um perfil dedicado a Soft Skills ou Comunicação. Considere adicionar um facilitador com essas valências.</p>`;
+      } else if (techCount === 0) {
+         message += `<p class="text-gray-300">⚠️ <strong>Aviso Digital:</strong> Nenhum formador selecionado tem um perfil marcadamente Técnico/Inovação. Se o programa B2B envolver transformação digital, sugerimos procurar formadores com a tag <em>Innovation Lab</em>.</p>`;
+      } else if (leaderCount === 0) {
+         message += `<p class="text-gray-300">⚠️ <strong>Aviso Liderança:</strong> O Squad carece de um perfil Sénior/Liderança. Para programas High-Ticket, considere adicionar alguém com histórico de gestão (ex: C-Level ou Directors).</p>`;
+      } else {
+         message += `<p class="text-gray-300">O seu Squad está em construção. Lembre-se de alinhar as valências técnicas com os objetivos específicos do programa do cliente.</p>`;
       }
-
-      // Update Shortlist
-      shortlist.clear();
-      matches.forEach(m => shortlist.add(m.id));
-
-      // Render
-      renderComparator();
+      
+      outputArea.innerHTML = message;
+      outputArea.classList.remove('hidden');
 
       // Feedback Animation
       const btn = document.querySelector('#comparator-view button[onclick="runAIConsultant()"]');
       if (btn) {
-        const original = btn.innerText;
-        btn.innerText = "Feito!";
-        btn.classList.add('bg-green-600');
+        const original = btn.innerHTML;
+        btn.innerHTML = `<i class="fa-solid fa-check"></i> Feito`;
+        btn.classList.add('bg-green-600', 'border-green-500');
         setTimeout(() => {
-          btn.innerText = original;
-          btn.classList.remove('bg-green-600');
+          btn.innerHTML = original;
+          btn.classList.remove('bg-green-600', 'border-green-500');
         }, 2000);
       }
     }
