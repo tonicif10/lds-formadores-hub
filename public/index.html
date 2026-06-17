@@ -2890,7 +2890,7 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
         // Close others
         if (typeof comparatorActive !== 'undefined') {
           comparatorActive = false;
-          const cBtn = document.getElementById('btn-comparator');
+          const cBtn = document.getElementById('btn-comparator-nav');
           if (cBtn) cBtn.classList.remove('bg-white/10', 'text-white');
           document.getElementById('comparator-view').classList.add('hidden');
         }
@@ -3144,7 +3144,7 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
       const matcherView = document.getElementById('business-matcher-view');
       const grid = document.getElementById('main-trainers-view');
 
-      const btn = document.getElementById('btn-comparator');
+      const btn = document.getElementById('btn-comparator-nav');
 
       if (comparatorActive) {
         // Show Comparator
@@ -3160,7 +3160,7 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
         if (dgertV) dgertV.classList.add('hidden');
 
         // Styling
-        btn.classList.add('bg-white/10', 'text-white');
+        if (btn) btn.classList.add('bg-white/10', 'text-white');
         renderComparator();
 
         // Reset Business Matcher
@@ -3184,7 +3184,7 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
         updateUI();
 
         // Reset Styling
-        btn.classList.remove('bg-white/10', 'text-white');
+        if (btn) btn.classList.remove('bg-white/10', 'text-white');
         const searchInput = document.getElementById('searchInput');
         if (searchInput) {
           searchInput.disabled = false;
@@ -3684,7 +3684,7 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
       matcherActive = false;
       comparatorActive = false;
       const bmBtn = document.getElementById('btn-business-matcher');
-      const cmpBtn = document.getElementById('btn-comparator');
+      const cmpBtn = document.getElementById('btn-comparator-nav');
       if (bmBtn) bmBtn.classList.remove('bg-white/10', 'text-white');
       if (cmpBtn) cmpBtn.classList.remove('bg-white/10', 'text-white');
 
@@ -3716,7 +3716,7 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
       matcherActive = false;
       comparatorActive = false;
       const bmBtn = document.getElementById('btn-business-matcher');
-      const cmpBtn = document.getElementById('btn-comparator');
+      const cmpBtn = document.getElementById('btn-comparator-nav');
       const dgertBtn = document.getElementById('btn-dgert-admin');
       
       if (bmBtn) bmBtn.classList.remove('bg-white/10', 'text-white');
