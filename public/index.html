@@ -292,8 +292,8 @@
           <button onclick="toggleBusinessMatcher()" id="btn-business-matcher"
             class="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 transition rounded-md">
             <span class="w-5 h-5 rounded bg-yellow-500/10 flex items-center justify-center text-yellow-400 text-xs"><i
-                class="fa-solid fa-briefcase"></i></span>
-            Business Matcher
+                class="fa-solid fa-satellite-dish"></i></span>
+            B2B Radar
           </button>
           <button onclick="toggleAnalytics()" id="btn-analytics"
             class="w-full flex items-center gap-3 px-3 py-2 text-sm text-gray-400 hover:text-white hover:bg-white/5 transition rounded-md">
@@ -400,9 +400,8 @@
                 <i class="fa-solid fa-briefcase text-sm"></i>
               </div>
               <div>
-                <h2 class="text-base font-bold text-white leading-none">Client Match Engine</h2>
-                <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-0.5">Encontre os melhores formadores
-                  para cada cliente</p>
+                <h2 class="text-base font-bold text-white leading-none">Corporate Fit Engine</h2>
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-0.5">Encontre os talentos com maior % de compatibilidade B2B</p>
               </div>
             </div>
             <button onclick="toggleBusinessMatcher()"
@@ -478,9 +477,9 @@
                 </h3>
                 <p class="text-xs text-gray-500 mt-0.5" id="bm-result-label"></p>
               </div>
-              <button onclick="generateProposalFromMatcher()"
-                class="px-4 py-2 bg-lds-gold/10 text-lds-gold border border-lds-gold/30 rounded-lg text-xs font-bold hover:bg-lds-gold hover:text-black transition flex items-center gap-2">
-                <i class="fa-solid fa-file-pdf"></i> Gerar Proposta PDF
+              <button onclick="sendToSquadBuilder()"
+                class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold transition flex items-center gap-2">
+                <i class="fa-solid fa-paper-plane"></i> Enviar Top 3 para Squad Builder
               </button>
             </div>
             <div class="p-6">
@@ -2970,20 +2969,24 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
         const timelineStr = t.timeline ? JSON.stringify(t.timeline).toLowerCase() : '';
         const fullText = (t.bio_completa + ' ' + t.bio_curta + ' ' + timelineStr + ' ' + (t.categorias || []).join(' ')).toLowerCase();
 
-        // 1. Direct Brand Match (50 pts)
-        if (client && timelineStr.includes(client)) {
-          score += 50;
-          reasons.push(`Experiência direta com <b>${clientInput.value.trim()}</b>`);
+        // 1. Direct Brand Match (40 pts)
+        if (client) {
+           if (timelineStr.includes(client)) {
+             score += 40;
+             reasons.push(`Trabalhou diretamente com <b>${clientInput.value.trim()}</b>`);
+           } else if (fullText.includes(client)) {
+             score += 15;
+             reasons.push(`Mencionou <b>${clientInput.value.trim()}</b> no perfil`);
+           }
         }
-        if (client && fullText.includes(client)) score += 10;
 
-        // 2. Sector keyword match (30 pts)
+        // 2. Sector keyword match (40 pts)
         if (sector) {
           const kws = sectorKeywords[sector] || [];
           const hits = kws.filter(k => fullText.includes(k));
           if (hits.length > 0) {
-            score += 30;
-            reasons.push(`Experiência no setor de <b>${sector}</b>`);
+            score += 40;
+            reasons.push(`Forte experiência no setor de <b>${sector}</b>`);
           }
         }
 
@@ -2993,19 +2996,29 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
           const progHits = progTokens.filter(k => k.length > 3 && fullText.includes(k));
           if (progHits.length > 0) {
             score += 20;
-            reasons.push(`Especialidade em <b>${progHits[0]}</b>`);
+            reasons.push(`Especialista em <b>${progHits[0]}</b>`);
           }
         }
 
         // 4. Quality boosts
-        if (t.flags && t.flags.corporate) { score += 8; }
-        if (t.flags && t.flags.ingles) { reasons.push('Disponível em Inglês'); }
+        if (t.flags && t.flags.corporate) { score += 5; }
 
-        return { trainer: t, score, reasons };
+        let finalScore = Math.min(99, score);
+        if(finalScore < 20 && finalScore > 0) finalScore += 35; // boost terrible scores a bit so they don't look completely broken if they just matched 1 keyword
+        if(finalScore === 0) finalScore = 0;
+
+        // Generate reasoning summary
+        let fitReason = "";
+        if (reasons.length > 0) {
+          fitReason = "⭐ " + reasons.join(" • ");
+        } else {
+          fitReason = "A recomendação baseia-se em valências genéricas do perfil.";
+        }
+
+        return { trainer: t, score: finalScore, fitReason };
       });
 
       const topMatches = scored.filter(s => s.score > 0).sort((a, b) => b.score - a.score).slice(0, 6);
-      const maxScore = topMatches.length > 0 ? topMatches[0].score : 1;
 
       // Update label
       const parts = [];
@@ -3027,10 +3040,15 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
       }
 
       grid.innerHTML = topMatches.map((m, idx) => {
-        const matchPct = Math.min(99, Math.round((m.score / maxScore) * 95) + (idx === 0 ? 4 : 0));
-        const isTop = idx === 0;
+        let colorClass = 'text-green-400 bg-green-500/10 border-green-500/30';
+        if (m.score < 70) {
+           colorClass = 'text-orange-400 bg-orange-500/10 border-orange-500/30';
+        } else if (m.score < 85) {
+           colorClass = 'text-yellow-400 bg-yellow-500/10 border-yellow-500/30';
+        }
+
         return `
-        <div class="group relative bg-[#1e293b] border ${isTop ? 'border-lds-gold/40' : 'border-lds-border'} rounded-xl overflow-hidden hover:border-lds-gold/50 transition-all duration-300 flex flex-col">
+        <div class="group relative bg-[#1e293b] border border-lds-border rounded-xl overflow-hidden hover:border-lds-gold/50 transition-all duration-300 flex flex-col">
           <!-- Photo -->
           <div class="h-[150px] w-full relative overflow-hidden bg-gray-900">
             ${(m.trainer.foto && m.trainer.foto.length > 3)
@@ -3038,22 +3056,21 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
             : `<div class="w-full h-full ${getColor(m.trainer.nome)} flex items-center justify-center text-2xl font-bold text-white">${getInitials(m.trainer.nome)}</div>`}
             <div class="absolute inset-0 bg-gradient-to-t from-[#1e293b] via-transparent to-transparent"></div>
             <!-- Match badge -->
-            <div class="absolute top-0 right-0 ${isTop ? 'bg-lds-gold text-black' : 'bg-gray-800 text-white'} text-[10px] font-bold px-2.5 py-1 rounded-bl-xl z-10">
-              ${isTop ? '⭐ TOP' : ''} ${matchPct}% MATCH
+            <div class="absolute top-3 right-3 ${colorClass} border text-[10px] font-bold px-2.5 py-1 rounded-full z-10 shadow-lg backdrop-blur-md">
+              ${m.score}% MATCH
             </div>
           </div>
           <!-- Content -->
           <div class="p-4 flex flex-col flex-1">
             <h3 class="font-bold text-white text-base leading-tight mb-0.5 cursor-pointer hover:text-lds-gold transition" onclick="openModal(${m.trainer.id})">${m.trainer.nome}</h3>
             <p class="text-[10px] text-gray-500 uppercase tracking-wider font-bold mb-3">${m.trainer.cargo}</p>
-            <!-- Reasons -->
-            <div class="space-y-1.5 flex-1 mb-3">
-              ${m.reasons.slice(0, 3).map(r => `
-                <div class="text-[11px] text-gray-300 flex gap-2 items-start">
-                  <i class="fa-solid fa-check text-lds-gold text-[9px] mt-0.5 shrink-0"></i>
-                  <span>${r}</span>
-                </div>`).join('')}
+            
+            <!-- Fit Justification -->
+            <div class="bg-lds-gold/10 border border-lds-gold/20 rounded-lg p-2.5 mb-3 flex-1">
+              <p class="text-[10px] font-bold text-lds-gold uppercase mb-1"><i class="fa-solid fa-bullseye mr-1"></i> Fit Justification</p>
+              <p class="text-[11px] text-gray-300 leading-snug">${m.fitReason}</p>
             </div>
+            
             <button onclick="openModal(${m.trainer.id})" class="w-full mt-auto py-2 text-[11px] font-bold text-gray-400 hover:text-white border border-white/10 hover:border-lds-gold/40 rounded-lg transition flex items-center justify-center gap-2">
               Ver Dossier Completo <i class="fa-solid fa-arrow-right text-[9px]"></i>
             </button>
@@ -3062,13 +3079,14 @@ ${JSON.stringify(trainersContext.slice(0, 50))} // Limited to 50 to avoid massiv
       }).join('');
     }
 
-    function generateProposalFromMatcher() {
+    function sendToSquadBuilder() {
       if (!window._bmMatchedIds || window._bmMatchedIds.length === 0) return;
-      // Temporarily add matched trainers to shortlist and call generateProposal
-      const prevShortlist = new Set(shortlist);
-      window._bmMatchedIds.forEach(id => shortlist.add(id));
-      generateProposal();
-      shortlist = prevShortlist; // Restore
+      // Temporarily add matched trainers to shortlist and switch view
+      shortlist.clear();
+      window._bmMatchedIds.slice(0, 3).forEach(id => shortlist.add(id));
+      
+      toggleComparatorView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
 
