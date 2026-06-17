@@ -1605,12 +1605,13 @@ function handleExcelUpload(e) {
       // Smart Deduplication Logic (Name-based fallback)
       let finalId = row.id ? parseInt(row.id) : null;
       let isUpdate = false;
+      let existingObj = null;
 
       if (!finalId && row.nome) {
         // Procura se já existe um formador com este nome exato na DB local
-        const existing = window.trainers.find(t => t.nome && t.nome.toLowerCase() === row.nome.toLowerCase().trim());
-        if (existing) {
-          finalId = existing.id; // Herda o ID antigo para fazer OVERWRITE no Supabase
+        existingObj = window.trainers.find(t => t.nome && t.nome.toLowerCase() === row.nome.toLowerCase().trim());
+        if (existingObj) {
+          finalId = existingObj.id; // Herda o ID antigo para fazer OVERWRITE no Supabase
           isUpdate = true;
           updateCount++;
         } else {
@@ -1619,8 +1620,8 @@ function handleExcelUpload(e) {
         }
       } else if (finalId) {
          // Se já trouxe ID, verifica se existe
-         const existing = window.trainers.find(t => t.id === finalId);
-         if(existing) {
+         existingObj = window.trainers.find(t => t.id === finalId);
+         if(existingObj) {
             isUpdate = true;
             updateCount++;
          } else {
@@ -1631,7 +1632,7 @@ function handleExcelUpload(e) {
         newCount++;
       }
 
-      return {
+      let payload = {
         _isUpdate: isUpdate,
         id: finalId,
         nome: row.nome || 'Sem Nome',
@@ -1643,6 +1644,20 @@ function handleExcelUpload(e) {
         flags: flagsObj,
         ativo: row.ativo !== undefined ? (row.ativo === 'true' || row.ativo === '1' || row.ativo === true) : true
       };
+
+      // SMART MERGE: Se já existir na BD, preservamos os dados antigos caso as células do Excel venham vazias
+      if (existingObj) {
+        payload.nome = row.nome || existingObj.nome;
+        payload.cargo = row.cargo || existingObj.cargo;
+        payload.bio_curta = row.bio_curta || existingObj.bio_curta;
+        payload.bio_completa = row.bio_completa || existingObj.bio_completa;
+        payload.foto = row.foto || existingObj.foto;
+        payload.categorias = cats.length > 0 ? cats : (existingObj.categorias || []);
+        payload.flags = Object.keys(flagsObj).length > 0 ? flagsObj : (existingObj.flags || {});
+        payload.ativo = row.ativo !== undefined ? payload.ativo : (existingObj.ativo !== undefined ? existingObj.ativo : true);
+      }
+
+      return payload;
     });
 
     document.getElementById('import-preview').style.display = 'block';
